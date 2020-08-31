@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: futura, sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    width: 400px;
+    font: 14px/1.4 futura;
+}
+
+nav button {
+    background: transparent;
+    border: 0;
+    margin: auto;
+    padding: 8px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+nav button.on {
+    border-bottom-color: black;
+}
+
+section {
+    width: 400px;
+    margin: 0 auto;
+}
+
+div {
+    height: 80px;
+    margin-bottom: 1px;
+    padding: 8px;
+    background: #eee;
+    font: 32px/1.6 futura;
+    position: relative;
+}
+
+div:not(:first-of-type):not(:last-of-type) {
+    background: #ddd;
+    display: grid;
+    place-items: center;
+    height: auto;
+}
+
+.add {
+    position: absolute;
+    left: 100%;
+    top: calc(100% + 1px);
+    font-size: 12px;
+    border: 0;
+    background: #eefbee;
+    cursor: pointer;
+}
+
+.remove {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    font-size: 12px;
+    border: 0;
+    background: #fbeeee;
+    cursor: pointer;
+}

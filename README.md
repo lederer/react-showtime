@@ -13,21 +13,19 @@ npm install --save react-showtime
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import { useMyHook } from 'react-showtime'
+import { useMyHook } from "react-showtime";
 
 const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>{example}</div>
-  )
-}
+    const example = useMyHook();
+    return <div>{example}</div>;
+};
 ```
 
 ## License
 
-Apache-2.0 © [lederer](https://github.com/lederer)
+Apache-2.0 © [Azavea](https://github.com/azavea)
 
 ---
 
