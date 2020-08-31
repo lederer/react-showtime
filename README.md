@@ -1,6 +1,6 @@
 # react-showtime
 
-> Easily mount and unmount React components with CSS transitions.
+Mount and unmount React elements with CSS transitions.
 
 [![NPM](https://img.shields.io/npm/v/react-showtime.svg)](https://www.npmjs.com/package/react-showtime) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -12,21 +12,46 @@ npm install --save react-showtime
 
 ## Usage
 
+### Hook
+
 ```jsx
-import React, { Component } from "react";
+import React from "react";
 
-import { useMyHook } from "react-showtime";
+import { useShowtime } from "react-showtime";
 
-const Example = () => {
-    const example = useMyHook();
-    return <div>{example}</div>;
+const HookExample = () => {
+    const [isMounted, ref, show, hide] = useShowtime();
+
+    return (
+        <>
+            <button onClick={() => (isMounted ? hide() : show())}>
+                Toggle
+            </button>
+            {isMounted && <div ref={ref}>Hi there</div>}
+        </>
+    );
 };
 ```
 
-## License
+### Component
 
-Apache-2.0 © [Azavea](https://github.com/azavea)
+```jsx
+import React, { useState } from "react";
 
----
+import { Showtime } from "react-showtime";
 
-This hook is created using [create-react-hook](https://github.com/hermanya/create-react-hook).
+const ComponentExample = () => {
+    const [show, setShow] = useState(true);
+
+    return (
+        <>
+            <button onClick={() => setShow((current) => !current)}>
+                Toggle
+            </button>
+            <Showtime show={show}>
+                {(ref) => <div ref={ref}>Oh hi</div>}
+            </Showtime>
+        </>
+    );
+};
+```
