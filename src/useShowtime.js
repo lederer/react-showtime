@@ -49,14 +49,16 @@ export default function useShowtime(settings) {
                 setStatus(STATUS.hidden);
             } else if (status === STATUS.transitioningIn) {
                 elementRef.current.style.transition = null;
-                restoreDimensions(elementRef.current);
-                setStatus(STATUS.showing);
+                animationFrameRequestRef.current = requestAnimationFrame(() => {
+                    restoreDimensions(elementRef.current);
+                    setStatus(STATUS.showing);
+                });
             }
         }
     };
 
     const handleTransitionCancel = (e) => {
-        eventSetRef.current.has(e.propertyName) && handleTransitionEnd(e);
+        eventSetRef.current.delete(e.propertyName);
     };
 
     useEventListener("transitionrun", handleTransitionRun, elementRef.current);
@@ -107,29 +109,38 @@ export default function useShowtime(settings) {
 
     useLayoutEffect(() => {
         if (status === STATUS.transitioningIn) {
-            dimensionsRef.current = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, alwaysCss);
+            dimensionsRef.current = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, beforeShowCss);
         } else if (status === STATUS.transitioningOut) {
             const dimensions = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, dimensions);
         }
-    }, [status, alwaysCss, beforeShowCss, showTransitionCssText]);
+    }, [status, alwaysCss, beforeShowCss]);
 
     useEffect(() => {
         if (status === STATUS.transitioningIn) {
-            animationFrameRequestRef.current = requestAnimationFrame(() => {
+            const showCss = {
+                ...nullifyStyles(beforeShowCss),
+                ...dimensionsRef.current,
+            };
+
+            // For some reason, this delay avoids a Firefox issue where
+            // some transition properties (eg, opacity) start with their
+            // showing value instead of hidden, so the transition is abrupt.
+            // requestAnimationFrame() doesn't suffice, so must use setTimeout().
+            setTimeout(() => {
                 elementRef.current.style.transition = showTransitionCssText;
-                const showCss = {
-                    ...nullifyStyles(beforeShowCss),
-                    ...dimensionsRef.current,
-                };
-                addInlineStyles(elementRef.current, showCss);
-            });
+                animationFrameRequestRef.current = requestAnimationFrame(() => {
+                    addInlineStyles(elementRef.current, showCss);
+                });
+            }, 32);
         } else if (status === STATUS.transitioningOut) {
             animationFrameRequestRef.current = requestAnimationFrame(() => {
                 elementRef.current.style.transition = hideTransitionCssText;
-                addInlineStyles(elementRef.current, afterShowCss);
+                animationFrameRequestRef.current = requestAnimationFrame(() => {
+                    addInlineStyles(elementRef.current, afterShowCss);
+                });
             });
         }
     }, [
