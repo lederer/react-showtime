@@ -22,7 +22,7 @@ function stringifyCssTransitionNumber(n) {
         return `${n}ms`;
     }
     if (Number.isNaN(n)) {
-        console.error(`Expected ${n} to be a string or number.`);
+        //  Expected string or number
         return;
     }
 

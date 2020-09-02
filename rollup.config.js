@@ -1,8 +1,9 @@
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
+import babel from "@rollup/plugin-babel";
 import external from "rollup-plugin-peer-deps-external";
-import resolve from "rollup-plugin-node-resolve";
-import url from "rollup-plugin-url";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import url from "@rollup/plugin-url";
+import { eslint } from "rollup-plugin-eslint";
 
 import pkg from "./package.json";
 
@@ -23,10 +24,12 @@ export default {
     plugins: [
         external(),
         url({ exclude: ["**/*.svg"] }),
+        eslint(),
         babel({
             exclude: "node_modules/**",
+            babelHelpers: "bundled",
         }),
-        resolve(),
+        resolve({ browser: true }),
         commonjs(),
     ],
 };
