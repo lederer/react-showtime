@@ -197,9 +197,14 @@ const HookExample = () => {
 
 #### Asymmetric transitions with `beforeShow` and `afterShow`
 
-The `beforeShow` and `afterShow` properties of the `transition` object conform to the same definition as the `hidden` property, but `beforeShow` defines how the element or component is hidden prior to being shown, and `afterShow` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
+The `beforeShow` and `afterShow` properties of the `transition` object conform to approximately the same structural definition as the `hidden` property. `beforeShow` defines how the element or component is hidden prior to being shown, and `afterShow` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
 
 `beforeShow` and `afterShow` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
+
+There are a couple of difference between `beforeShow`/`afterShow` and `hidden`, both of which allow you to use a canned transiton for an asymmetric transition:
+
+-   You can pass a string to `beforeShow`/`afterShow` instead of an object. The string must be the name of a canned transiton.
+-   The `beforeShow`/`afterShow` object can contain a `transition` key. Its value must be the name of a canned transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a canned transiton and also pass in optional custom values for `duration`, `delay`, or `easing`.
 
 #### `always`
 
@@ -248,12 +253,12 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 
 #### transitionObject
 
-| Name       | Type                 | Req'd? | Description                                                    |
-| ---------- | -------------------- | ------ | -------------------------------------------------------------- |
-| hidden     | transitionProperties | no     | Styles and transition timing of before and after hidden state. |
-| beforeShow | transitionProperties | no     | Styles and transition timing of beforeShow hidden state.       |
-| afterShow  | transitionProperties | no     | Styles and transition timing of afterShow hidden state.        |
-| always     | cssProperties        | no     | Styles applied throughout entire lifecycle.                    |
+| Name       | Type                           | Req'd? | Description                                                    |
+| ---------- | ------------------------------ | ------ | -------------------------------------------------------------- |
+| hidden     | transitionProperties           | no     | Styles and transition timing of before and after hidden state. |
+| beforeShow | string or transitionProperties | no     | Styles and transition timing of beforeShow hidden state.       |
+| afterShow  | string or transitionProperties | no     | Styles and transition timing of afterShow hidden state.        |
+| always     | cssProperties                  | no     | Styles applied throughout entire lifecycle.                    |
 
 #### transitionProperties
 

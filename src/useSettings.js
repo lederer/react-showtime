@@ -95,7 +95,46 @@ function extractCssValues({
     return values;
 }
 
-function determineEffectiveSettings(settings) {
+function resolveBeforeAfter(transitionSetting) {
+    const transition = { ...transitionSetting };
+    const { beforeShow, afterShow } = transition;
+
+    if (isString(beforeShow)) {
+        transition.beforeShow = {
+            ...TRANSITIONS[beforeShow].hidden,
+            ...TRANSITIONS[beforeShow].beforeShow,
+        };
+    } else if (isString(beforeShow.transition)) {
+        const { duration, delay, easing } = beforeShow;
+        transition.beforeShow = {
+            ...TRANSITIONS[beforeShow.transition].hidden,
+            ...TRANSITIONS[beforeShow.transition].beforeShow,
+            duration,
+            delay,
+            easing,
+        };
+    }
+
+    if (isString(afterShow)) {
+        transition.afterShow = {
+            ...TRANSITIONS[afterShow].hidden,
+            ...TRANSITIONS[afterShow].beforeShow,
+        };
+    } else if (isString(afterShow.transition)) {
+        const { duration, delay, easing } = afterShow;
+        transition.afterShow = {
+            ...TRANSITIONS[afterShow.transition].hidden,
+            ...TRANSITIONS[afterShow.transition].afterShow,
+            duration,
+            delay,
+            easing,
+        };
+    }
+
+    return transition;
+}
+
+function resolveEffectiveSettings(settings) {
     const { transition: defaultTransition, ...defaults } = DEFAULTS;
 
     if (isString(settings)) {
@@ -107,6 +146,8 @@ function determineEffectiveSettings(settings) {
         transition = TRANSITIONS[defaultTransition];
     } else if (isString(transition)) {
         transition = TRANSITIONS[transition];
+    } else {
+        transition = resolveBeforeAfter(transition);
     }
 
     return { ...defaults, ...rest, ...transition };
@@ -122,7 +163,7 @@ function processSettings(settings = {}) {
         duration,
         delay,
         easing,
-    } = determineEffectiveSettings(settings);
+    } = resolveEffectiveSettings(settings);
 
     const showTransitionCssText = extractTransitionCssText({
         duration,
