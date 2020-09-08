@@ -139,30 +139,30 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 
 ```jsx
 
-  // Hook
+    // Hook
     const [isMounted, ref, show, hide] = useShowtime({
         duration: 500,
         delay: 100,
         easing: "ease-out",
     });
 
-  // Component
-  <Showtime
-    show={show}
-    transition="scale"
-    duration={500}
-    delay={150}
-    easing="ease-out"
-  >
-    ...
-};
+    // Component
+    <Showtime
+        show={show}
+        transition="scale"
+        duration={500}
+        delay={150}
+        easing="ease-out"
+    >
+        ...
+    };
 ```
 
 ### Custom transitions
 
 You can forego React Showtime's canned transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`, `always`.
 
-#### `hidden`
+#### `transition.hidden`
 
 The `hidden` property of the `transition` object should be an object literal of the CSS properties and values that define your element or component's hidden state.
 
@@ -181,6 +181,7 @@ const HookExample = () => {
     const [isMounted, ref, show, hide] = useShowtime({
         transition: {
             hidden: {
+                duration: 350,
                 right: "100vw",
                 top: "-100vh",
                 opacity: {
@@ -196,7 +197,7 @@ const HookExample = () => {
 };
 ```
 
-#### Asymmetric transitions with `beforeShow` and `afterShow`
+#### Asymmetric transitions with `transition.beforeShow` and `transition.afterShow`
 
 The `beforeShow` and `afterShow` properties of the `transition` object conform to approximately the same structural definition as the `hidden` property. `beforeShow` defines how the element or component is hidden prior to being shown, and `afterShow` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
 
@@ -207,7 +208,27 @@ There are a couple of difference between `beforeShow`/`afterShow` and `hidden`, 
 -   You can pass a string to `beforeShow`/`afterShow` instead of an object. The string must be the name of a canned transiton.
 -   The `beforeShow`/`afterShow` object can contain a `transition` key. Its value must be the name of a canned transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a canned transiton and also pass in optional custom values for `duration`, `delay`, or `easing`.
 
-#### `always`
+Eg…
+
+```jsx
+const HookExample = () => {
+    const [isMounted, ref, show, hide] = useShowtime({
+        transition: {
+            beforeShow: "fade", // or { transition: "fade", delay: 100, … }
+            afterShow: {
+                duration: 350,
+                right: "100vw",
+                top: "-100vh",
+                opacity: 0,
+            },
+        },
+    });
+
+    // ...
+};
+```
+
+#### `transition.always`
 
 The `always` property of the `transition` object should be an object literal of any CSS properties and values that should be applied at all times. That is, they will apply during the show transition, while showing, and during the hide transition.
 

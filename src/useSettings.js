@@ -95,8 +95,8 @@ function extractCssValues({
     return values;
 }
 
-function resolveBeforeAfter(transitionSetting) {
-    const transition = { ...transitionSetting };
+function resolveBeforeAfter(transitionParam) {
+    const transition = { ...transitionParam };
     const { beforeShow, afterShow } = transition;
 
     if (isString(beforeShow)) {
@@ -104,7 +104,7 @@ function resolveBeforeAfter(transitionSetting) {
             ...TRANSITIONS[beforeShow].hidden,
             ...TRANSITIONS[beforeShow].beforeShow,
         };
-    } else if (isString(beforeShow.transition)) {
+    } else if (beforeShow && isString(beforeShow.transition)) {
         const { duration, delay, easing } = beforeShow;
         transition.beforeShow = {
             ...TRANSITIONS[beforeShow.transition].hidden,
@@ -120,7 +120,7 @@ function resolveBeforeAfter(transitionSetting) {
             ...TRANSITIONS[afterShow].hidden,
             ...TRANSITIONS[afterShow].beforeShow,
         };
-    } else if (isString(afterShow.transition)) {
+    } else if (afterShow && isString(afterShow.transition)) {
         const { duration, delay, easing } = afterShow;
         transition.afterShow = {
             ...TRANSITIONS[afterShow.transition].hidden,
@@ -131,24 +131,30 @@ function resolveBeforeAfter(transitionSetting) {
         };
     }
 
+    transition.beforeShow = { ...transition.hidden, ...transition.beforeShow };
+    transition.afterShow = { ...transition.hidden, ...transition.afterShow };
+
     return transition;
 }
 
-function resolveEffectiveSettings(settings) {
+function resolveEffectiveSettings(settingsParam) {
     const { transition: defaultTransition, ...defaults } = DEFAULTS;
 
-    if (isString(settings)) {
-        return { ...defaults, ...TRANSITIONS[settings] };
+    let settings;
+    if (isString(settingsParam)) {
+        settings = { transition: TRANSITIONS[settingsParam] };
+    } else {
+        settings = settingsParam;
     }
 
     let { transition, ...rest } = settings;
     if (!transition) {
-        transition = TRANSITIONS[defaultTransition];
+        transition = { ...TRANSITIONS[defaultTransition] };
     } else if (isString(transition)) {
-        transition = TRANSITIONS[transition];
-    } else {
-        transition = resolveBeforeAfter(transition);
+        transition = { ...TRANSITIONS[transition] };
     }
+
+    transition = resolveBeforeAfter(transition);
 
     return { ...defaults, ...rest, ...transition };
 }
@@ -156,7 +162,6 @@ function resolveEffectiveSettings(settings) {
 function processSettings(settings = {}) {
     const {
         startHidden,
-        hidden,
         beforeShow,
         afterShow,
         always,
@@ -169,18 +174,16 @@ function processSettings(settings = {}) {
         duration,
         delay,
         easing,
-        ...hidden,
         ...beforeShow,
     });
     const hideTransitionCssText = extractTransitionCssText({
         duration,
         delay,
         easing,
-        ...hidden,
         ...afterShow,
     });
-    const beforeShowCss = extractCssValues({ ...hidden, ...beforeShow });
-    const afterShowCss = extractCssValues({ ...hidden, ...afterShow });
+    const beforeShowCss = extractCssValues(beforeShow);
+    const afterShowCss = extractCssValues(afterShow);
     const alwaysCss = extractCssValues(always);
 
     return {
