@@ -4,13 +4,13 @@
 
 React Showtime makes it easy to apply CSS transitions to the appearance and disappearance of React elements and components. It automatically handles mounting and unmounting to allow time for transitions to occur.
 
--   Choose between `useShowtime` hook and `<Showtime />` component.
--   Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.
--   Specify _showing_ styles however you like – inline, Emotion, styled-components, classnames, you name it.
--   Sensible API for defining _hidden_ styles and custom transitions.
--   Preset transitions: `slideFade`, `slide`, `fade`, `scale`.
--   Symmetric or asymmetric show/hide transitions.
--   Zero dependencies. 21k unpacked.
+👯&emsp;Choose between `useShowtime` hook and `<Showtime />` component.<br/>
+💃&emsp;Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.<br/>
+💅&emsp;Specify _showing_ styles however you like – inline, Emotion, styled-components, classnames, you name it.<br/>
+💨&emsp;Sensible API for defining _hidden_ styles and custom transitions.<br/>
+🎩&emsp;Preset transitions: `slideFade`, `slide`, `fade`, `scale`.<br/>
+🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
+🕴&emsp;Zero dependencies. 21k unpacked.
 
 ### How so?
 
