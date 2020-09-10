@@ -8,7 +8,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 -   Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.
 -   Specify _showing_ styles however you like – inline, Emotion, styled-components, classnames, you name it.
 -   Sensible API for defining _hidden_ styles and custom transitions.
--   Canned transitions: `slideFade`, `slide`, `fade`, `scale`.
+-   Preset transitions: `slideFade`, `slide`, `fade`, `scale`.
 -   Symmetric or asymmetric show/hide transitions.
 -   Zero dependencies. 21k unpacked.
 
@@ -108,16 +108,16 @@ const ComponentExample = () => {
 };
 ```
 
-### Canned transitions
+### Preset transitions
 
-React Showtime offers some canned transitions:
+React Showtime offers some preset transitions:
 
 -   `slideFade` (default)
 -   `slide`
 -   `fade`
 -   `scale`
 
-Specify a canned transtion by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
+Specify a preset by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
 
 `useShowtime` also accepts an object instead of a string, in which case pass `{ transition: <transition name> }`.
 
@@ -160,7 +160,7 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 
 ### Custom transitions
 
-You can forego React Showtime's canned transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`, `always`.
+You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`, `always`.
 
 #### `transition.hidden`
 
@@ -203,10 +203,10 @@ The `beforeShow` and `afterShow` properties of the `transition` object conform t
 
 `beforeShow` and `afterShow` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
 
-There are a couple of difference between `beforeShow`/`afterShow` and `hidden`, both of which allow you to use a canned transiton for an asymmetric transition:
+There are a couple of differences between the structure of `beforeShow`/`afterShow` and `hidden`, which allow you to use a preset for an asymmetric transition:
 
--   You can pass a string to `beforeShow`/`afterShow` instead of an object. The string must be the name of a canned transiton.
--   The `beforeShow`/`afterShow` object can contain a `transition` key. Its value must be the name of a canned transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a canned transiton and also pass in optional custom values for `duration`, `delay`, or `easing`.
+-   You can pass a string to `beforeShow`/`afterShow` instead of an object. The string must be the name of a preset transiton.
+-   The `beforeShow`/`afterShow` object can contain a `transition` key. Its value must be the name of a preset transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a preset and also pass in optional custom values for `duration`, `delay`, or `easing`.
 
 Eg…
 
@@ -232,7 +232,7 @@ const HookExample = () => {
 
 The `always` property of the `transition` object should be an object literal of any CSS properties and values that should be applied at all times. That is, they will apply during the show transition, while showing, and during the hide transition.
 
-This is useful in cases when transitions require some consistent CSS property throughout the lifecycle. Eg, the canned `"scale"` transition uses `always` to set `transform-origin` to `"top"` so that the slide down/up transition is anchorded at the top.
+This is useful in cases when transitions require some consistent CSS property throughout the lifecycle. Eg, the `"scale"` preset uses `always` to set `transform-origin` to `"top"` so that the slide down/up transition is anchorded at the top.
 
 Strictly speaking, you could use `always` to define the element or component's _showing_ styles. That said, it is more natural to define those however and wherever you define styles for your entire app, which was one of React Showtime's design requirements.
 
@@ -248,7 +248,7 @@ The `useShowtime` hook currently does not accept any event handlers.
 
 The `useShowtime` hook accepts a single parameter, which can be either of:
 
--   a string referring to a canned transition – `"slideFade"` (default), `"slide"`, `"fade"`, `"scale"`
+-   a string referring to a preset transition – `"slideFade"` (default), `"slide"`, `"fade"`, `"scale"`
 -   an object with the following properties:
 
 | Name        | Type                       | Req'd? | Default     | Description                                                                                                                 |
