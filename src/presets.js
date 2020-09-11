@@ -73,4 +73,21 @@ export const PRESETS = Object.freeze({
             },
         },
     },
+    rise: {
+        hidden: {
+            opacity: 0.1,
+            transform: "translateY(50%)",
+            zIndex: {
+                value: 1,
+                delay: 0,
+                duration: 0,
+            },
+        },
+        beforeShow: {
+            easing: "ease-out",
+        },
+        afterShow: {
+            easing: "ease",
+        },
+    },
 });

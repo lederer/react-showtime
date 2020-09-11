@@ -8,7 +8,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 💃&emsp;Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.<br/>
 💅&emsp;Specify _showing_ styles however you like – inline, Emotion, styled-components, classnames, you name it.<br/>
 💨&emsp;Sensible API for defining _hidden_ styles and custom transitions.<br/>
-🎩&emsp;Preset transitions: `slideFade`, `slide`, `fade`, `scale`.<br/>
+🎩&emsp;Preset transitions: `slideFade`, `slide`, `fade`, `scale`, `rise`.<br/>
 🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
 🕴&emsp;Zero dependencies. 21k unpacked.
 
@@ -116,6 +116,7 @@ React Showtime offers some preset transitions:
 -   `slide`
 -   `fade`
 -   `scale`
+-   `rise`
 
 Specify a preset by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
 
@@ -227,6 +228,8 @@ const HookExample = () => {
     // ...
 };
 ```
+
+If you want to use the same transition for showing and hiding, but with different duration, delay, or easing, just define the transition once in `hidden` and then define `duration`, `delay`, or `easing` values in `beforeShow` and `afterShow`.
 
 ### Events
 
