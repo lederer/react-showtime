@@ -15,6 +15,28 @@ function isString(s) {
     return typeof s === "string" || s instanceof String;
 }
 
+function isObject(o) {
+    return typeof o === "object" && o !== null;
+}
+
+function hasZeroDurationAndDelay(cssPropertyObject) {
+    if (!isObject(cssPropertyObject)) {
+        return false;
+    }
+
+    const { duration, delay } = cssPropertyObject;
+
+    if (!isZeroCssValue(duration)) {
+        return false;
+    }
+
+    if (delay !== null && delay !== undefined && !isZeroCssValue(delay)) {
+        return false;
+    }
+
+    return true;
+}
+
 function stringifyCssTransitionNumber(n) {
     if (isString(n)) {
         return n;
@@ -96,6 +118,24 @@ function extractCssValues({
     return values;
 }
 
+function extractInstantProperties(cssObject) {
+    // If there are any zero-duration, zero-delay properties in before/after,
+    // they'll need to be applied early to take affect.
+    // eg, `transformOrigin: top` in "scale".
+
+    const pre = {},
+        rest = {};
+    for (const property in cssObject) {
+        const value = cssObject[property];
+        if (hasZeroDurationAndDelay(value)) {
+            pre[property] = value;
+        } else {
+            rest[property] = value;
+        }
+    }
+    return [pre, rest];
+}
+
 function resolveBeforeAfter(transitionParam) {
     const transition = { ...transitionParam };
     const { beforeShow, afterShow } = transition;
@@ -132,8 +172,19 @@ function resolveBeforeAfter(transitionParam) {
         };
     }
 
-    transition.beforeShow = { ...transition.hidden, ...transition.beforeShow };
-    transition.afterShow = { ...transition.hidden, ...transition.afterShow };
+    const [beforeShowInstant, beforeShowRest] = extractInstantProperties({
+        ...transition.hidden,
+        ...transition.beforeShow,
+    });
+    transition.beforeShowInstant = beforeShowInstant;
+    transition.beforeShow = beforeShowRest;
+
+    const [afterShowInstant, afterShowRest] = extractInstantProperties({
+        ...transition.hidden,
+        ...transition.afterShow,
+    });
+    transition.afterShowInstant = afterShowInstant;
+    transition.afterShow = afterShowRest;
 
     return transition;
 }
@@ -165,7 +216,8 @@ function processSettings(settings = {}) {
         startHidden,
         beforeShow,
         afterShow,
-        always,
+        beforeShowInstant,
+        afterShowInstant,
         duration,
         delay,
         easing,
@@ -183,15 +235,19 @@ function processSettings(settings = {}) {
         easing,
         ...afterShow,
     });
+
     const beforeShowCss = extractCssValues(beforeShow);
+    const beforeShowInstantCss = extractCssValues(beforeShowInstant);
+
     const afterShowCss = extractCssValues(afterShow);
-    const alwaysCss = extractCssValues(always);
+    const afterShowInstantCss = extractCssValues(afterShowInstant);
 
     return {
         startHidden,
         beforeShowCss,
+        beforeShowInstantCss,
         afterShowCss,
-        alwaysCss,
+        afterShowInstantCss,
         showTransitionCssText,
         hideTransitionCssText,
     };

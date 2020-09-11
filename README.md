@@ -160,7 +160,7 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 
 ### Custom transitions
 
-You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`, `always`.
+You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`.
 
 #### `transition.hidden`
 
@@ -228,14 +228,6 @@ const HookExample = () => {
 };
 ```
 
-#### `transition.always`
-
-The `always` property of the `transition` object should be an object literal of any CSS properties and values that should be applied at all times. That is, they will apply during the show transition, while showing, and during the hide transition.
-
-This is useful in cases when transitions require some consistent CSS property throughout the lifecycle. Eg, the `"scale"` preset uses `always` to set `transform-origin` to `"top"` so that the slide down/up transition is anchorded at the top.
-
-Strictly speaking, you could use `always` to define the element or component's _showing_ styles. That said, it is more natural to define those however and wherever you define styles for your entire app, which was one of React Showtime's design requirements.
-
 ### Events
 
 The `Showtime` component accepts handlers for `onHidden` and `onShowing`. Other lifecycle events are being considered.
@@ -280,7 +272,6 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | hidden     | transitionProperties           | no     | Styles and transition timing of before and after hidden state. |
 | beforeShow | string or transitionProperties | no     | Styles and transition timing of beforeShow hidden state.       |
 | afterShow  | string or transitionProperties | no     | Styles and transition timing of afterShow hidden state.        |
-| always     | cssProperties                  | no     | Styles applied throughout entire lifecycle.                    |
 
 #### transitionProperties
 
@@ -290,12 +281,6 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | delay              | number or string               | no     | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
 | easing             | string                         | no     | inherited | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
 | [Any CSS property] | string, number, or cssProperty | yes    |           | Use camelCase for names. String and number values passed directly to style.                                                 |
-
-#### cssProperties
-
-| Name               | Type                           | Description                                                                 |
-| ------------------ | ------------------------------ | --------------------------------------------------------------------------- |
-| [Any CSS property] | string, number, or cssProperty | Use camelCase for names. String and number values passed directly to style. |
 
 #### cssProperty
 

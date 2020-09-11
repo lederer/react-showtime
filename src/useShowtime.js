@@ -13,8 +13,9 @@ export default function useShowtime(settings) {
     const {
         startHidden,
         beforeShowCss,
+        beforeShowInstantCss,
         afterShowCss,
-        alwaysCss,
+        afterShowInstantCss,
         showTransitionCssText,
         hideTransitionCssText,
     } = useSettings(settings);
@@ -51,6 +52,10 @@ export default function useShowtime(settings) {
                 elementRef.current.style.transition = null;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
                     restoreDimensions(elementRef.current);
+                    addInlineStyles(
+                        elementRef.current,
+                        nullifyStyles(beforeShowInstantCss)
+                    );
                     setStatus(STATUS.showing);
                 });
             }
@@ -97,26 +102,25 @@ export default function useShowtime(settings) {
         if (isInitialRenderRef.current) {
             isInitialRenderRef.current = false;
             if (!startHidden) {
-                // alwaysCss will get added on each show transition,
-                // but needs to be added here for initial non-transitioned show
-                addInlineStyles(elementRef.current, alwaysCss);
                 return;
             }
         }
 
+        addInlineStyles(elementRef.current, beforeShowInstantCss);
         setStatus(STATUS.transitioningIn);
-    }, [isMounted, startHidden, alwaysCss]);
+    }, [isMounted, startHidden, beforeShowInstantCss]);
 
     useLayoutEffect(() => {
         if (status === STATUS.transitioningIn) {
-            addInlineStyles(elementRef.current, alwaysCss);
+            addInlineStyles(elementRef.current, beforeShowInstantCss);
             dimensionsRef.current = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, beforeShowCss);
         } else if (status === STATUS.transitioningOut) {
+            addInlineStyles(elementRef.current, afterShowInstantCss);
             const dimensions = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, dimensions);
         }
-    }, [status, alwaysCss, beforeShowCss]);
+    }, [status, beforeShowInstantCss, beforeShowCss, afterShowInstantCss]);
 
     useEffect(() => {
         if (status === STATUS.transitioningIn) {

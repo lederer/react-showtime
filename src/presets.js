@@ -1,8 +1,5 @@
 export const PRESETS = Object.freeze({
     scale: {
-        always: {
-            transformOrigin: "top",
-        },
         hidden: {
             height: 0,
             minHeight: 0,
@@ -12,6 +9,11 @@ export const PRESETS = Object.freeze({
             marginBottom: 0,
             transform: "scaleY(0.5)",
             opacity: 0,
+            transformOrigin: {
+                value: "top",
+                delay: 0,
+                duration: 0,
+            },
         },
     },
     slide: {
