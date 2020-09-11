@@ -24,16 +24,6 @@ React Showtime is **not for transitions that do not involve mounting/unmounting*
 
 React Showtime is **not for sophisticated animations**. Consider a more full-featured library like react-spring for those.
 
-## Components and Refs
-
-React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element and to listen for transition events.
-
-If you are transitioning an _element_ directly, you can just pass the provided `ref` as a prop.
-
-If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the ref down to the component's outermost element.
-
-If you are transitioning a _component you cannot edit_ and that does not forward refs to its outermost element, attach the `ref` to a wrapper div.
-
 ## Install
 
 ### Yarn
@@ -107,6 +97,16 @@ const ComponentExample = () => {
     );
 };
 ```
+
+### Reliance on refs
+
+As you can see above, React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element and to listen for transition events.
+
+If you are transitioning an _element_ directly, you can just pass the provided `ref` as a prop.
+
+If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the ref down to the component's outermost element.
+
+If you are transitioning a _component you cannot edit_ and that does not forward refs to its outermost element, attach the `ref` to a wrapper div.
 
 ### Preset transitions
 
@@ -248,7 +248,7 @@ The `useShowtime` hook currently does not accept any event handlers.
 
 The `useShowtime` hook accepts a single parameter, which can be either of:
 
--   a string referring to a preset transition – `"slideFade"` (default), `"slide"`, `"fade"`, `"scale"`
+-   a string referring to a [preset transition](#preset-transitions)
 -   an object with the following properties:
 
 | Name        | Type                       | Req'd? | Default     | Description                                                                                                                 |
@@ -257,7 +257,7 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | duration    | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
 | delay       | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
 | easing      | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition  | string or transitionObject | no     | "slideFade" | `"slideFade", "slide", "fade", "scale"` or object defining custom transition. See below.                                    |
+| transition  | string or transitionObject | no     | "slideFade" | [Preset transition](#preset-transitions) or object defining custom transition (see below)                                   |
 
 ### Showtime component
 
@@ -267,7 +267,7 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | duration   | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
 | delay      | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
 | easing     | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition | string or transitionObject | no     | "slideFade" | {"slideFade", "slide", "fade", "scale"} or object defining custom transition. See below.                                    |
+| transition | string or transitionObject | no     | "slideFade" | [Preset transition](#preset-transitions) or object defining custom transition (see below)                                   |
 | onHidden   | function                   | no     |             | Called when hide transition complete.                                                                                       |
 | onShowing  | function                   | no     |             | Called when show transition complete.                                                                                       |
 
