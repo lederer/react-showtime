@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { DEFAULTS, TRANSITIONS } from "./constants";
+import { DEFAULTS } from "./constants";
+import { PRESETS } from "./presets";
 
 function toKebabCase(str) {
     return str
@@ -101,14 +102,14 @@ function resolveBeforeAfter(transitionParam) {
 
     if (isString(beforeShow)) {
         transition.beforeShow = {
-            ...TRANSITIONS[beforeShow].hidden,
-            ...TRANSITIONS[beforeShow].beforeShow,
+            ...PRESETS[beforeShow].hidden,
+            ...PRESETS[beforeShow].beforeShow,
         };
     } else if (beforeShow && isString(beforeShow.transition)) {
         const { duration, delay, easing } = beforeShow;
         transition.beforeShow = {
-            ...TRANSITIONS[beforeShow.transition].hidden,
-            ...TRANSITIONS[beforeShow.transition].beforeShow,
+            ...PRESETS[beforeShow.transition].hidden,
+            ...PRESETS[beforeShow.transition].beforeShow,
             duration,
             delay,
             easing,
@@ -117,14 +118,14 @@ function resolveBeforeAfter(transitionParam) {
 
     if (isString(afterShow)) {
         transition.afterShow = {
-            ...TRANSITIONS[afterShow].hidden,
-            ...TRANSITIONS[afterShow].beforeShow,
+            ...PRESETS[afterShow].hidden,
+            ...PRESETS[afterShow].beforeShow,
         };
     } else if (afterShow && isString(afterShow.transition)) {
         const { duration, delay, easing } = afterShow;
         transition.afterShow = {
-            ...TRANSITIONS[afterShow.transition].hidden,
-            ...TRANSITIONS[afterShow.transition].afterShow,
+            ...PRESETS[afterShow.transition].hidden,
+            ...PRESETS[afterShow.transition].afterShow,
             duration,
             delay,
             easing,
@@ -142,16 +143,16 @@ function resolveEffectiveSettings(settingsParam) {
 
     let settings;
     if (isString(settingsParam)) {
-        settings = { transition: TRANSITIONS[settingsParam] };
+        settings = { transition: PRESETS[settingsParam] };
     } else {
         settings = settingsParam;
     }
 
     let { transition, ...rest } = settings;
     if (!transition) {
-        transition = { ...TRANSITIONS[defaultTransition] };
+        transition = { ...PRESETS[defaultTransition] };
     } else if (isString(transition)) {
-        transition = { ...TRANSITIONS[transition] };
+        transition = { ...PRESETS[transition] };
     }
 
     transition = resolveBeforeAfter(transition);
