@@ -47,7 +47,6 @@ export const PRESETS = Object.freeze({
     },
     slideFade: {
         hidden: {
-            opacity: 0,
             height: 0,
             minHeight: 0,
             paddingTop: 0,
@@ -63,21 +62,14 @@ export const PRESETS = Object.freeze({
         beforeShow: {
             opacity: {
                 value: 0,
-                delay: 100,
-            },
-            overflow: {
-                value: "hidden",
-                delay: 100,
+                delay: 150,
             },
         },
         afterShow: {
-            delay: 66,
+            delay: 100,
+            easing: "ease-in",
             opacity: {
                 value: 0,
-                delay: 0,
-            },
-            overflow: {
-                value: "hidden",
                 delay: 0,
             },
         },
