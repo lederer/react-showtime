@@ -12,11 +12,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
 🕴&emsp;Zero dependencies. 21k unpacked.
 
-### How so?
-
-The essential insight of React Showtime is that the one-two sequence of React's `useLayoutEffect` and `useEffect` hooks is nicely suited to the one-two sequence of mounting a component with _hidden_ CSS values and then applying _showing_ CSS values to trigger the transition.
-
-As for hiding, CSS Transition Event handlers trigger unmounting once the "hide" transition is complete.
+The essential insight of React Showtime is that the one-two sequence of React's `useLayoutEffect` and `useEffect` hooks is nicely suited to the one-two sequence of mounting a component with _hidden_ CSS values and then applying _showing_ CSS values to trigger the transition. As for hiding, transition event handlers trigger unmounting once the "hide" transition is complete.
 
 ### What React Showtime is not
 
@@ -24,21 +20,15 @@ React Showtime is **not for transitions that do not involve mounting/unmounting*
 
 React Showtime is **not for sophisticated animations**. Consider a more full-featured library like react-spring for those.
 
-## Install
-
-### Yarn
+## Getting Started
 
 ```bash
 yarn add react-showtime
 ```
 
-### npm
-
 ```bash
 npm install react-showtime
 ```
-
-## Usage
 
 Choose from the `useShowtime` hook or the `Showtime` component.
 
@@ -98,7 +88,7 @@ const ComponentExample = () => {
 };
 ```
 
-### Reliance on refs
+### Attaching the ref
 
 As you can see above, React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element and to listen for transition events.
 
@@ -107,6 +97,64 @@ If you are transitioning an _element_ directly, you can just pass the provided `
 If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the ref down to the component's outermost element.
 
 If you are transitioning a _component you cannot edit_ and that does not forward refs to its outermost element, attach the `ref` to a wrapper div.
+
+## Configuration
+
+### TL;DR
+
+To use a [preset transition](#preset-transitions) with the default duration (`250ms`), delay (`0ms`), and easing (`"ease"`):
+
+```jsx
+useShowtime("slide");
+```
+
+```jsx
+<Showtime transition="fade">
+```
+
+To use a preset with custom duration, delay, or easing:
+
+```jsx
+useShowtime({
+    transition: "rise",
+    duration: 1000,
+    delay: 250,
+    easing: "linear",
+});
+```
+
+```jsx
+<Showtime
+    transition="scale"
+    duration={500}
+    delay={50}
+    easing="ease-out"
+>
+```
+
+To use a [custom transition](#custom-transitions) instead of a preset:
+
+```jsx
+useShowtime({
+    transition: {
+        hidden: { … },
+        beforeShow: …,
+        afterShow: …,
+    },
+    …
+});
+```
+
+```jsx
+<Showtime
+    transition={{
+        hidden: { … },
+        beforeShow: …,
+        afterShow: …,
+    }}
+    …
+>
+```
 
 ### Preset transitions
 
