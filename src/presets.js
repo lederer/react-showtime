@@ -1,4 +1,4 @@
-export const PRESETS = Object.freeze({
+export default Object.freeze({
     scaleTop: {
         hidden: {
             height: 0,

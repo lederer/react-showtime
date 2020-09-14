@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { DEFAULTS } from "./constants";
-import { PRESETS } from "./presets";
+import PRESETS from "./presets";
 
 function toKebabCase(str) {
     return str
