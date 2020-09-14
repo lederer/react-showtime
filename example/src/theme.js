@@ -12,9 +12,9 @@ export default {
     ],
     fonts: {
         body:
-            'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+            '"Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
         heading: "inherit",
-        monospace: "'Andale Mono', AndaleMono, Consolas, Monaco, monospace",
+        monospace: "'IBM Plex Mono', monospace",
     },
     fontSizes: [
         "1.1rem",
@@ -45,6 +45,8 @@ export default {
         disabled: "#ccc",
         muted: "#f6f6f6",
         accent: "#008484",
+        ticket: "#fd7c83",
+        tint: "#fd7c8317",
     },
     shadows: [
         "none",
@@ -59,6 +61,11 @@ export default {
             fontFamily: "heading",
             lineHeight: "heading",
             fontWeight: "heading",
+        },
+        code: {
+            fontFamily: "monospace",
+            bg: "tint",
+            px: "0.4rem",
         },
     },
     buttons: {

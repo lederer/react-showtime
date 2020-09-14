@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx, Link, Image } from "theme-ui";
+
+import Ticket from "./Ticket";
 import react from "../img/react.svg";
 import github from "../img/github.svg";
 
@@ -11,6 +13,7 @@ const sx = {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        height: "9.2rem",
         py: 2,
         px: 3,
         bg: "white",
@@ -21,65 +24,42 @@ const sx = {
         alignItems: "center",
         my: 0,
         mr: 2,
+        transition: "transform 100ms",
     },
     showtime: {
-        position: "relative",
         flex: "none",
-        display: "inline-flex",
-        alignItems: "center",
-        fontFamily: "'Arial Narrow', Arial, sans-serif",
-        fontSize: "2.4rem",
-        fontWeight: "bold",
-        textTransform: "uppercase",
-        color: "black",
-        py: "1.2rem",
-        pr: "2rem",
-        pl: "1.2rem",
-        zIndex: 0,
-        "::before": {
-            position: "absolute",
-            zIndex: -1,
-            content: "''",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: "100%",
-            background: "#fd7c83",
-            "--stop-list": "transparent 1rem, #000 0",
-            mask:
-                "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in, source-in, source-in, xor",
-        },
-    },
-    react: {
-        flex: "none",
-        mr: 1,
-    },
-    emoji: {
-        flex: "none",
-        ml: 2,
-        fontSize: "4rem",
+        zIndex: 1,
     },
     repo: {
         flex: "none",
     },
 };
 
-function Header(props) {
+const scrollTo = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+function Header({ compact = false, ...props }) {
     return (
         <header sx={sx.header} {...props}>
-            <h1 sx={sx.title}>
-                <span sx={sx.showtime}>
-                    <Image sx={sx.react} src={react} width="32" height="32" />{" "}
-                    Showtime
-                </span>
-                <span role="img" aria-label="drum" sx={sx.emoji}>
-                    🥁
-                </span>
-                <span role="img" aria-label="performing arts" sx={sx.emoji}>
-                    🎭
-                </span>
+            <h1
+                sx={{
+                    ...sx.title,
+                    ...(compact ? { transform: "translateX(-2rem)" } : {}),
+                }}
+            >
+                <Ticket
+                    href="#"
+                    active={!compact}
+                    sx={sx.showtime}
+                    iconSrc={react}
+                    iconSize={32}
+                    label="Showtime"
+                    activeFontSize="2.4rem"
+                    onClick={scrollTo}
+                />
             </h1>
             <Link
                 sx={sx.repo}

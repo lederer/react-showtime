@@ -9,3 +9,8 @@ textarea,
 select {
     font-family: inherit;
 }
+
+#root {
+    display: flex;
+    flex-direction: column;
+}

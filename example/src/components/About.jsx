@@ -3,7 +3,7 @@ import { jsx, Text, Link } from "theme-ui";
 
 const sx = {
     container: {
-        px: 2,
+        px: 3,
     },
     tldr: {
         mb: 3,
@@ -11,11 +11,16 @@ const sx = {
         fontSize: "4.8rem",
         fontWeight: "bold",
         lineHeight: 1.4,
-        textAlign: "center",
     },
-    desc: { mt: 2 },
+    emoji: {
+        mx: 1,
+        fontSize: "4rem",
+        pointerEvents: "none",
+    },
+    desc: {},
     features: {
         listStyle: "none",
+        my: 3,
         pl: "3.2rem",
         textIndent: "-3.2rem",
     },
@@ -30,7 +35,18 @@ const sx = {
 function About(props) {
     return (
         <div sx={sx.container} {...props}>
-            <Text sx={sx.tldr}>Mount &amp; unmount with CSS transitions</Text>
+            <Text sx={sx.tldr}>
+                Mount &amp; unmount with{" "}
+                <span sx={{ whiteSpace: "nowrap" }}>
+                    CSS transitions
+                    <span role="img" aria-label="drum" sx={sx.emoji}>
+                        🥁
+                    </span>
+                    <span role="img" aria-label="performing arts" sx={sx.emoji}>
+                        🎭
+                    </span>
+                </span>
+            </Text>
             <Text sx={sx.desc}>
                 <strong>React Showtime</strong> makes it easy to apply CSS
                 transitions to the appearance and disappearance of React
@@ -44,8 +60,13 @@ function About(props) {
                         "::before": { content: "'👯'", mr: "1.2rem" },
                     }}
                 >
-                    Choose between <code>useShowtime</code> hook and{" "}
-                    <code>&lt;Showtime /&gt;</code> component.
+                    Choose between{" "}
+                    <code sx={{ variant: "text.code" }}>useShowtime</code> hook
+                    and{" "}
+                    <code sx={{ variant: "text.code" }}>
+                        &lt;Showtime /&gt;
+                    </code>{" "}
+                    component.
                 </li>
                 <li
                     sx={{
@@ -53,8 +74,10 @@ function About(props) {
                         "::before": { content: "'💃'", mr: "1.2rem" },
                     }}
                 >
-                    Feels familiar: <code>useShowtime</code> is a near-drop-in
-                    replacement for conditional rendering with a state boolean.
+                    Feels familiar:{" "}
+                    <code sx={{ variant: "text.code" }}>useShowtime</code> is a
+                    near-drop-in replacement for conditional rendering with a
+                    state boolean.
                 </li>
                 <li
                     sx={{
@@ -80,9 +103,13 @@ function About(props) {
                         "::before": { content: "'🎩'", mr: "1.2rem" },
                     }}
                 >
-                    Preset transitions: <code>slideFade</code>,{" "}
-                    <code>slide</code>, <code>fade</code>, <code>rise</code>,{" "}
-                    <code>scale</code>, <code>scaleTop</code>.
+                    Preset transitions:{" "}
+                    <code sx={{ variant: "text.code" }}>slideFade</code>,{" "}
+                    <code sx={{ variant: "text.code" }}>slide</code>,{" "}
+                    <code sx={{ variant: "text.code" }}>fade</code>,{" "}
+                    <code sx={{ variant: "text.code" }}>rise</code>,{" "}
+                    <code sx={{ variant: "text.code" }}>scale</code>,{" "}
+                    <code sx={{ variant: "text.code" }}>scaleTop</code>.
                 </li>
                 <li
                     sx={{
