@@ -5,6 +5,8 @@ import github from "../img/github.svg";
 
 const sx = {
     header: {
+        position: "sticky",
+        top: 0,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
