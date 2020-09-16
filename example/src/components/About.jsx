@@ -11,10 +11,18 @@ const sx = {
         fontSize: "4.8rem",
         fontWeight: "bold",
         lineHeight: 1.4,
+        "@media (max-width: 600px)": {
+            fontSize: "3.2rem",
+            textAlign: "center",
+        },
     },
     emoji: {
         mx: 1,
         fontSize: "4rem",
+        "@media (max-width: 600px)": {
+            mx: "0.4rem",
+            fontSize: "2.4rem",
+        },
         pointerEvents: "none",
     },
     desc: {},
@@ -29,6 +37,7 @@ const sx = {
     },
     link: {
         fontWeight: "bold",
+        whiteSpace: "nowrap",
     },
 };
 

@@ -14,7 +14,7 @@ const sx = {
     },
     name: {
         mb: 2,
-        fontSize: 7,
+        fontSize: 8,
         fontWeight: "bold",
         textAlign: "center",
     },
@@ -33,7 +33,9 @@ const sx = {
         justifyContent: "stretch",
         alignItems: "stretch",
         minHeight: "28rem",
-        boxShadow: 2,
+        "@media (min-width: 900px)": {
+            boxShadow: 2,
+        },
         "@media (max-width: 600px)": {
             flexDirection: "column",
         },
@@ -49,7 +51,7 @@ const sx = {
     button: {
         flex: "none",
         appearance: "none",
-        width: "12rem",
+        width: "20rem",
         border: "none",
         mt: "auto",
         p: 2,
@@ -69,8 +71,11 @@ const sx = {
         height: "8rem",
         px: 4,
         my: "1px",
-        bg: "#fd7c8328",
+        bg: "darktint",
         fontSize: 7,
+        ":last-of-type": {
+            mb: 4,
+        },
     },
     canvas: {
         bg: "white",
@@ -83,6 +88,7 @@ const sx = {
         flexBasis: "40%",
         width: "40%",
         maxWidth: "40%",
+        minHeight: "36rem",
         overflow: "hidden",
         "@media (max-width: 600px)": {
             flexBasis: "100%",
@@ -105,7 +111,11 @@ const RandomEmoji = forwardRef((props, ref) => {
 
     return (
         <div sx={sx.emoji} ref={ref} {...props}>
-            <span role="img" aria-label="random emoji">
+            <span
+                role="img"
+                aria-label="random emoji"
+                sx={{ transform: "perspective(0)" }}
+            >
                 {emoji.current}
             </span>
         </div>

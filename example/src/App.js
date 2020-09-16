@@ -21,7 +21,9 @@ const sx = {
         mb: 3,
     },
     nav: {
-        alignSelf: "center",
+        "@media (min-width: 900px)": {
+            alignSelf: "center",
+        },
         zIndex: 2,
     },
     examples: {

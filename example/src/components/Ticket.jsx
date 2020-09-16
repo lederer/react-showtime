@@ -5,14 +5,17 @@ const sx = {
     ticket: {
         "--opacity": 0,
         position: "relative",
-        py: "0.4rem",
-        pl: "1.6rem",
-        pr: "1.6rem",
+        py: "0.6rem",
+        px: 2,
         fontFamily: "Pompiere, cursive",
         fontSize: "2.6rem",
         fontWeight: "bold",
         textTransform: "uppercase",
         color: "black",
+        "@media (max-width: 600px)": {
+            px: "1rem",
+            fontSize: "2rem",
+        },
         "::before": {
             position: "absolute",
             zIndex: -1,
@@ -23,6 +26,9 @@ const sx = {
             width: "100%",
             bg: "ticket",
             "--stop-list": "transparent 1rem, #000 0",
+            "@media (max-width: 600px)": {
+                "--stop-list": "transparent 0.6rem, #000 0",
+            },
             mask:
                 "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
             maskComposite: "intersect",
@@ -38,11 +44,20 @@ const sx = {
         borderRadius: "6px",
         py: "0.4rem",
         px: 1,
+        "@media (max-width: 600px)": {
+            px: "0.6rem",
+        },
     },
     icon: {
         flex: "none",
         mr: 1,
         opacity: 0.8,
+        width: "2.8rem",
+        height: "2.8rem",
+        "@media (max-width: 600px)": {
+            width: "2rem",
+            height: "2rem",
+        },
     },
     labelContainer: {
         position: "relative",
@@ -59,6 +74,9 @@ const sx = {
         opacity: "var(--opacity)",
         fontFamily: "'Arial Narrow', Arial, sans-serif",
         fontSize: "2.4rem",
+        "@media (max-width: 600px)": {
+            fontSize: "1.7rem",
+        },
         fontWeight: "bold",
         textTransform: "uppercase",
         transition: "opacity 150ms",
@@ -68,7 +86,6 @@ const sx = {
 function Ticket({
     active,
     iconSrc,
-    iconSize,
     fontSize,
     activeFontSize,
     label,
@@ -83,12 +100,7 @@ function Ticket({
             {...props}
         >
             <span sx={sx.content}>
-                <Image
-                    src={iconSrc}
-                    sx={sx.icon}
-                    width={iconSize}
-                    height={iconSize}
-                />
+                <Image src={iconSrc} sx={sx.icon} width={28} height={28} />
                 <span sx={sx.labelContainer}>
                     <span sx={sx.inactiveLabel}>{label}</span>
                     <span sx={{ ...sx.activeLabel, fontSize: activeFontSize }}>

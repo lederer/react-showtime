@@ -16,7 +16,8 @@ const sx = {
         pt: 2,
     },
     section: {
-        pb: 4,
+        mb: 4,
+        pb: 8,
     },
     name: {
         position: "sticky",
@@ -26,7 +27,7 @@ const sx = {
         mb: 2,
         py: 2,
         fontFamily: "Pompiere, cursive",
-        fontSize: "4rem",
+        fontSize: "4.4rem",
         textAlign: "center",
         zIndex: 1,
     },

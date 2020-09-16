@@ -13,8 +13,10 @@ const sx = {
         position: "sticky",
         top: 0,
         display: "flex",
+        justifyContent: "center",
         alignItems: "center",
         height: "9.2rem",
+        bg: "white",
     },
     link: {
         flex: "none",
@@ -41,7 +43,6 @@ const Nav = forwardRef(
                     active={activeSection === "hook"}
                     sx={sx.link}
                     iconSrc={hook}
-                    iconSize={28}
                     label="Hook"
                     activeFontSize="2.2rem"
                     onClick={scrollTo}
@@ -51,7 +52,6 @@ const Nav = forwardRef(
                     active={activeSection === "component"}
                     sx={sx.link}
                     iconSrc={component}
-                    iconSize={28}
                     label="Component"
                     activeFontSize="2.2rem"
                     onClick={scrollTo}
@@ -61,7 +61,6 @@ const Nav = forwardRef(
                     active={activeSection === "presets"}
                     sx={sx.link}
                     iconSrc={presets}
-                    iconSize={28}
                     label="Presets"
                     activeFontSize="2.2rem"
                     onClick={scrollTo}

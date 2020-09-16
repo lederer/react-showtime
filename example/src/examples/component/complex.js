@@ -7,7 +7,7 @@ export const code = `
 // import { Showtime } from "react-showtime";
 
 function Container() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <>

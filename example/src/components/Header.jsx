@@ -7,8 +7,10 @@ import github from "../img/github.svg";
 
 const sx = {
     header: {
-        position: "sticky",
-        top: 0,
+        "@media (min-width: 900px)": {
+            position: "sticky",
+            top: 0,
+        },
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -16,6 +18,9 @@ const sx = {
         height: "9.2rem",
         py: 2,
         px: 3,
+        "@media (max-width: 600px)": {
+            py: 1,
+        },
         bg: "white",
     },
     title: {
@@ -55,7 +60,6 @@ function Header({ compact = false, ...props }) {
                     active={!compact}
                     sx={sx.showtime}
                     iconSrc={react}
-                    iconSize={32}
                     label="Showtime"
                     activeFontSize="2.4rem"
                     onClick={scrollTo}

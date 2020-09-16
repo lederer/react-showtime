@@ -8,6 +8,7 @@ export const code = `
 
 function Container() {
   const [isMounted, ref, show, hide] = useShowtime({
+      startHidden: true,
       transition: {
         beforeShow: {
           transform: "translateY(-100%)",
