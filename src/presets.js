@@ -18,10 +18,6 @@ export default Object.freeze({
     },
     scale: {
         hidden: {
-            height: 0,
-            minHeight: 0,
-            padding: 0,
-            margin: 0,
             transform: "scale(0)",
         },
     },
@@ -76,7 +72,6 @@ export default Object.freeze({
     },
     rise: {
         hidden: {
-            opacity: 0.1,
             transform: "translateY(50%)",
             zIndex: {
                 value: 1,
@@ -86,9 +81,18 @@ export default Object.freeze({
         },
         beforeShow: {
             easing: "ease-out",
+            opacity: {
+                value: 0,
+                duration: 200,
+            },
         },
         afterShow: {
             easing: "ease",
+            opacity: {
+                value: 0,
+                duration: 200,
+                delay: 50,
+            },
         },
     },
 });
