@@ -3,29 +3,59 @@ import { jsx } from "theme-ui";
 import { forwardRef, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
+import Example from "./Example";
+import {
+    HOOK_EXAMPLES,
+    COMPONENT_EXAMPLES,
+    PRESET_EXAMPLES,
+} from "../examples";
+
 const sx = {
     examples: {
         bg: "tint",
+        pt: 2,
     },
     section: {
-        height: "120rem",
-        mb: 4,
-        pt: 2,
+        width: "88rem",
+        maxWidth: "100%",
+        mx: "auto",
+        pb: 4,
+        ":not(:last-of-type)": {
+            mb: 8,
+            borderBottom: "8px solid #fff",
+            // borderBottom: "1px solid #00000011",
+        },
     },
     name: {
         my: 4,
         fontFamily: "Pompiere, cursive",
-        fontSize: 8,
+        fontSize: "4.8rem",
         textAlign: "center",
+    },
+    example: {
+        mb: 8,
     },
 };
 
-const INTERSECTION_THRESHOLD = [0, 0.25, 0.5, 0.75, 1];
+const INTERSECTION_THRESHOLD = [
+    0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1,
+];
 
-const Section = forwardRef(({ name, id, ...props }, ref) => {
+const Section = forwardRef(({ name, id, children, ...props }, ref) => {
     return (
         <section id={id} ref={ref} sx={sx.section} {...props}>
             <h2 sx={sx.name}>{name}</h2>
+            {children}
         </section>
     );
 });
@@ -74,13 +104,43 @@ function Examples({ onActiveSectionChange, ...props }) {
 
     return (
         <article sx={sx.examples} {...props}>
-            <Section id="hook" ref={hookRef} name="useShowtime() Hook" />
+            <Section id="hook" ref={hookRef} name="useShowtime() Hook">
+                {HOOK_EXAMPLES.map(({ name, desc, code }) => (
+                    <Example
+                        sx={sx.example}
+                        key={name}
+                        name={name}
+                        desc={desc}
+                        code={code}
+                    />
+                ))}
+            </Section>
             <Section
                 id="component"
                 ref={componentRef}
-                name="&lt;Showtime /&gt; component"
-            />
-            <Section id="presets" ref={presetsRef} name="Preset Transitions" />
+                name="&lt;Showtime /&gt; Component"
+            >
+                {COMPONENT_EXAMPLES.map(({ name, desc, code }) => (
+                    <Example
+                        sx={sx.example}
+                        key={name}
+                        name={name}
+                        desc={desc}
+                        code={code}
+                    />
+                ))}
+            </Section>
+            <Section id="presets" ref={presetsRef} name="Preset Transitions">
+                {PRESET_EXAMPLES.map(({ name, desc, code }) => (
+                    <Example
+                        sx={sx.example}
+                        key={name}
+                        name={name}
+                        desc={desc}
+                        code={code}
+                    />
+                ))}
+            </Section>
         </article>
     );
 }

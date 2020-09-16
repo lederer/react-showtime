@@ -12,6 +12,7 @@ import theme from "./theme";
 const sx = {
     header: {
         mb: 2,
+        zIndex: 1,
     },
     about: {
         maxWidth: "110ch",
@@ -20,6 +21,7 @@ const sx = {
     },
     nav: {
         alignSelf: "center",
+        zIndex: 1,
     },
 };
 
