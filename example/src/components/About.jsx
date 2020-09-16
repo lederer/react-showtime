@@ -117,8 +117,7 @@ function About(props) {
                     <code sx={{ variant: "text.code" }}>slide</code>,{" "}
                     <code sx={{ variant: "text.code" }}>fade</code>,{" "}
                     <code sx={{ variant: "text.code" }}>rise</code>,{" "}
-                    <code sx={{ variant: "text.code" }}>scale</code>,{" "}
-                    <code sx={{ variant: "text.code" }}>scaleTop</code>.
+                    <code sx={{ variant: "text.code" }}>scale</code>.
                 </li>
                 <li
                     sx={{

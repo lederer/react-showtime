@@ -1,21 +1,4 @@
 export default Object.freeze({
-    scaleTop: {
-        hidden: {
-            height: 0,
-            minHeight: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            marginTop: 0,
-            marginBottom: 0,
-            transform: "scaleY(0.5)",
-            opacity: 0,
-            transformOrigin: {
-                value: "top",
-                delay: 0,
-                duration: 0,
-            },
-        },
-    },
     scale: {
         hidden: {
             transform: "scale(0)",
