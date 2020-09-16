@@ -1,7 +1,7 @@
 export const name = "Asymmetric";
 
 export const desc =
-    "Use different transitions for showing and hiding with <code>transition.beforeShow</code> and <code>transition.afterShow</code>.";
+    "Use different transitions for showing and hiding with <code>transition.hiddenBefore</code> and <code>transition.hiddenAfter</code>.";
 
 export const code = `
 // import { useShowtime } from "react-showtime";
@@ -9,11 +9,11 @@ export const code = `
 function Container() {
   const [isMounted, ref, show, hide] = useShowtime({
       transition: {
-        beforeShow: {
+        hiddenBefore: {
           transform: "translateY(400px) rotate(180deg)",
           opacity: 0,
         },
-        afterShow: "fade",
+        hiddenAfter: "fade",
       },
   });
 

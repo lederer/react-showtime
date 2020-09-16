@@ -55,13 +55,13 @@ export default Object.freeze({
                 delay: 0,
             },
         },
-        beforeShow: {
+        hiddenBefore: {
             opacity: {
                 value: 0,
                 delay: 150,
             },
         },
-        afterShow: {
+        hiddenAfter: {
             delay: 100,
             easing: "ease-in",
             opacity: {
@@ -79,14 +79,14 @@ export default Object.freeze({
                 duration: 0,
             },
         },
-        beforeShow: {
+        hiddenBefore: {
             easing: "ease-out",
             opacity: {
                 value: 0,
                 duration: 200,
             },
         },
-        afterShow: {
+        hiddenAfter: {
             easing: "ease",
             opacity: {
                 value: 0,

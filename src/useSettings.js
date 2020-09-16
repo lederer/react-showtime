@@ -138,53 +138,53 @@ function extractInstantProperties(cssObject) {
 
 function resolveBeforeAfter(transitionParam) {
     const transition = { ...transitionParam };
-    const { beforeShow, afterShow } = transition;
+    const { hiddenBefore, hiddenAfter } = transition;
 
-    if (isString(beforeShow)) {
-        transition.beforeShow = {
-            ...PRESETS[beforeShow].hidden,
-            ...PRESETS[beforeShow].beforeShow,
+    if (isString(hiddenBefore)) {
+        transition.hiddenBefore = {
+            ...PRESETS[hiddenBefore].hidden,
+            ...PRESETS[hiddenBefore].hiddenBefore,
         };
-    } else if (beforeShow && isString(beforeShow.transition)) {
-        const { duration, delay, easing } = beforeShow;
-        transition.beforeShow = {
-            ...PRESETS[beforeShow.transition].hidden,
-            ...PRESETS[beforeShow.transition].beforeShow,
+    } else if (hiddenBefore && isString(hiddenBefore.transition)) {
+        const { duration, delay, easing } = hiddenBefore;
+        transition.hiddenBefore = {
+            ...PRESETS[hiddenBefore.transition].hidden,
+            ...PRESETS[hiddenBefore.transition].hiddenBefore,
             duration,
             delay,
             easing,
         };
     }
 
-    if (isString(afterShow)) {
-        transition.afterShow = {
-            ...PRESETS[afterShow].hidden,
-            ...PRESETS[afterShow].beforeShow,
+    if (isString(hiddenAfter)) {
+        transition.hiddenAfter = {
+            ...PRESETS[hiddenAfter].hidden,
+            ...PRESETS[hiddenAfter].hiddenBefore,
         };
-    } else if (afterShow && isString(afterShow.transition)) {
-        const { duration, delay, easing } = afterShow;
-        transition.afterShow = {
-            ...PRESETS[afterShow.transition].hidden,
-            ...PRESETS[afterShow.transition].afterShow,
+    } else if (hiddenAfter && isString(hiddenAfter.transition)) {
+        const { duration, delay, easing } = hiddenAfter;
+        transition.hiddenAfter = {
+            ...PRESETS[hiddenAfter.transition].hidden,
+            ...PRESETS[hiddenAfter.transition].hiddenAfter,
             duration,
             delay,
             easing,
         };
     }
 
-    const [beforeShowInstant, beforeShowRest] = extractInstantProperties({
+    const [hiddenBeforeInstant, hiddenBeforeRest] = extractInstantProperties({
         ...transition.hidden,
-        ...transition.beforeShow,
+        ...transition.hiddenBefore,
     });
-    transition.beforeShowInstant = beforeShowInstant;
-    transition.beforeShow = beforeShowRest;
+    transition.hiddenBeforeInstant = hiddenBeforeInstant;
+    transition.hiddenBefore = hiddenBeforeRest;
 
-    const [afterShowInstant, afterShowRest] = extractInstantProperties({
+    const [hiddenAfterInstant, hiddenAfterRest] = extractInstantProperties({
         ...transition.hidden,
-        ...transition.afterShow,
+        ...transition.hiddenAfter,
     });
-    transition.afterShowInstant = afterShowInstant;
-    transition.afterShow = afterShowRest;
+    transition.hiddenAfterInstant = hiddenAfterInstant;
+    transition.hiddenAfter = hiddenAfterRest;
 
     return transition;
 }
@@ -214,10 +214,10 @@ function resolveEffectiveSettings(settingsParam) {
 function processSettings(settings = {}) {
     const {
         startHidden,
-        beforeShow,
-        afterShow,
-        beforeShowInstant,
-        afterShowInstant,
+        hiddenBefore,
+        hiddenAfter,
+        hiddenBeforeInstant,
+        hiddenAfterInstant,
         duration,
         delay,
         easing,
@@ -227,27 +227,27 @@ function processSettings(settings = {}) {
         duration,
         delay,
         easing,
-        ...beforeShow,
+        ...hiddenBefore,
     });
     const hideTransitionCssText = extractTransitionCssText({
         duration,
         delay,
         easing,
-        ...afterShow,
+        ...hiddenAfter,
     });
 
-    const beforeShowCss = extractCssValues(beforeShow);
-    const beforeShowInstantCss = extractCssValues(beforeShowInstant);
+    const hiddenBeforeCss = extractCssValues(hiddenBefore);
+    const hiddenBeforeInstantCss = extractCssValues(hiddenBeforeInstant);
 
-    const afterShowCss = extractCssValues(afterShow);
-    const afterShowInstantCss = extractCssValues(afterShowInstant);
+    const hiddenAfterCss = extractCssValues(hiddenAfter);
+    const hiddenAfterInstantCss = extractCssValues(hiddenAfterInstant);
 
     return {
         startHidden,
-        beforeShowCss,
-        beforeShowInstantCss,
-        afterShowCss,
-        afterShowInstantCss,
+        hiddenBeforeCss,
+        hiddenBeforeInstantCss,
+        hiddenAfterCss,
+        hiddenAfterInstantCss,
         showTransitionCssText,
         hideTransitionCssText,
     };

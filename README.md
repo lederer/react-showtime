@@ -138,8 +138,8 @@ To use a [custom transition](#custom-transitions) instead of a preset:
 useShowtime({
     transition: {
         hidden: { … },
-        beforeShow: …,
-        afterShow: …,
+        hiddenBefore: …,
+        hiddenAfter: …,
     },
     …
 });
@@ -149,8 +149,8 @@ useShowtime({
 <Showtime
     transition={{
         hidden: { … },
-        beforeShow: …,
-        afterShow: …,
+        hiddenBefore: …,
+        hiddenAfter: …,
     }}
     …
 >
@@ -210,7 +210,7 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 
 ### Custom transitions
 
-You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `beforeShow`, `afterShow`.
+You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `hiddenBefore`, `hiddenAfter`.
 
 #### `transition.hidden`
 
@@ -247,16 +247,16 @@ const HookExample = () => {
 };
 ```
 
-#### Asymmetric transitions with `transition.beforeShow` and `transition.afterShow`
+#### Asymmetric transitions with `transition.hiddenBefore` and `transition.hiddenAfter`
 
-The `beforeShow` and `afterShow` properties of the `transition` object conform to approximately the same structural definition as the `hidden` property. `beforeShow` defines how the element or component is hidden prior to being shown, and `afterShow` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
+The `hiddenBefore` and `hiddenAfter` properties of the `transition` object conform to approximately the same structural definition as the `hidden` property. `hiddenBefore` defines how the element or component is hidden prior to being shown, and `hiddenAfter` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
 
-`beforeShow` and `afterShow` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
+`hiddenBefore` and `hiddenAfter` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
 
-There are a couple of differences between the structure of `beforeShow`/`afterShow` and `hidden`, which allow you to use a preset for an asymmetric transition:
+There are a couple of differences between the structure of `hiddenBefore`/`hiddenAfter` and `hidden`, which allow you to use a preset for an asymmetric transition:
 
--   You can pass a string to `beforeShow`/`afterShow` instead of an object. The string must be the name of a preset transiton.
--   The `beforeShow`/`afterShow` object can contain a `transition` key. Its value must be the name of a preset transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a preset and also pass in optional custom values for `duration`, `delay`, or `easing`.
+-   You can pass a string to `hiddenBefore`/`hiddenAfter` instead of an object. The string must be the name of a preset transiton.
+-   The `hiddenBefore`/`hiddenAfter` object can contain a `transition` key. Its value must be the name of a preset transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a preset and also pass in optional custom values for `duration`, `delay`, or `easing`.
 
 Eg…
 
@@ -264,8 +264,8 @@ Eg…
 const HookExample = () => {
     const [isMounted, ref, show, hide] = useShowtime({
         transition: {
-            beforeShow: "fade", // or { transition: "fade", delay: 100, … }
-            afterShow: {
+            hiddenBefore: "fade", // or { transition: "fade", delay: 100, … }
+            hiddenAfter: {
                 duration: 350,
                 right: "100vw",
                 top: "-100vh",
@@ -278,7 +278,7 @@ const HookExample = () => {
 };
 ```
 
-If you want to use the same transition for showing and hiding, but with different duration, delay, or easing, just define the transition once in `hidden` and then define `duration`, `delay`, or `easing` values in `beforeShow` and `afterShow`.
+If you want to use the same transition for showing and hiding, but with different duration, delay, or easing, just define the transition once in `hidden` and then define `duration`, `delay`, or `easing` values in `hiddenBefore` and `hiddenAfter`.
 
 ### Events
 
@@ -319,11 +319,11 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 
 #### transitionObject
 
-| Name       | Type                           | Req'd? | Description                                                    |
-| ---------- | ------------------------------ | ------ | -------------------------------------------------------------- |
-| hidden     | transitionProperties           | no     | Styles and transition timing of before and after hidden state. |
-| beforeShow | string or transitionProperties | no     | Styles and transition timing of beforeShow hidden state.       |
-| afterShow  | string or transitionProperties | no     | Styles and transition timing of afterShow hidden state.        |
+| Name         | Type                           | Req'd? | Description                                                    |
+| ------------ | ------------------------------ | ------ | -------------------------------------------------------------- |
+| hidden       | transitionProperties           | no     | Styles and transition timing of before and after hidden state. |
+| hiddenBefore | string or transitionProperties | no     | Styles and transition timing of hiddenBefore hidden state.     |
+| hiddenAfter  | string or transitionProperties | no     | Styles and transition timing of hiddenAfter hidden state.      |
 
 #### transitionProperties
 

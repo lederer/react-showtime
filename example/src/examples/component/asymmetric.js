@@ -13,11 +13,11 @@ function Container() {
       <Showtime 
         show={show}
         transition={{
-          beforeShow: {
+          hiddenBefore: {
             transform: "translateY(400px) rotate(180deg)",
             opacity: 0,
           },
-          afterShow: "fade",
+          hiddenAfter: "fade",
         }}
       >
           {(ref) => (

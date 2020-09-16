@@ -1,7 +1,7 @@
 export const name = "Extravaganza";
 
 export const desc =
-    "Asymmetric transitions. Per-property timing. Do your thing.";
+    "A whole bunch of stuff… Asymmetric transitions. Per-property timing. Start hidden.";
 
 export const code = `
 // import { useShowtime } from "react-showtime";
@@ -10,12 +10,12 @@ function Container() {
   const [isMounted, ref, show, hide] = useShowtime({
       startHidden: true,
       transition: {
-        beforeShow: {
+        hiddenBefore: {
           transform: "translateY(-100%)",
           duration: 200,
           easing: "cubic-bezier(0.16, 2.04, 0.41, 1.67)",
         },
-        afterShow: {
+        hiddenAfter: {
           transform: "translateX(300%)",
           opacity: {
             value: 0,
