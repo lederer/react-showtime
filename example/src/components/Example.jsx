@@ -71,8 +71,15 @@ const sx = {
         height: "8rem",
         px: 4,
         my: "1px",
-        bg: "darktint",
         fontSize: 7,
+        "--stripe": (theme) => theme.colors.tint,
+        background: `linear-gradient(135deg, var(--stripe) 25%, transparent 25%) -0.8rem 0,
+                     linear-gradient(225deg, var(--stripe) 25%, transparent 25%) -0.8rem 0,
+                     linear-gradient(315deg, var(--stripe) 25%, transparent 25%),
+                     linear-gradient(45deg, var(--stripe) 25%, transparent 25%)`,
+        backgroundSize: "1.6rem 1.6rem",
+        bg: "darktint",
+
         ":last-of-type": {
             mb: 4,
         },
