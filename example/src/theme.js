@@ -46,7 +46,7 @@ export default {
         muted: "#f6f6f6",
         accent: "#008484",
         ticket: "#fd7c83",
-        tint: "#fd7c8317",
+        tint: "#fff3f4",
     },
     shadows: [
         "none",

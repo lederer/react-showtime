@@ -16,24 +16,24 @@ const sx = {
         pt: 2,
     },
     section: {
-        width: "88rem",
-        maxWidth: "100%",
-        mx: "auto",
         pb: 4,
-        ":not(:last-of-type)": {
-            mb: 8,
-            borderBottom: "8px solid #fff",
-            // borderBottom: "1px solid #00000011",
-        },
     },
     name: {
-        my: 4,
+        position: "sticky",
+        top: "9.2rem",
+        bg: "tint",
+        mt: 0,
+        mb: 2,
+        py: 2,
         fontFamily: "Pompiere, cursive",
-        fontSize: "4.8rem",
+        fontSize: "4rem",
         textAlign: "center",
+        zIndex: 1,
     },
     example: {
-        mb: 8,
+        ":not(:last-of-type)": {
+            mb: 8,
+        },
     },
 };
 

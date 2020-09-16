@@ -24,7 +24,7 @@ const sx = {
 const scrollTo = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const HEADER_OFFSET = -120;
+    const HEADER_OFFSET = -92;
     const id = event.currentTarget.getAttribute("href");
     const el = document.querySelectorAll(id)[0];
     const top =

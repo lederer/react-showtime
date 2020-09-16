@@ -7,10 +7,14 @@ import { useShowtime, Showtime } from "react-showtime";
 const emojis = ["👯", "💃", "🕺", "🎩", "🎭", "🕴"];
 
 const sx = {
-    container: {},
+    container: {
+        width: "88rem",
+        maxWidth: "100%",
+        mx: "auto",
+    },
     name: {
         mb: 2,
-        fontSize: 8,
+        fontSize: 7,
         fontWeight: "bold",
         textAlign: "center",
     },

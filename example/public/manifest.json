@@ -3,6 +3,6 @@
     "name": "react-showtime",
     "start_url": "./index.html",
     "display": "standalone",
-    "theme_color": "#000000",
+    "theme_color": "#fd7c83",
     "background_color": "#ffffff"
 }

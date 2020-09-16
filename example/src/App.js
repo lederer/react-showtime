@@ -7,12 +7,13 @@ import Header from "./components/Header";
 import About from "./components/About";
 import Nav from "./components/Nav";
 import Examples from "./components/Examples";
+import Footer from "./components/Footer";
 import theme from "./theme";
 
 const sx = {
     header: {
         mb: 2,
-        zIndex: 1,
+        zIndex: 2,
     },
     about: {
         maxWidth: "110ch",
@@ -21,6 +22,9 @@ const sx = {
     },
     nav: {
         alignSelf: "center",
+        zIndex: 2,
+    },
+    examples: {
         zIndex: 1,
     },
 };
@@ -43,8 +47,11 @@ function App() {
                 ref={navRef}
                 activeSection={isNavDocked ? activeSection : null}
             />
-            <Examples onActiveSectionChange={setActiveSection} />
-            <footer>FOOTER</footer>
+            <Examples
+                sx={sx.examples}
+                onActiveSectionChange={setActiveSection}
+            />
+            <Footer />
         </ThemeProvider>
     );
 }
