@@ -47,7 +47,7 @@ export default {
         accent: "#008484",
         ticket: "#fd7c83",
         tint: "#fff3f4",
-        darktint: "#ffdcdf",
+        darktint: "#ffe0e3",
     },
     shadows: [
         "none",
