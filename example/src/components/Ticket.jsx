@@ -16,6 +16,9 @@ const sx = {
             px: "1rem",
             fontSize: "2rem",
         },
+        "@media (max-width: 400px)": {
+            fontSize: "1.8rem",
+        },
         "::before": {
             position: "absolute",
             zIndex: -1,
@@ -76,6 +79,9 @@ const sx = {
         fontSize: "2.4rem",
         "@media (max-width: 600px)": {
             fontSize: "1.7rem",
+        },
+        "@media (max-width: 400px)": {
+            fontSize: "1.3rem",
         },
         fontWeight: "bold",
         textTransform: "uppercase",

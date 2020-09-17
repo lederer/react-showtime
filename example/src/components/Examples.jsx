@@ -19,7 +19,7 @@ const sx = {
         mb: 4,
         pb: 8,
     },
-    name: {
+    heading: {
         position: "sticky",
         top: "9.2rem",
         bg: "tint",
@@ -30,6 +30,9 @@ const sx = {
         fontSize: "4.4rem",
         textAlign: "center",
         zIndex: 1,
+        "@media (max-width: 600px)": {
+            fontSize: "3.2rem",
+        },
     },
     example: {
         ":not(:last-of-type)": {
@@ -55,7 +58,7 @@ const INTERSECTION_THRESHOLD = [
 const Section = forwardRef(({ name, id, children, ...props }, ref) => {
     return (
         <section id={id} ref={ref} sx={sx.section} {...props}>
-            <h2 sx={sx.name}>{name}</h2>
+            <h2 sx={sx.heading}>{name}</h2>
             {children}
         </section>
     );
@@ -119,7 +122,7 @@ function Examples({ onActiveSectionChange, ...props }) {
             <Section
                 id="component"
                 ref={componentRef}
-                name="&lt;Showtime /&gt; Component"
+                name="&lt;Showtime&gt; Component"
             >
                 {COMPONENT_EXAMPLES.map(({ name, desc, code }) => (
                     <Example

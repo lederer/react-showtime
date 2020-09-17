@@ -85,11 +85,14 @@ export default {
             fontFamily: "body",
             lineHeight: "body",
             fontWeight: "body",
-            fontSize: 3,
+            fontSize: 4,
             position: "relative",
             width: "100%",
             m: 0,
             p: 0,
+            "@media (max-width: 400px)": {
+                fontSize: 3,
+            },
         },
         a: {
             textDecoration: "none",

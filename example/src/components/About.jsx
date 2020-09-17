@@ -4,6 +4,9 @@ import { jsx, Text, Link } from "theme-ui";
 const sx = {
     container: {
         px: 3,
+        "@media (max-width: 600px)": {
+            px: 2,
+        },
     },
     tldr: {
         mb: 3,
@@ -66,21 +69,19 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'👯'", mr: "1.2rem" },
+                        "::before": { content: "'👯'", mr: 2 },
                     }}
                 >
                     Choose between{" "}
                     <code sx={{ variant: "text.code" }}>useShowtime</code> hook
                     and{" "}
-                    <code sx={{ variant: "text.code" }}>
-                        &lt;Showtime /&gt;
-                    </code>{" "}
+                    <code sx={{ variant: "text.code" }}>&lt;Showtime&gt;</code>{" "}
                     component.
                 </li>
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'💃'", mr: "1.2rem" },
+                        "::before": { content: "'💃'", mr: 2 },
                     }}
                 >
                     Feels familiar:{" "}
@@ -91,7 +92,7 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'💅'", mr: "1.2rem" },
+                        "::before": { content: "'💅'", mr: 2 },
                     }}
                 >
                     Specify <em>showing</em> styles however you like – inline,
@@ -100,7 +101,7 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'💨'", mr: "1.2rem" },
+                        "::before": { content: "'💨'", mr: 2 },
                     }}
                 >
                     Sensible API for defining <em>hidden</em> styles and custom
@@ -109,7 +110,7 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'🎩'", mr: "1.2rem" },
+                        "::before": { content: "'🎩'", mr: 2 },
                     }}
                 >
                     Preset transitions:{" "}
@@ -122,7 +123,7 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'🎭'", mr: "1.2rem" },
+                        "::before": { content: "'🎭'", mr: 2 },
                     }}
                 >
                     Symmetric or asymmetric show/hide transitions.
@@ -130,7 +131,7 @@ function About(props) {
                 <li
                     sx={{
                         ...sx.feature,
-                        "::before": { content: "'🕴'", mr: "1.2rem" },
+                        "::before": { content: "'🕴'", mr: 2 },
                     }}
                 >
                     Zero dependencies. 21k unpacked.

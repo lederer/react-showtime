@@ -18,10 +18,11 @@ const sx = {
         height: "9.2rem",
         py: 2,
         px: 3,
+        bg: "white",
         "@media (max-width: 600px)": {
             py: 1,
+            px: 2,
         },
-        bg: "white",
     },
     title: {
         flex: "none",
@@ -37,6 +38,11 @@ const sx = {
     },
     repo: {
         flex: "none",
+    },
+    github: {
+        "@media (max-width: 600px)": {
+            width: "3.2rem",
+        },
     },
 };
 
@@ -70,7 +76,7 @@ function Header({ compact = false, ...props }) {
                 title="Go to repo"
                 href="https://github.com/azavea/react-showtime"
             >
-                <Image src={github} width="40" height="40" />
+                <Image sx={sx.github} src={github} width="40" height="40" />
             </Link>
         </header>
     );
