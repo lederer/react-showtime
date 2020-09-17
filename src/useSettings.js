@@ -214,6 +214,7 @@ function resolveEffectiveSettings(settingsParam) {
 function processSettings(settings = {}) {
     const {
         startHidden,
+        startWithTransition,
         hiddenBefore,
         hiddenAfter,
         hiddenBeforeInstant,
@@ -244,6 +245,7 @@ function processSettings(settings = {}) {
 
     return {
         startHidden,
+        startWithTransition,
         hiddenBeforeCss,
         hiddenBeforeInstantCss,
         hiddenAfterCss,

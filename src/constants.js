@@ -7,6 +7,7 @@ export const STATUS = Object.freeze({
 
 export const DEFAULTS = Object.freeze({
     startHidden: false,
+    startWithTransition: false,
     transition: "slideFade",
     duration: 250,
     delay: 0,

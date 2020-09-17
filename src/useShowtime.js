@@ -12,6 +12,7 @@ import {
 export default function useShowtime(settings) {
     const {
         startHidden,
+        startWithTransition,
         hiddenBeforeCss,
         hiddenBeforeInstantCss,
         hiddenAfterCss,
@@ -101,14 +102,14 @@ export default function useShowtime(settings) {
 
         if (isInitialRenderRef.current) {
             isInitialRenderRef.current = false;
-            if (!startHidden) {
+            if (!startHidden && !startWithTransition) {
                 return;
             }
         }
 
         addInlineStyles(elementRef.current, hiddenBeforeInstantCss);
         setStatus(STATUS.transitioningIn);
-    }, [isMounted, startHidden, hiddenBeforeInstantCss]);
+    }, [isMounted, startHidden, startWithTransition, hiddenBeforeInstantCss]);
 
     useLayoutEffect(() => {
         if (status === STATUS.transitioningIn) {

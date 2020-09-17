@@ -12,6 +12,7 @@ function usePrevious(value) {
 
 export default function Showtime({
     show: shouldShow = true,
+    startWithTransition,
     transition,
     duration,
     delay,
@@ -23,6 +24,7 @@ export default function Showtime({
 }) {
     const [isMounted, ref, show, hide, status] = useShowtime({
         startHidden: !shouldShow,
+        startWithTransition,
         transition,
         duration,
         delay,
