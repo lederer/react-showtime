@@ -348,9 +348,9 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 
 React Showtime was built with [create-react-hook](https://github.com/Hermanya/create-react-hook) using [this blog post](https://www.twilio.com/blog/release-custom-react-component-hook-effect-npm-package) as a guiding reference.
 
-Any API changes should be reflected in the demo app in `example/` and in this readme.
+Be sure to reflect any API changes in the demo app in `example/` and in this readme.
 
-### Getting started
+To get started:
 
 1.  `yarn start` in `src/` to watch for changes there.
 2.  Then `yarn start` in `example/` to watch for changes there and run a dev server.
