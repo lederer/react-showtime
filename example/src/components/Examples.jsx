@@ -109,13 +109,14 @@ function Examples({ onActiveSectionChange, ...props }) {
     return (
         <article sx={sx.examples} {...props}>
             <Section id="hook" ref={hookRef} name="useShowtime() Hook">
-                {HOOK_EXAMPLES.map(({ name, desc, code }) => (
+                {HOOK_EXAMPLES.map(({ name, desc, code, noInline }) => (
                     <Example
                         sx={sx.example}
                         key={name}
                         name={name}
                         desc={desc}
                         code={code}
+                        noInline={noInline}
                     />
                 ))}
             </Section>
@@ -124,24 +125,26 @@ function Examples({ onActiveSectionChange, ...props }) {
                 ref={componentRef}
                 name="&lt;Showtime&gt; Component"
             >
-                {COMPONENT_EXAMPLES.map(({ name, desc, code }) => (
+                {COMPONENT_EXAMPLES.map(({ name, desc, code, noInline }) => (
                     <Example
                         sx={sx.example}
                         key={name}
                         name={name}
                         desc={desc}
                         code={code}
+                        noInline={noInline}
                     />
                 ))}
             </Section>
             <Section id="presets" ref={presetsRef} name="Preset Transitions">
-                {PRESET_EXAMPLES.map(({ name, desc, code }) => (
+                {PRESET_EXAMPLES.map(({ name, desc, code, noInline }) => (
                     <Example
                         sx={sx.example}
                         key={name}
                         name={name}
                         desc={desc}
                         code={code}
+                        noInline={noInline}
                     />
                 ))}
             </Section>

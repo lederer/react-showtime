@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Text } from "theme-ui";
+import { jsx, Text, Close } from "theme-ui";
 import { forwardRef, useRef, useState } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import { useShowtime, Showtime } from "react-showtime";
@@ -69,7 +69,7 @@ const sx = {
         alignItems: "center",
         width: "100%",
         height: "8rem",
-        px: 4,
+        px: 2,
         my: "1px",
         fontSize: 7,
         "--stripe": (theme) => theme.colors.tint,
@@ -79,10 +79,16 @@ const sx = {
                      linear-gradient(45deg, var(--stripe) 25%, transparent 25%)`,
         backgroundSize: "1.6rem 1.6rem",
         bg: "darktint",
-
         ":last-of-type": {
             mb: 4,
         },
+    },
+    close: {
+        flex: "none",
+        ml: "auto",
+        width: "4rem",
+        height: "4rem",
+        cursor: "pointer",
     },
     canvas: {
         bg: "white",
@@ -113,18 +119,15 @@ const Button = ({ label, ...props }) => {
     );
 };
 
-const RandomEmoji = forwardRef((props, ref) => {
+const RandomEmoji = forwardRef(({ onClose, ...props }, ref) => {
     const emoji = useRef(emojis[Math.floor(Math.random() * emojis.length)]);
 
     return (
         <div sx={sx.emoji} ref={ref} {...props}>
-            <span
-                role="img"
-                aria-label="random emoji"
-                sx={{ transform: "perspective(0)" }}
-            >
+            <span role="img" aria-label="random emoji" sx={{ flex: "none" }}>
                 {emoji.current}
             </span>
+            {onClose && <Close sx={sx.close} onClick={onClose} />}
         </div>
     );
 });
@@ -135,13 +138,13 @@ const Canvas = (props) => {
 
 const scope = { useShowtime, Showtime, useState, Button, RandomEmoji };
 
-function Example({ name, desc, code, ...props }) {
+function Example({ name, desc, code, noInline, ...props }) {
     return (
         <div sx={sx.container} {...props}>
             <Text sx={sx.name}>{name}</Text>
             <Text sx={sx.desc} dangerouslySetInnerHTML={{ __html: desc }} />
             <div sx={sx.example}>
-                <LiveProvider scope={scope} code={code}>
+                <LiveProvider scope={scope} code={code} noInline={noInline}>
                     <LiveEditor style={sx.editor} />
                     <LiveError />
                     <LivePreview Component={Canvas} />
