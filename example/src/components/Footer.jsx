@@ -16,7 +16,7 @@ function Footer(props) {
     return (
         <footer sx={sx.footer} {...props}>
             <Link href="https://www.azavea.com/">
-                <Image src={azavea} width="120" />
+                <Image src={azavea} width="120" alt="Azavea" />
             </Link>
         </footer>
     );

@@ -66,6 +66,7 @@ function Header({ compact = false, ...props }) {
                     active={!compact}
                     sx={sx.showtime}
                     iconSrc={react}
+                    iconAlt="React"
                     label="Showtime"
                     activeFontSize="2.4rem"
                     onClick={scrollTo}
@@ -76,7 +77,13 @@ function Header({ compact = false, ...props }) {
                 title="Go to repo"
                 href="https://github.com/azavea/react-showtime"
             >
-                <Image sx={sx.github} src={github} width="40" height="40" />
+                <Image
+                    sx={sx.github}
+                    src={github}
+                    alt="Github"
+                    width="40"
+                    height="40"
+                />
             </Link>
         </header>
     );

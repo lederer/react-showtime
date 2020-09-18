@@ -95,6 +95,7 @@ function Ticket({
     fontSize,
     activeFontSize,
     label,
+    iconAlt = "",
     ...props
 }) {
     return (
@@ -106,7 +107,13 @@ function Ticket({
             {...props}
         >
             <span sx={sx.content}>
-                <Image src={iconSrc} sx={sx.icon} width={28} height={28} />
+                <Image
+                    src={iconSrc}
+                    sx={sx.icon}
+                    alt={iconAlt}
+                    width={28}
+                    height={28}
+                />
                 <span sx={sx.labelContainer}>
                     <span sx={sx.inactiveLabel}>{label}</span>
                     <span sx={{ ...sx.activeLabel, fontSize: activeFontSize }}>
