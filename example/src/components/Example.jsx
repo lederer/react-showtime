@@ -14,8 +14,9 @@ const sx = {
     },
     name: {
         mb: 2,
-        fontSize: 8,
-        fontWeight: "bold",
+        fontFamily: "Pompiere, cursive",
+        fontSize: "4.2rem",
+        textTransform: "uppercase",
         textAlign: "center",
     },
     desc: {
@@ -123,7 +124,11 @@ const RandomEmoji = forwardRef(({ onClose, ...props }, ref) => {
     const emoji = useRef(emojis[Math.floor(Math.random() * emojis.length)]);
 
     return (
-        <div sx={sx.emoji} ref={ref} {...props}>
+        <div
+            sx={{ ...sx.emoji, filter: ref ? undefined : "grayscale(1)" }}
+            ref={ref}
+            {...props}
+        >
             <span role="img" aria-label="random emoji" sx={{ flex: "none" }}>
                 {emoji.current}
             </span>
