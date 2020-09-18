@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Link, Image } from "theme-ui";
+import { useShowtime } from "react-showtime";
 
 import Ticket from "./Ticket";
 import react from "../img/react.svg";
@@ -58,6 +59,20 @@ const scrollTo = (event) => {
 };
 
 function Header({ compact = false, ...props }) {
+    const [isMounted, ref] = useShowtime({
+        startWithTransition: true,
+        transition: {
+            duration: 250,
+            delay: 50,
+            easing: "cubic-bezier(0.34, 1.56, 1, 1.73)",
+            hidden: {
+                transform: {
+                    value: "translateX(-200%)",
+                },
+            },
+        },
+    });
+
     return (
         <header sx={sx.header} {...props}>
             <h1
@@ -66,15 +81,18 @@ function Header({ compact = false, ...props }) {
                     ...(compact ? { transform: "translateX(-2rem)" } : {}),
                 }}
             >
-                <Ticket
-                    href="#"
-                    active={!compact}
-                    sx={sx.showtime}
-                    iconSrc={react}
-                    iconAlt="React"
-                    label="Showtime"
-                    onClick={scrollTo}
-                />
+                {isMounted && (
+                    <Ticket
+                        ref={ref}
+                        href="#"
+                        active={!compact}
+                        sx={sx.showtime}
+                        iconSrc={react}
+                        iconAlt="React"
+                        label="Showtime"
+                        onClick={scrollTo}
+                    />
+                )}
             </h1>
             <Link
                 sx={sx.repo}

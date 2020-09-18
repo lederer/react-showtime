@@ -1,5 +1,8 @@
 /** @jsx jsx */
 import { jsx, Text, Link } from "theme-ui";
+import { useLayoutEffect } from "react";
+import useFontFaceObserver from "../hooks/useFontFaceObserver";
+import { useShowtime } from "react-showtime";
 
 const sx = {
     container: {
@@ -14,10 +17,13 @@ const sx = {
         fontSize: "4.8rem",
         fontWeight: "bold",
         lineHeight: 1.4,
+        transition: "opacity 1000ms",
         "@media (max-width: 600px)": {
             fontSize: "3.2rem",
-            textAlign: "center",
         },
+    },
+    emojis: {
+        display: "inline-block",
     },
     emoji: {
         mx: 1,
@@ -38,6 +44,7 @@ const sx = {
     feature: {
         mb: 1,
     },
+    more: {},
     link: {
         fontWeight: "bold",
         whiteSpace: "nowrap",
@@ -45,20 +52,68 @@ const sx = {
 };
 
 function About(props) {
+    const isFontLoaded = useFontFaceObserver("Pompiere");
+    const [isTextMounted, textRef, showText] = useShowtime({
+        startHidden: true,
+        transition: {
+            duration: 250,
+            easing: "cubic-bezier(0.34, 1.56, 0.92, 0.88)",
+            hidden: {
+                height: 0,
+                transform: {
+                    value: "translateX(100vw)",
+                    delay: 250,
+                },
+            },
+        },
+    });
+    const [areEmojisMounted, emojisRef, showEmojis] = useShowtime({
+        startHidden: true,
+        duration: 250,
+        delay: 400,
+        easing: "cubic-bezier(0.34, 1.56, 0.92, 0.88)",
+        transition: {
+            hidden: {
+                transform: "translateX(100vw)",
+            },
+        },
+    });
+
+    useLayoutEffect(() => {
+        if (isFontLoaded) {
+            showEmojis();
+            showText();
+        }
+    }, [isFontLoaded, showText, showEmojis]);
+
     return (
         <div sx={sx.container} {...props}>
-            <Text sx={sx.tldr}>
-                Mount &amp; unmount with{" "}
-                <span sx={{ whiteSpace: "nowrap" }}>
-                    CSS transitions
-                    <span role="img" aria-label="drum" sx={sx.emoji}>
-                        🥁
+            {isTextMounted && (
+                <Text sx={sx.tldr} ref={textRef}>
+                    Mount &amp; unmount with{" "}
+                    <span sx={{ whiteSpace: "nowrap" }}>
+                        CSS transitions{" "}
+                        {areEmojisMounted && (
+                            <span sx={sx.emojis} ref={emojisRef}>
+                                <span
+                                    role="img"
+                                    aria-label="drum"
+                                    sx={sx.emoji}
+                                >
+                                    🥁
+                                </span>
+                                <span
+                                    role="img"
+                                    aria-label="performing arts"
+                                    sx={sx.emoji}
+                                >
+                                    🎭
+                                </span>
+                            </span>
+                        )}
                     </span>
-                    <span role="img" aria-label="performing arts" sx={sx.emoji}>
-                        🎭
-                    </span>
-                </span>
-            </Text>
+                </Text>
+            )}
             <Text sx={sx.desc}>
                 <strong>React Showtime</strong> makes it easy to apply CSS
                 transitions to the appearance and disappearance of React
