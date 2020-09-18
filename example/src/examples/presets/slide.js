@@ -6,7 +6,7 @@ export const code = `
 // import { useShowtime } from "react-showtime";
 
 function Container() {
-  const [isMounted, ref, show, hide] = useShowtime("slide");
+  const [ref, isMounted, show, hide] = useShowtime("slide");
 
   return (
     <>

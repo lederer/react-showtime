@@ -16,9 +16,9 @@ The essential insight of React Showtime is that the one-two sequence of React's 
 
 ### What React Showtime is not
 
-React Showtime is **not for transitions that do not involve mounting/unmounting**. It was created specifically as a sort of shim for conditional rendering.
+React Showtime is **not for sophisticated animations**, as it works purely with CSS `transition`, not `animation`. Consider a more full-featured library like react-spring for those.
 
-React Showtime is **not for sophisticated animations**. Consider a more full-featured library like react-spring for those.
+React Showtime is **not for transitions that do not involve mounting/unmounting**. It was created specifically as a sort of shim for conditional rendering. (That said, if you set `startWithTransition` to `true` and ignore the `isMounted`, `show`, and `hide` return values, it will execute a single transition on the initial mount, which can be nice for, say, adding flair to an initial page load.)
 
 ## Getting Started
 
@@ -41,8 +41,8 @@ import { useShowtime } from "react-showtime";
 
 const HookExample = () => {
     // Choose from object or array destructuring…
-    // const {isMounted, ref, show, hide} = useShowtime();
-    const [isMounted, ref, show, hide] = useShowtime();
+    // const {ref, isMounted, show, hide} = useShowtime();
+    const [ref, isMounted, show, hide] = useShowtime();
 
     return (
         <>
@@ -173,7 +173,7 @@ Specify a preset by passing its name as the sole parameter to `useShowtime` or a
 ```jsx
 
   // Hook
-  const [isMounted, ref, show, hide] = useShowtime("scale");
+  const [ref, isMounted, show, hide] = useShowtime("scale");
 
   // Component
   <Showtime show={show} transition="scale">
@@ -189,7 +189,7 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 ```jsx
 
     // Hook
-    const [isMounted, ref, show, hide] = useShowtime({
+    const [ref, isMounted, show, hide] = useShowtime({
         duration: 500,
         delay: 100,
         easing: "ease-out",
@@ -227,7 +227,7 @@ Eg…
 
 ```jsx
 const HookExample = () => {
-    const [isMounted, ref, show, hide] = useShowtime({
+    const [ref, isMounted, show, hide] = useShowtime({
         transition: {
             hidden: {
                 duration: 350,
@@ -261,7 +261,7 @@ Eg…
 
 ```jsx
 const HookExample = () => {
-    const [isMounted, ref, show, hide] = useShowtime({
+    const [ref, isMounted, show, hide] = useShowtime({
         transition: {
             hiddenBefore: "fade", // or { transition: "fade", delay: 100, … }
             hiddenAfter: {

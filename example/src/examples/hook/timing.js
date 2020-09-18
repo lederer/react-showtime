@@ -7,7 +7,7 @@ export const code = `
 // import { useShowtime } from "react-showtime";
 
 function Container() {
-  const [isMounted, ref, show, hide] = useShowtime({
+  const [ref, isMounted, show, hide] = useShowtime({
       transition: "scale",
       duration: 500,
       delay: 250,

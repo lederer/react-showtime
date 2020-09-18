@@ -59,7 +59,7 @@ const scrollTo = (event) => {
 };
 
 function Header({ compact = false, ...props }) {
-    const [isMounted, ref] = useShowtime({
+    const [ref] = useShowtime({
         startWithTransition: true,
         transition: {
             duration: 250,
@@ -81,18 +81,16 @@ function Header({ compact = false, ...props }) {
                     ...(compact ? { transform: "translateX(-2rem)" } : {}),
                 }}
             >
-                {isMounted && (
-                    <Ticket
-                        ref={ref}
-                        href="#"
-                        active={!compact}
-                        sx={sx.showtime}
-                        iconSrc={react}
-                        iconAlt="React"
-                        label="Showtime"
-                        onClick={scrollTo}
-                    />
-                )}
+                <Ticket
+                    ref={ref}
+                    href="#"
+                    active={!compact}
+                    sx={sx.showtime}
+                    iconSrc={react}
+                    iconAlt="React"
+                    label="Showtime"
+                    onClick={scrollTo}
+                />
             </h1>
             <Link
                 sx={sx.repo}

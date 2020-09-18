@@ -161,10 +161,10 @@ export default function useShowtime(settings) {
         hideTransitionCssText,
     ]);
 
-    const ret = [isMounted, elementRef, show, hide, status];
+    const ret = [elementRef, isMounted, show, hide, status];
 
-    ret.isMounted = isMounted;
     ret.ref = elementRef;
+    ret.isMounted = isMounted;
     ret.show = show;
     ret.hide = hide;
     ret.status = status;

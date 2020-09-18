@@ -22,7 +22,7 @@ export default function Showtime({
     children,
     ...props
 }) {
-    const [isMounted, ref, show, hide, status] = useShowtime({
+    const [ref, isMounted, show, hide, status] = useShowtime({
         startHidden: !shouldShow,
         startWithTransition,
         transition,

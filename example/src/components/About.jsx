@@ -53,7 +53,7 @@ const sx = {
 
 function About(props) {
     const isFontLoaded = useFontFaceObserver("Pompiere");
-    const [isTextMounted, textRef, showText] = useShowtime({
+    const [textRef, isTextMounted, showText] = useShowtime({
         startHidden: true,
         transition: {
             duration: 250,
@@ -67,7 +67,7 @@ function About(props) {
             },
         },
     });
-    const [areEmojisMounted, emojisRef, showEmojis] = useShowtime({
+    const [emojisRef, areEmojisMounted, showEmojis] = useShowtime({
         startHidden: true,
         duration: 250,
         delay: 400,

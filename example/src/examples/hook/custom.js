@@ -7,7 +7,7 @@ export const code = `
 // import { useShowtime } from "react-showtime";
 
 function Container() {
-  const [isMounted, ref, show, hide] = useShowtime({
+  const [ref, isMounted, show, hide] = useShowtime({
       transition: {
         hidden: {
           transform: "translateY(400px) rotate(180deg)",
