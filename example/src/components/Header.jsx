@@ -62,13 +62,10 @@ function Header({ compact = false, ...props }) {
     const [ref] = useShowtime({
         startWithTransition: true,
         transition: {
-            duration: 250,
             delay: 50,
-            easing: "cubic-bezier(0.34, 1.56, 1, 1.73)",
+            easing: "cubic-bezier(0.34, 1.16, 1, 1.23)",
             hidden: {
-                transform: {
-                    value: "translateX(-200%)",
-                },
+                transform: "translateX(-200%) rotate(290deg)",
             },
         },
     });
