@@ -13,7 +13,6 @@ import {
 const sx = {
     examples: {
         bg: "tint",
-        pt: 2,
     },
     section: {
         mb: 4,
@@ -22,9 +21,9 @@ const sx = {
     heading: {
         position: "sticky",
         top: "9.2rem",
-        bg: "tint",
+        bg: "darktint",
         mt: 0,
-        mb: 2,
+        mb: 6,
         py: 2,
         fontFamily: "Pompiere, cursive",
         fontSize: "4.4rem",
