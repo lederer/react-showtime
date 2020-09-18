@@ -13,6 +13,7 @@ import {
 const sx = {
     examples: {
         bg: "tint",
+        px: 1,
     },
     section: {
         mb: 4,

@@ -7,17 +7,16 @@ const sx = {
         position: "relative",
         py: "0.6rem",
         px: 2,
-        fontFamily: "Pompiere, cursive",
-        fontSize: "2.6rem",
-        fontWeight: "bold",
-        textTransform: "uppercase",
         color: "black",
-        "@media (max-width: 600px)": {
-            px: "1rem",
-            fontSize: "2rem",
-        },
-        "@media (max-width: 400px)": {
-            fontSize: "1.8rem",
+        fontFamily: "'Arial Narrow', Arial, sans-serif",
+        fontSize: "2.2rem",
+        fontWeight: "bold",
+        lineHeight: "4rem",
+        textTransform: "uppercase",
+        "@media (max-width: 500px)": {
+            px: 1,
+            fontSize: "1.3rem",
+            lineHeight: "2.8rem",
         },
         "::before": {
             position: "absolute",
@@ -29,7 +28,7 @@ const sx = {
             width: "100%",
             bg: "ticket",
             "--stop-list": "transparent 1rem, #000 0",
-            "@media (max-width: 600px)": {
+            "@media (max-width: 500px)": {
                 "--stop-list": "transparent 0.6rem, #000 0",
             },
             mask:
@@ -47,7 +46,7 @@ const sx = {
         borderRadius: "6px",
         py: "0.4rem",
         px: 1,
-        "@media (max-width: 600px)": {
+        "@media (max-width: 500px)": {
             px: "0.6rem",
         },
     },
@@ -57,47 +56,14 @@ const sx = {
         opacity: 0.8,
         width: "2.8rem",
         height: "2.8rem",
-        "@media (max-width: 600px)": {
+        "@media (max-width: 500px)": {
             width: "2rem",
             height: "2rem",
         },
     },
-    labelContainer: {
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-    },
-    inactiveLabel: {
-        position: "absolute",
-        opacity: "calc(1 - var(--opacity))",
-        transition: "opacity 150ms",
-        pointerEvents: "none",
-    },
-    activeLabel: {
-        opacity: "var(--opacity)",
-        fontFamily: "'Arial Narrow', Arial, sans-serif",
-        fontSize: "2.4rem",
-        "@media (max-width: 600px)": {
-            fontSize: "1.7rem",
-        },
-        "@media (max-width: 400px)": {
-            fontSize: "1.3rem",
-        },
-        fontWeight: "bold",
-        textTransform: "uppercase",
-        transition: "opacity 150ms",
-    },
 };
 
-function Ticket({
-    active,
-    iconSrc,
-    fontSize,
-    activeFontSize,
-    label,
-    iconAlt = "",
-    ...props
-}) {
+function Ticket({ active, iconSrc, fontSize, label, iconAlt = "", ...props }) {
     return (
         <NavLink
             sx={{
@@ -114,12 +80,7 @@ function Ticket({
                     width={28}
                     height={28}
                 />
-                <span sx={sx.labelContainer}>
-                    <span sx={sx.inactiveLabel}>{label}</span>
-                    <span sx={{ ...sx.activeLabel, fontSize: activeFontSize }}>
-                        {label}
-                    </span>
-                </span>
+                {label}
             </span>
         </NavLink>
     );

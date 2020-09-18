@@ -44,7 +44,6 @@ const Nav = forwardRef(
                     sx={sx.link}
                     iconSrc={hook}
                     label="Hook"
-                    activeFontSize="2.2rem"
                     onClick={scrollTo}
                 />
                 <Ticket
@@ -53,7 +52,6 @@ const Nav = forwardRef(
                     sx={sx.link}
                     iconSrc={component}
                     label="Component"
-                    activeFontSize="2.2rem"
                     onClick={scrollTo}
                 />
                 <Ticket
@@ -62,7 +60,6 @@ const Nav = forwardRef(
                     sx={sx.link}
                     iconSrc={presets}
                     label="Presets"
-                    activeFontSize="2.2rem"
                     onClick={scrollTo}
                 />
             </nav>

@@ -35,6 +35,11 @@ const sx = {
     showtime: {
         flex: "none",
         zIndex: 1,
+        fontSize: "2.4rem",
+        "@media (max-width: 500px)": {
+            fontSize: "2rem",
+            lineHeight: "3.2rem",
+        },
     },
     repo: {
         flex: "none",
@@ -68,7 +73,6 @@ function Header({ compact = false, ...props }) {
                     iconSrc={react}
                     iconAlt="React"
                     label="Showtime"
-                    activeFontSize="2.4rem"
                     onClick={scrollTo}
                 />
             </h1>
