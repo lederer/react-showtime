@@ -113,7 +113,7 @@ function About(props) {
                         "::before": { content: "'🎩'", mr: 2 },
                     }}
                 >
-                    Preset transitions:{" "}
+                    Included transitions:{" "}
                     <code sx={{ variant: "text.code" }}>slideFade</code>,{" "}
                     <code sx={{ variant: "text.code" }}>slide</code>,{" "}
                     <code sx={{ variant: "text.code" }}>fade</code>,{" "}

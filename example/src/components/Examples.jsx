@@ -136,7 +136,7 @@ function Examples({ onActiveSectionChange, ...props }) {
                     />
                 ))}
             </Section>
-            <Section id="presets" ref={presetsRef} name="Preset Transitions">
+            <Section id="presets" ref={presetsRef} name="Transitions">
                 {PRESET_EXAMPLES.map(({ name, desc, code, noInline }) => (
                     <Example
                         sx={sx.example}

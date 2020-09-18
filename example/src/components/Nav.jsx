@@ -59,7 +59,7 @@ const Nav = forwardRef(
                     active={activeSection === "presets"}
                     sx={sx.link}
                     iconSrc={presets}
-                    label="Presets"
+                    label="Transitions"
                     onClick={scrollTo}
                 />
             </nav>

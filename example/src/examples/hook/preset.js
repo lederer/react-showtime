@@ -1,7 +1,7 @@
-export const name = "Preset";
+export const name = "Named Transitions";
 
 export const desc =
-    "Passing a preset name uses it with the default transition, duration, delay, and easing. Here we pass the <code>slide</code> preset.";
+    "Passing a transition name uses it with the default duration, delay, and easing.";
 
 export const code = `
 // import { useShowtime } from "react-showtime";
