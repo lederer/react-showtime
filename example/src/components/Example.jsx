@@ -28,6 +28,31 @@ const sx = {
             bg: "#fd7c8328",
         },
     },
+    tabs: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        mb: 4,
+    },
+    tab: {
+        appearance: "none",
+        border: "none",
+        bg: "darktint",
+        mx: 1,
+        px: 3,
+        py: 1,
+        fontFamily: "Pompiere, cursive",
+        fontSize: 7,
+        cursor: "pointer",
+        ":hover": {
+            bg: "ticket",
+        },
+        "@media (max-width: 600px)": {
+            fontSize: 4,
+            px: 2,
+            mx: "0.4rem",
+        },
+    },
     example: {
         display: "flex",
         flexDirection: "row",
@@ -125,7 +150,15 @@ const RandomEmoji = forwardRef(({ onClose, ...props }, ref) => {
 
     return (
         <div
-            sx={{ ...sx.emoji, filter: ref ? undefined : "grayscale(1)" }}
+            sx={{
+                ...sx.emoji,
+                ...(ref
+                    ? {}
+                    : {
+                          filter: "grayscale(1)",
+                          "--stripe": "#ddd",
+                      }),
+            }}
             ref={ref}
             {...props}
         >
@@ -144,12 +177,44 @@ const Canvas = (props) => {
 const scope = { useShowtime, Showtime, useState, Button, RandomEmoji };
 
 function Example({ name, desc, code, noInline, ...props }) {
+    const isComplex = typeof code === "object";
+    const initialTransition = isComplex ? Object.keys(code)[0] : null;
+    const [selectedTransition, setSelectedTransition] = useState(
+        initialTransition
+    );
+
+    if (!code) {
+        return null;
+    }
+
     return (
         <div sx={sx.container} {...props}>
             <Text sx={sx.name}>{name}</Text>
             <Text sx={sx.desc} dangerouslySetInnerHTML={{ __html: desc }} />
+            {isComplex && (
+                <div sx={sx.tabs}>
+                    {Object.keys(code).map((name) => (
+                        <button
+                            sx={{
+                                ...sx.tab,
+                                ...(name === selectedTransition
+                                    ? { bg: "ticket" }
+                                    : {}),
+                            }}
+                            onClick={() => setSelectedTransition(name)}
+                            key={name}
+                        >
+                            {name}
+                        </button>
+                    ))}
+                </div>
+            )}
             <div sx={sx.example}>
-                <LiveProvider scope={scope} code={code} noInline={noInline}>
+                <LiveProvider
+                    scope={scope}
+                    code={isComplex ? code[selectedTransition] : code}
+                    noInline={noInline}
+                >
                     <LiveEditor style={sx.editor} />
                     <LiveError />
                     <LivePreview Component={Canvas} />

@@ -3,9 +3,9 @@ export const noInline = true;
 export const name = "Lists";
 
 export const desc =
-    "The <code>&lt;Showtime&gt;</code> component's <code>onHidden</code> handler makes it well-suited for growable lists of dismissable items.";
+    "The <code>&lt;Showtime&gt;</code> component's <code>onHidden</code> handler makes it well suited for growable lists of dismissable items.";
 
-export const code = `
+export const component = `
 // import { Showtime } from "react-showtime";
 
 function Item({onHidden, ...props}) {
