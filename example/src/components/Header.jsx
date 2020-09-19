@@ -52,22 +52,51 @@ const sx = {
     },
 };
 
-const scrollTo = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
+const BOUNCE = "cubic-bezier(0.34, 1.26, 1, 1.33)";
+
+const TICKET_TRANSITIONS = [
+    // shuriken
+    {
+        hidden: {
+            duration: 400,
+            transform: "translateX(100vw) rotate(720deg)",
+        },
+    },
+    // swing
+    {
+        hidden: {
+            transform: "translateX(-160%) rotate(270deg)",
+        },
+    },
+    // snake
+    {
+        hidden: {
+            easing: "cubic-bezier(0.25, 1.66, 0.52, 2.04)",
+            transform: "translateX(-160%)",
+        },
+    },
+    // switchblade
+    {
+        hidden: {
+            transform: "translate(-2.4rem, -1.6rem) rotate(-270deg)",
+            transformOrigin: {
+                value: "top left",
+                duration: 0,
+                delay: 0,
+            },
+        },
+    },
+];
+
+const randomTransition =
+    TICKET_TRANSITIONS[Math.floor(TICKET_TRANSITIONS.length * Math.random())];
 
 function Header({ compact = false, ...props }) {
     const [ref] = useShowtime({
         startWithTransition: true,
-        transition: {
-            delay: 50,
-            easing: "cubic-bezier(0.34, 1.16, 1, 1.23)",
-            hidden: {
-                transform: "translateX(-200%) rotate(290deg)",
-            },
-        },
+        delay: 50,
+        easing: BOUNCE,
+        transition: randomTransition,
     });
 
     return (
@@ -86,7 +115,11 @@ function Header({ compact = false, ...props }) {
                     iconSrc={react}
                     iconAlt="React"
                     label="Showtime"
-                    onClick={scrollTo}
+                    onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                 />
             </h1>
             <Link
