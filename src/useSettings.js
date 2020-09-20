@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { DEFAULTS } from "./constants";
-import PRESETS from "./presets";
+import TRANSITIONS from "./transitions";
 
 function toKebabCase(str) {
     return str
@@ -121,7 +121,6 @@ function extractCssValues({
 function extractInstantProperties(cssObject) {
     // If there are any zero-duration, zero-delay properties in before/after,
     // they'll need to be applied early to take affect.
-    // eg, `transformOrigin: top` in "scale".
 
     const pre = {},
         rest = {};
@@ -142,14 +141,14 @@ function resolveBeforeAfter(transitionParam) {
 
     if (isString(hiddenBefore)) {
         transition.hiddenBefore = {
-            ...PRESETS[hiddenBefore].hidden,
-            ...PRESETS[hiddenBefore].hiddenBefore,
+            ...TRANSITIONS[hiddenBefore].hidden,
+            ...TRANSITIONS[hiddenBefore].hiddenBefore,
         };
     } else if (hiddenBefore && isString(hiddenBefore.transition)) {
         const { duration, delay, easing } = hiddenBefore;
         transition.hiddenBefore = {
-            ...PRESETS[hiddenBefore.transition].hidden,
-            ...PRESETS[hiddenBefore.transition].hiddenBefore,
+            ...TRANSITIONS[hiddenBefore.transition].hidden,
+            ...TRANSITIONS[hiddenBefore.transition].hiddenBefore,
             duration,
             delay,
             easing,
@@ -158,14 +157,14 @@ function resolveBeforeAfter(transitionParam) {
 
     if (isString(hiddenAfter)) {
         transition.hiddenAfter = {
-            ...PRESETS[hiddenAfter].hidden,
-            ...PRESETS[hiddenAfter].hiddenBefore,
+            ...TRANSITIONS[hiddenAfter].hidden,
+            ...TRANSITIONS[hiddenAfter].hiddenBefore,
         };
     } else if (hiddenAfter && isString(hiddenAfter.transition)) {
         const { duration, delay, easing } = hiddenAfter;
         transition.hiddenAfter = {
-            ...PRESETS[hiddenAfter.transition].hidden,
-            ...PRESETS[hiddenAfter.transition].hiddenAfter,
+            ...TRANSITIONS[hiddenAfter.transition].hidden,
+            ...TRANSITIONS[hiddenAfter.transition].hiddenAfter,
             duration,
             delay,
             easing,
@@ -194,16 +193,16 @@ function resolveEffectiveSettings(settingsParam) {
 
     let settings;
     if (isString(settingsParam)) {
-        settings = { transition: PRESETS[settingsParam] };
+        settings = { transition: TRANSITIONS[settingsParam] };
     } else {
         settings = settingsParam;
     }
 
     let { transition, ...rest } = settings;
     if (!transition) {
-        transition = { ...PRESETS[defaultTransition] };
+        transition = { ...TRANSITIONS[defaultTransition] };
     } else if (isString(transition)) {
-        transition = { ...PRESETS[transition] };
+        transition = { ...TRANSITIONS[transition] };
     }
 
     transition = resolveBeforeAfter(transition);

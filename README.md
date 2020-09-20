@@ -8,7 +8,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 💃&emsp;Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.<br/>
 💅&emsp;Specify _showing_ styles however you like – inline, Emotion, styled-components, classnames, you name it.<br/>
 💨&emsp;Sensible API for defining _hidden_ styles and custom transitions.<br/>
-🎩&emsp;Preset transitions: `slideFade`, `slide`, `fade`, `rise`, `scale`.<br/>
+🎩&emsp;Included transitions: `slideFade`, `slide`, `fade`, `rise`, `scale`.<br/>
 🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
 🕴&emsp;Zero dependencies. 21k unpacked.
 
@@ -102,7 +102,7 @@ If you are transitioning a _component you cannot edit_ and that does not forward
 
 ### TL;DR
 
-To use a [preset transition](#preset-transitions) with the default duration (`250ms`), delay (`0ms`), and easing (`"ease"`):
+To use a [named transition](#transitions) with the default duration (`250ms`), delay (`0ms`), and easing (`"ease"`):
 
 ```jsx
 useShowtime("slide");
@@ -112,7 +112,7 @@ useShowtime("slide");
 <Showtime transition="fade">
 ```
 
-To use a preset with custom duration, delay, or easing:
+To use a named transition with custom duration, delay, or easing:
 
 ```jsx
 useShowtime({
@@ -132,7 +132,7 @@ useShowtime({
 >
 ```
 
-To use a [custom transition](#custom-transitions) instead of a preset:
+To use a [custom transition](#custom-transitions):
 
 ```jsx
 useShowtime({
@@ -156,9 +156,9 @@ useShowtime({
 >
 ```
 
-### Preset transitions
+### Transitions
 
-React Showtime offers some preset transitions:
+React Showtime includes some pre-configured transitions:
 
 -   `slideFade` (default)
 -   `slide`
@@ -166,7 +166,7 @@ React Showtime offers some preset transitions:
 -   `rise`
 -   `scale`
 
-Specify a preset by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
+Specify a transition by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
 
 `useShowtime` also accepts an object instead of a string, in which case pass `{ transition: <transition name> }`.
 
@@ -209,7 +209,7 @@ You can pass other values via `useShowtime`'s object parameter or `Showtime`'s p
 
 ### Custom transitions
 
-You can forego React Showtime's preset transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `hiddenBefore`, `hiddenAfter`.
+You can forego React Showtime's included transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `hiddenBefore`, `hiddenAfter`.
 
 #### `transition.hidden`
 
@@ -252,10 +252,10 @@ The `hiddenBefore` and `hiddenAfter` properties of the `transition` object confo
 
 `hiddenBefore` and `hiddenAfter` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
 
-There are a couple of differences between the structure of `hiddenBefore`/`hiddenAfter` and `hidden`, which allow you to use a preset for an asymmetric transition:
+There are a couple of differences between the structure of `hiddenBefore`/`hiddenAfter` and `hidden` that allow you to use a named transition for an asymmetric transition:
 
--   You can pass a string to `hiddenBefore`/`hiddenAfter` instead of an object. The string must be the name of a preset transiton.
--   The `hiddenBefore`/`hiddenAfter` object can contain a `transition` key. Its value must be the name of a preset transition, and it will _not_ be passed on to the CSS transiton property. This way you can specify a preset and also pass in optional custom values for `duration`, `delay`, or `easing`.
+-   You can pass the name of the transition to `hiddenBefore`/`hiddenAfter` instead of an object.
+-   The `hiddenBefore`/`hiddenAfter` object can contain a `transition` property containing the name of a transition. It will _not_ be passed on to the CSS transiton property. This way you can specify a transition and also pass in optional custom values for `duration`, `delay`, or `easing`.
 
 Eg…
 
@@ -291,7 +291,7 @@ The `useShowtime` hook currently does not accept any event handlers.
 
 The `useShowtime` hook accepts a single parameter, which can be either of:
 
--   a string referring to a [preset transition](#preset-transitions)
+-   a string referring to a [named transition](#transitions)
 -   an object with the following properties:
 
 | Name                | Type                       | Req'd? | Default     | Description                                                                                                                 |
@@ -301,7 +301,7 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | duration            | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
 | delay               | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
 | easing              | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition          | string or transitionObject | no     | "slideFade" | [Preset transition](#preset-transitions) or object defining custom transition (see below)                                   |
+| transition          | string or transitionObject | no     | "slideFade" | [Named transition](#transitions) or object defining custom transition (see below)                                           |
 
 ### Showtime component
 
@@ -312,7 +312,7 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | duration            | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
 | delay               | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
 | easing              | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition          | string or transitionObject | no     | "slideFade" | [Preset transition](#preset-transitions) or object defining custom transition (see below)                                   |
+| transition          | string or transitionObject | no     | "slideFade" | [Named transition](#transitions) or object defining custom transition (see below)                                           |
 | onHidden            | function                   | no     |             | Called when hide transition complete.                                                                                       |
 | onShowing           | function                   | no     |             | Called when show transition complete.                                                                                       |
 
