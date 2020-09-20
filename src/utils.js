@@ -42,15 +42,20 @@ export function getComputedDimensions(el) {
     };
 }
 
-export function restoreDimensions(el) {
-    el.style.height = null;
-    el.style.width = null;
-}
-
 export function addInlineStyles(element, styles) {
     for (const style in styles) {
-        element.style[style] = styles[style];
+        element.style.setProperty(style, styles[style]);
     }
+}
+
+export function getInlineStyles(element) {
+    const styles = {};
+    for (const prop in element.style) {
+        if (element.style.hasOwnProperty(prop) && element.style[prop]) {
+            styles[prop] = element.style[prop];
+        }
+    }
+    return styles;
 }
 
 export function nullifyStyles(styles) {

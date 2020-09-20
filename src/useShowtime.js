@@ -4,8 +4,8 @@ import useEventListener from "./useEventListener";
 import { STATUS } from "./constants";
 import {
     getComputedDimensions,
-    restoreDimensions,
     addInlineStyles,
+    getInlineStyles,
     nullifyStyles,
 } from "./utils";
 
@@ -23,6 +23,7 @@ export default function useShowtime(settings) {
 
     const elementRef = useRef();
     const dimensionsRef = useRef();
+    const inlineShowingCssRef = useRef();
     const isInitialRenderRef = useRef(true);
     const eventSetRef = useRef();
 
@@ -52,11 +53,13 @@ export default function useShowtime(settings) {
             } else if (status === STATUS.transitioningIn) {
                 elementRef.current.style.transition = null;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
-                    restoreDimensions(elementRef.current);
-                    addInlineStyles(
-                        elementRef.current,
-                        nullifyStyles(hiddenBeforeInstantCss)
-                    );
+                    const showingCss = {
+                        height: null,
+                        width: null,
+                        ...nullifyStyles(hiddenBeforeInstantCss),
+                        ...inlineShowingCssRef.current,
+                    };
+                    addInlineStyles(elementRef.current, showingCss);
                     setStatus(STATUS.showing);
                 });
             }
@@ -107,13 +110,13 @@ export default function useShowtime(settings) {
             }
         }
 
+        inlineShowingCssRef.current = getInlineStyles(elementRef.current);
         addInlineStyles(elementRef.current, hiddenBeforeInstantCss);
         setStatus(STATUS.transitioningIn);
     }, [isMounted, startHidden, startWithTransition, hiddenBeforeInstantCss]);
 
     useLayoutEffect(() => {
         if (status === STATUS.transitioningIn) {
-            addInlineStyles(elementRef.current, hiddenBeforeInstantCss);
             dimensionsRef.current = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, hiddenBeforeCss);
         } else if (status === STATUS.transitioningOut) {
@@ -132,6 +135,7 @@ export default function useShowtime(settings) {
         if (status === STATUS.transitioningIn) {
             const showCss = {
                 ...nullifyStyles(hiddenBeforeCss),
+                ...inlineShowingCssRef.current,
                 ...dimensionsRef.current,
             };
 
