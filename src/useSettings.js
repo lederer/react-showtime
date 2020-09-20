@@ -122,17 +122,17 @@ function extractInstantProperties(cssObject) {
     // If there are any zero-duration, zero-delay properties in before/after,
     // they'll need to be applied early to take affect.
 
-    const pre = {},
+    const instant = {},
         rest = {};
     for (const property in cssObject) {
         const value = cssObject[property];
         if (hasZeroDurationAndDelay(value)) {
-            pre[property] = value;
+            instant[property] = value;
         } else {
             rest[property] = value;
         }
     }
-    return [pre, rest];
+    return [instant, rest];
 }
 
 function resolveBeforeAfter(transitionParam) {
@@ -158,7 +158,7 @@ function resolveBeforeAfter(transitionParam) {
     if (isString(hiddenAfter)) {
         transition.hiddenAfter = {
             ...TRANSITIONS[hiddenAfter].hidden,
-            ...TRANSITIONS[hiddenAfter].hiddenBefore,
+            ...TRANSITIONS[hiddenAfter].hiddenAfter,
         };
     } else if (hiddenAfter && isString(hiddenAfter.transition)) {
         const { duration, delay, easing } = hiddenAfter;
