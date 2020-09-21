@@ -53,6 +53,9 @@ export default function useShowtime(settings) {
             } else if (status === STATUS.transitioningIn) {
                 elementRef.current.style.transition = null;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
+                    if (!elementRef.current) {
+                        return;
+                    }
                     const showingCss = {
                         height: null,
                         width: null,
@@ -144,16 +147,24 @@ export default function useShowtime(settings) {
             // showing value instead of hidden, so the transition is abrupt.
             // requestAnimationFrame() doesn't suffice, so must use setTimeout().
             setTimeout(() => {
+                if (!elementRef.current) {
+                    return;
+                }
                 elementRef.current.style.transition = showTransitionCssText;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
-                    addInlineStyles(elementRef.current, showCss);
+                    elementRef.current &&
+                        addInlineStyles(elementRef.current, showCss);
                 });
             }, 32);
         } else if (status === STATUS.transitioningOut) {
             animationFrameRequestRef.current = requestAnimationFrame(() => {
+                if (!elementRef.current) {
+                    return;
+                }
                 elementRef.current.style.transition = hideTransitionCssText;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
-                    addInlineStyles(elementRef.current, hiddenAfterCss);
+                    elementRef.current &&
+                        addInlineStyles(elementRef.current, hiddenAfterCss);
                 });
             });
         }

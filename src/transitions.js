@@ -64,16 +64,12 @@ export default Object.freeze({
         },
         hiddenBefore: {
             easing: "ease-out",
-            opacity: {
-                value: 0,
-                duration: 200,
-            },
+            opacity: 0,
         },
         hiddenAfter: {
             easing: "ease",
             opacity: {
                 value: 0,
-                duration: 200,
                 delay: 50,
             },
         },
