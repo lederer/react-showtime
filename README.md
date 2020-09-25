@@ -105,17 +105,17 @@ If you are transitioning a _component you cannot edit_ and that does not forward
 To use a [named transition](#transitions) with the default duration (`250ms`), delay (`0ms`), and easing (`"ease"`):
 
 ```jsx
-useShowtime("slide");
+const [ref, isMounted, show, hide] = useShowtime("slide");
 ```
 
 ```jsx
-<Showtime transition="fade">
+<Showtime transition="fade">…</Showtime>
 ```
 
 To use a named transition with custom duration, delay, or easing:
 
 ```jsx
-useShowtime({
+const [ref, isMounted, show, hide] = useShowtime({
     transition: "rise",
     duration: 1000,
     delay: 250,
@@ -132,14 +132,13 @@ useShowtime({
 >
 ```
 
-To use a [custom transition](#custom-transitions):
+To use a [custom transition](#custom-transitions), pass an object to `transition` defining the item's _hidden_ state:
 
 ```jsx
-useShowtime({
+const [ref, isMounted, show, hide] = useShowtime({
     transition: {
-        hidden: { … },
-        hiddenBefore: …,
-        hiddenAfter: …,
+        opacity: 0,
+        …
     },
     …
 });
@@ -148,9 +147,8 @@ useShowtime({
 ```jsx
 <Showtime
     transition={{
-        hidden: { … },
-        hiddenBefore: …,
-        hiddenAfter: …,
+        opacity: 0,
+        …
     }}
     …
 >
@@ -158,9 +156,9 @@ useShowtime({
 
 ### Transitions
 
-React Showtime includes some pre-configured transitions:
+React Showtime includes some pre-configured, named transitions:
 
--   `slideFade` (default)
+-   `slideFade` <em>default</em>
 -   `slide`
 -   `fade`
 -   `rise`
@@ -168,116 +166,103 @@ React Showtime includes some pre-configured transitions:
 
 Specify a transition by passing its name as the sole parameter to `useShowtime` or as the value of `Showtime`'s `transition` prop.
 
-`useShowtime` also accepts an object instead of a string, in which case pass `{ transition: <transition name> }`.
+`useShowtime` also accepts an object instead of a string, in which case pass `{ transition: <name> }`.
 
 ```jsx
+// Hook (string)
+const [ref, isMounted, show, hide] = useShowtime("scale");
 
-  // Hook
-  const [ref, isMounted, show, hide] = useShowtime("scale");
+// Hook (object)
+const [ref, isMounted, show, hide] = useShowtime({ transition: "scale" });
 
-  // Component
-  <Showtime show={show} transition="scale">
-    ...
+// Component
+<Showtime show={show} transition="scale">…
 ```
 
 ### Transition timing
 
 By default, React Showtime uses a `transition-duration` of `250ms` and `transition-function` of `ease`, with no `transition-delay`.
 
-You can pass other values via `useShowtime`'s object parameter or `Showtime`'s props…
+You can pass other values via `useShowtime`'s object parameter or `Showtime`'s props. Use `duration`, `delay`, and `easing` to control both show and hide transitions. Or use `showDuration`, `showDelay`, `showEasing`, `hideDuration`, `hideDelay`, `hideEasing` for more fine-grained control over show and hide.
 
 ```jsx
 
-    // Hook
-    const [ref, isMounted, show, hide] = useShowtime({
-        duration: 500,
-        delay: 100,
-        easing: "ease-out",
-    });
+  // Hook
+const [ref, isMounted, show, hide] = useShowtime({
+    duration: 500,
+    delay: 100,
+    easing: "ease-out",
+});
 
-    // Component
-    <Showtime
-        show={show}
-        transition="scale"
-        duration={500}
-        delay={150}
-        easing="ease-out"
-    >
-        ...
-    };
+// Component
+<Showtime
+    show={show}
+    duration={500}
+    delay={150}
+    easing="ease-out"
+>
+    …
+};
 ```
 
 ### Custom transitions
 
-You can forego React Showtime's included transitions in favor of your own custom transitions. Pass an object to the `transition` prop(erty) with one or more of the following properties: `hidden`, `hiddenBefore`, `hiddenAfter`.
+Defining a custom transition essentially boils down to describing the item's _hidden_ state with a CSS object literal.
 
-#### `transition.hidden`
+#### Define symmetric transitions with `transition`
 
-The `hidden` property of the `transition` object should be an object literal of the CSS properties and values that define your element or component's hidden state.
+The `transition` property accepts an object that define your element or component's _hidden_ state.
 
-It also accepts optional `duration`, `delay`, and `easing` properties, which will override any corresponding properties passed in at the top-level.
+Each CSS property can be a string, number, or object. Strings and numbers will be passed through as CSS.
 
-Each CSS property can be a string, number, or object. Strings and numbers will be passed through as CSS, and will be transitioned according to any duration, delay, and easing values inherited or passed in as siblings.
+If an object is passed in as a CSS property value, it should contain `{ value, duration, delay, easing }` properties. `value` is required and will be passed through as CSS. The other properties are optional and will be applied to that property's transition, overriding any inherited duration, delay, and easing values.
 
-If an object is passed in as a CSS property value, it should contain `{ value, duration, delay, easing }` properties. `value` is required and will be passed through as CSS. The other properties are optional and will be applied to that property's transition, overriding any inherited transition values.
-
-Do not include a `transition` property on the `hidden` object. Although it is a valid CSS property, it will be ignored, since React Showtime uses its own API to define transitions.
+Do not include a `transition` property on the `transition` object, even though it is a valid CSS property. It will be ignored, since React Showtime assumes control of that property.
 
 Eg…
 
 ```jsx
 const HookExample = () => {
     const [ref, isMounted, show, hide] = useShowtime({
+        duration: 350,
         transition: {
-            hidden: {
-                duration: 350,
-                right: "100vw",
-                top: "-100vh",
-                opacity: {
-                    value: 0,
-                    duration: 400,
-                    easing: "linear",
-                },
+            right: "100vw",
+            top: "-100vh",
+            opacity: {
+                value: 0,
+                duration: 400,
+                easing: "linear",
             },
         },
     });
 
-    // ...
+    // …
 };
 ```
 
-#### Asymmetric transitions with `transition.hiddenBefore` and `transition.hiddenAfter`
+#### Define asymmetric transitions with `showTransition` and `hideTransition`
 
-The `hiddenBefore` and `hiddenAfter` properties of the `transition` object conform to approximately the same structural definition as the `hidden` property. `hiddenBefore` defines how the element or component is hidden prior to being shown, and `hiddenAfter` defines how it is hidden after being shown. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
+The `showTransition` and `hideTransition` properties define how the element or component is hidden prior to being shown or after being hidden, respectively. This is useful if, say, a notification should slide down from above, but fade away when dismissed.
 
-`hiddenBefore` and `hiddenAfter` will be merged onto `hidden` if it is passed in as well, so you can still define shared properies in one place.
-
-There are a couple of differences between the structure of `hiddenBefore`/`hiddenAfter` and `hidden` that allow you to use a named transition for an asymmetric transition:
-
--   You can pass the name of the transition to `hiddenBefore`/`hiddenAfter` instead of an object.
--   The `hiddenBefore`/`hiddenAfter` object can contain a `transition` property containing the name of a transition. It will _not_ be passed on to the CSS transiton property. This way you can specify a transition and also pass in optional custom values for `duration`, `delay`, or `easing`.
+Like `transition` these properties accept a string (named transition) or object (custom transition). They override `transition` if that's also passed in.
 
 Eg…
 
 ```jsx
 const HookExample = () => {
     const [ref, isMounted, show, hide] = useShowtime({
-        transition: {
-            hiddenBefore: "fade", // or { transition: "fade", delay: 100, … }
-            hiddenAfter: {
-                duration: 350,
-                right: "100vw",
-                top: "-100vh",
-                opacity: 0,
-            },
+        showTransition: "fade",
+        hideTransition: {
+            right: "100vw",
+            top: "-100vh",
+            opacity: 0,
         },
+        hideDuration: 350,
     });
 
-    // ...
+    // …
 };
 ```
-
-If you want to use the same transition for showing and hiding, but with different duration, delay, or easing, just define the transition once in `hidden` and then define `duration`, `delay`, or `easing` values in `hiddenBefore` and `hiddenAfter`.
 
 ### Events
 
@@ -294,55 +279,62 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 -   a string referring to a [named transition](#transitions)
 -   an object with the following properties:
 
-| Name                | Type                       | Req'd? | Default     | Description                                                                                                                 |
-| ------------------- | -------------------------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------- |
-| startHidden         | boolean                    | no     | `false`     | Hide the element initially                                                                                                  |
-| startWithTransition | boolean                    | no     | `false`     | Transition in the initial appearance. Ignored if `startHidden` is `true`.                                                   |
-| duration            | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
-| delay               | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
-| easing              | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition          | string or transitionObject | no     | "slideFade" | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| Name                  | Type                         | Req'd? | Default       | Description                                                                                                                 |
+| --------------------- | ---------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `startHidden`         | `boolean`                    | no     | `false`       | Hide the element initially                                                                                                  |
+| `startWithTransition` | `boolean`                    | no     | `false`       | Transition in the initial appearance. Ignored if `startHidden` is `true`.                                                   |
+| `transition`          | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `showTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `delay`               | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `easing`              | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+| `showDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `showDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `showEasing`          | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+| `hideDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `hideDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `hideEasing`          | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
 
 ### Showtime component
 
-| Name                | Type                       | Req'd? | Default     | Description                                                                                                                 |
-| ------------------- | -------------------------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------- |
-| show                | boolean                    | yes    |             | Toggle this to show/hide the element or component                                                                           |
-| startWithTransition | boolean                    | no     | `false`     | Transition in the initial appearance. Ignored if `show` initially set to `false`.                                           |
-| duration            | number or string           | no     | `250`       | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
-| delay               | number or string           | no     | `0`         | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
-| easing              | string                     | no     | "ease"      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| transition          | string or transitionObject | no     | "slideFade" | [Named transition](#transitions) or object defining custom transition (see below)                                           |
-| onHidden            | function                   | no     |             | Called when hide transition complete.                                                                                       |
-| onShowing           | function                   | no     |             | Called when show transition complete.                                                                                       |
+| Name                  | Type                         | Req'd? | Default       | Description                                                                                                                 |
+| --------------------- | ---------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `show`                | `boolean`                    | yes    |               | Toggle this to show/hide the element or component                                                                           |
+| `startWithTransition` | `boolean`                    | no     | `false`       | Transition in the initial appearance. Ignored if `show` initially set to `false`.                                           |
+| `transition`          | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `showTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Named transition](#transitions) or object defining custom transition (see below)                                           |
+| `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `delay`               | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `easing`              | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+| `showDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `showDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `showEasing`          | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+| `hideDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `hideDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `hideEasing`          | `string`                     | no     | `"ease"`      | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+| `onHidden`            | `function`                   | no     |               | Called when hide transition complete.                                                                                       |
+| `onShowing`           | `function`                   | no     |               | Called when show transition complete.                                                                                       |
 
 ### Transition objects
 
-#### transitionObject
+#### CSS Properties
 
-| Name         | Type                           | Req'd? | Description                                                    |
-| ------------ | ------------------------------ | ------ | -------------------------------------------------------------- |
-| hidden       | transitionProperties           | no     | Styles and transition timing of before and after hidden state. |
-| hiddenBefore | string or transitionProperties | no     | Styles and transition timing of hiddenBefore hidden state.     |
-| hiddenAfter  | string or transitionProperties | no     | Styles and transition timing of hiddenAfter hidden state.      |
+| Name               | Type                                  | Req'd? | Default | Description                                                                 |
+| ------------------ | ------------------------------------- | ------ | ------- | --------------------------------------------------------------------------- |
+| [Any CSS property] | `string`, `number`, or `CSS Property` | yes    |         | Use camelCase for names. String and number values passed directly to style. |
 
-#### transitionProperties
+#### CSS Property
 
-| Name               | Type                           | Req'd? | Default   | Description                                                                                                                 |
-| ------------------ | ------------------------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------------------- |
-| duration           | number or string               | no     | inherited | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
-| delay              | number or string               | no     | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
-| easing             | string                         | no     | inherited | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
-| [Any CSS property] | string, number, or cssProperty | yes    |           | Use camelCase for names. String and number values passed directly to style.                                                 |
+| Name       | Type                 | Req'd? | Default   | Description                                                                                                                 |
+| ---------- | -------------------- | ------ | --------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `value`    | `string` or `number` | yes    |           | Any CSS property name.                                                                                                      |
+| `duration` | `number` or `string` | no     | inherited | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
+| `delay`    | `number` or `string` | no     | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
+| `easing`   | `string`             | no     | inherited | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
 
-#### cssProperty
-
-| Name     | Type             | Req'd? | Default   | Description                                                                                                                 |
-| -------- | ---------------- | ------ | --------- | --------------------------------------------------------------------------------------------------------------------------- |
-| value    | string or number | yes    |           | Any CSS property name.                                                                                                      |
-| duration | number or string | no     | inherited | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration). Integers are `ms`, floats `s`. |
-| delay    | number or string | no     | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay). Integers are `ms`, floats `s`.       |
-| easing   | string           | no     | inherited | [Transition timing](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                            |
+`
 
 ## Development
 

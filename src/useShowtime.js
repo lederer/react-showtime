@@ -13,12 +13,8 @@ export default function useShowtime(settings) {
     const {
         startHidden,
         startWithTransition,
-        hiddenBeforeCss,
-        hiddenBeforeInstantCss,
-        hiddenAfterCss,
-        hiddenAfterInstantCss,
-        showTransitionCssText,
-        hideTransitionCssText,
+        showTransition,
+        hideTransition,
     } = useSettings(settings);
 
     const elementRef = useRef();
@@ -47,10 +43,10 @@ export default function useShowtime(settings) {
         eventSetRef.current.delete(e.propertyName);
 
         if (!eventSetRef.current.size) {
-            if (status === STATUS.transitioningOut) {
+            if (status === STATUS.hideTransition) {
                 setIsMounted(false);
                 setStatus(STATUS.hidden);
-            } else if (status === STATUS.transitioningIn) {
+            } else if (status === STATUS.showTransition) {
                 elementRef.current.style.transition = null;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
                     if (!elementRef.current) {
@@ -59,7 +55,7 @@ export default function useShowtime(settings) {
                     const showingCss = {
                         height: null,
                         width: null,
-                        ...nullifyStyles(hiddenBeforeInstantCss),
+                        ...nullifyStyles(hideTransition.instantStyles),
                         ...inlineShowingCssRef.current,
                     };
                     addInlineStyles(elementRef.current, showingCss);
@@ -98,7 +94,7 @@ export default function useShowtime(settings) {
         if (!isMounted) {
             return;
         }
-        setStatus(STATUS.transitioningOut);
+        setStatus(STATUS.hideTransition);
     };
 
     useLayoutEffect(() => {
@@ -114,30 +110,25 @@ export default function useShowtime(settings) {
         }
 
         inlineShowingCssRef.current = getInlineStyles(elementRef.current);
-        addInlineStyles(elementRef.current, hiddenBeforeInstantCss);
-        setStatus(STATUS.transitioningIn);
-    }, [isMounted, startHidden, startWithTransition, hiddenBeforeInstantCss]);
+        addInlineStyles(elementRef.current, showTransition.instantStyles);
+        setStatus(STATUS.showTransition);
+    }, [isMounted, startHidden, startWithTransition, showTransition]);
 
     useLayoutEffect(() => {
-        if (status === STATUS.transitioningIn) {
+        if (status === STATUS.showTransition) {
             dimensionsRef.current = getComputedDimensions(elementRef.current);
-            addInlineStyles(elementRef.current, hiddenBeforeCss);
-        } else if (status === STATUS.transitioningOut) {
-            addInlineStyles(elementRef.current, hiddenAfterInstantCss);
+            addInlineStyles(elementRef.current, showTransition.styles);
+        } else if (status === STATUS.hideTransition) {
+            addInlineStyles(elementRef.current, hideTransition.instantStyles);
             const dimensions = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, dimensions);
         }
-    }, [
-        status,
-        hiddenBeforeInstantCss,
-        hiddenBeforeCss,
-        hiddenAfterInstantCss,
-    ]);
+    }, [status, showTransition, hideTransition]);
 
     useEffect(() => {
-        if (status === STATUS.transitioningIn) {
+        if (status === STATUS.showTransition) {
             const showCss = {
-                ...nullifyStyles(hiddenBeforeCss),
+                ...nullifyStyles(showTransition.styles),
                 ...inlineShowingCssRef.current,
                 ...dimensionsRef.current,
             };
@@ -150,31 +141,30 @@ export default function useShowtime(settings) {
                 if (!elementRef.current) {
                     return;
                 }
-                elementRef.current.style.transition = showTransitionCssText;
+                elementRef.current.style.transition =
+                    showTransition.cssTransitionProperty;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
                     elementRef.current &&
                         addInlineStyles(elementRef.current, showCss);
                 });
             }, 32);
-        } else if (status === STATUS.transitioningOut) {
+        } else if (status === STATUS.hideTransition) {
             animationFrameRequestRef.current = requestAnimationFrame(() => {
                 if (!elementRef.current) {
                     return;
                 }
-                elementRef.current.style.transition = hideTransitionCssText;
+                elementRef.current.style.transition =
+                    hideTransition.cssTransitionProperty;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
                     elementRef.current &&
-                        addInlineStyles(elementRef.current, hiddenAfterCss);
+                        addInlineStyles(
+                            elementRef.current,
+                            hideTransition.styles
+                        );
                 });
             });
         }
-    }, [
-        status,
-        hiddenBeforeCss,
-        hiddenAfterCss,
-        showTransitionCssText,
-        hideTransitionCssText,
-    ]);
+    }, [status, hideTransition, showTransition]);
 
     const ret = [elementRef, isMounted, show, hide, status];
 

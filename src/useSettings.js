@@ -1,15 +1,7 @@
 import { useRef } from "react";
 import { DEFAULTS } from "./constants";
+import { toKebabCase } from "./utils";
 import TRANSITIONS from "./transitions";
-
-function toKebabCase(str) {
-    return str
-        .match(
-            /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
-        )
-        .map((x) => x.toLowerCase())
-        .join("-");
-}
 
 function isString(s) {
     return typeof s === "string" || s instanceof String;
@@ -63,11 +55,10 @@ function isZeroCssValue(v) {
     return false;
 }
 
-function extractTransitionCssText({
-    duration = DEFAULTS.duration,
-    delay = DEFAULTS.delay,
-    easing: commonEasing = DEFAULTS.easing,
-    transition, // ignore if present
+function extractCssTransitionProperty({
+    duration,
+    delay,
+    easing: commonEasing,
     ...rest
 }) {
     const commonDuration = stringifyCssTransitionNumber(duration);
@@ -104,153 +95,161 @@ function extractTransitionCssText({
     return transitionStrings.join(", ");
 }
 
-function extractCssValues({
-    duration,
-    delay,
-    easing,
-    transition, // ignore if present
-    ...rest
-} = {}) {
+function extractCssValues(properties = {}) {
     const values = {};
-    for (const property in rest) {
-        values[property] = rest[property].value ?? rest[property];
+    for (const property in properties) {
+        values[property] = properties[property].value ?? properties[property];
     }
     return values;
 }
 
-function extractInstantProperties(cssObject) {
+function extractStyles(cssObject) {
     // If there are any zero-duration, zero-delay properties in before/after,
     // they'll need to be applied early to take affect.
 
-    const instant = {},
-        rest = {};
+    let instantStyles = {},
+        styles = {};
     for (const property in cssObject) {
         const value = cssObject[property];
         if (hasZeroDurationAndDelay(value)) {
-            instant[property] = value;
+            instantStyles[property] = value;
         } else {
-            rest[property] = value;
+            styles[property] = value;
         }
     }
-    return [instant, rest];
+
+    instantStyles = extractCssValues(instantStyles);
+    styles = extractCssValues(styles);
+
+    return { instantStyles, styles };
 }
 
-function resolveBeforeAfter(transitionParam) {
-    const transition = { ...transitionParam };
-    const { hiddenBefore, hiddenAfter } = transition;
-
-    if (isString(hiddenBefore)) {
-        transition.hiddenBefore = {
-            ...TRANSITIONS[hiddenBefore].hidden,
-            ...TRANSITIONS[hiddenBefore].hiddenBefore,
-        };
-    } else if (hiddenBefore && isString(hiddenBefore.transition)) {
-        const { duration, delay, easing } = hiddenBefore;
-        transition.hiddenBefore = {
-            ...TRANSITIONS[hiddenBefore.transition].hidden,
-            ...TRANSITIONS[hiddenBefore.transition].hiddenBefore,
-            duration,
-            delay,
-            easing,
-        };
-    }
-
-    if (isString(hiddenAfter)) {
-        transition.hiddenAfter = {
-            ...TRANSITIONS[hiddenAfter].hidden,
-            ...TRANSITIONS[hiddenAfter].hiddenAfter,
-        };
-    } else if (hiddenAfter && isString(hiddenAfter.transition)) {
-        const { duration, delay, easing } = hiddenAfter;
-        transition.hiddenAfter = {
-            ...TRANSITIONS[hiddenAfter.transition].hidden,
-            ...TRANSITIONS[hiddenAfter.transition].hiddenAfter,
-            duration,
-            delay,
-            easing,
-        };
-    }
-
-    const [hiddenBeforeInstant, hiddenBeforeRest] = extractInstantProperties({
-        ...transition.hidden,
-        ...transition.hiddenBefore,
+function resolveTransitionObject(transition, duration, delay, easing) {
+    const { styles, instantStyles } = extractStyles(transition);
+    const cssTransitionProperty = extractCssTransitionProperty({
+        duration,
+        delay,
+        easing,
+        ...transition,
     });
-    transition.hiddenBeforeInstant = hiddenBeforeInstant;
-    transition.hiddenBefore = hiddenBeforeRest;
 
-    const [hiddenAfterInstant, hiddenAfterRest] = extractInstantProperties({
-        ...transition.hidden,
-        ...transition.hiddenAfter,
-    });
-    transition.hiddenAfterInstant = hiddenAfterInstant;
-    transition.hiddenAfter = hiddenAfterRest;
-
-    return transition;
+    return { styles, instantStyles, cssTransitionProperty };
 }
 
-function resolveEffectiveSettings(settingsParam) {
+function resolveShowHideTransitions(settings) {
+    const { duration, delay, easing, transition } = settings;
+    let {
+        showDuration,
+        showDelay,
+        showEasing,
+        hideDuration,
+        hideDelay,
+        hideEasing,
+    } = settings;
+
+    let showTransition = settings.showTransition || transition;
+
+    if (isString(showTransition)) {
+        showDuration =
+            showDuration ||
+            TRANSITIONS[showTransition].showDuration ||
+            TRANSITIONS[showTransition].duration ||
+            duration;
+        showDelay =
+            showDelay ||
+            TRANSITIONS[showTransition].showDelay ||
+            TRANSITIONS[showTransition].delay ||
+            delay;
+        showEasing =
+            showEasing ||
+            TRANSITIONS[showTransition].showEasing ||
+            TRANSITIONS[showTransition].easing ||
+            easing;
+        showTransition =
+            TRANSITIONS[showTransition].showTransition ||
+            TRANSITIONS[showTransition].transition;
+    }
+
+    showTransition = resolveTransitionObject(
+        showTransition,
+        showDuration || duration,
+        showDelay || delay,
+        showEasing || easing
+    );
+
+    let hideTransition = settings.hideTransition || transition;
+
+    if (isString(hideTransition)) {
+        hideDuration =
+            settings.hideDuration ||
+            TRANSITIONS[hideTransition].hideDuration ||
+            TRANSITIONS[hideTransition].duration ||
+            settings.duration;
+        hideDelay =
+            settings.hideDelay ||
+            TRANSITIONS[hideTransition].hideDelay ||
+            TRANSITIONS[hideTransition].delay ||
+            settings.delay;
+        hideEasing =
+            settings.hideEasing ||
+            TRANSITIONS[hideTransition].hideEasing ||
+            TRANSITIONS[hideTransition].easing ||
+            settings.easing;
+        hideTransition =
+            TRANSITIONS[hideTransition].hideTransition ||
+            TRANSITIONS[hideTransition].transition;
+    }
+
+    hideTransition = resolveTransitionObject(
+        hideTransition,
+        hideDuration || duration,
+        hideDelay || delay,
+        hideEasing || easing
+    );
+
+    return { showTransition, hideTransition };
+}
+
+function mergeWithDefaults(settings) {
     const { transition: defaultTransition, ...defaults } = DEFAULTS;
 
-    let settings;
-    if (isString(settingsParam)) {
-        settings = { transition: TRANSITIONS[settingsParam] };
+    if (!settings) {
+        return { ...defaults, ...TRANSITIONS[defaultTransition] };
+    } else if (isString(settings)) {
+        return { ...defaults, ...TRANSITIONS[settings] };
+    } else if (!isObject(settings)) {
+        throw new Error("Invalid settings");
+    } else if (
+        !settings.transition &&
+        !settings.showTransition &&
+        !settings.hideTransition
+    ) {
+        return {
+            ...defaults,
+            ...TRANSITIONS[defaultTransition],
+            ...settings,
+        };
     } else {
-        settings = settingsParam;
+        return { ...defaults, ...settings };
     }
-
-    let { transition, ...rest } = settings;
-    if (!transition) {
-        transition = { ...TRANSITIONS[defaultTransition] };
-    } else if (isString(transition)) {
-        transition = { ...TRANSITIONS[transition] };
-    }
-
-    transition = resolveBeforeAfter(transition);
-
-    return { ...defaults, ...rest, ...transition };
 }
 
 function processSettings(settings = {}) {
     const {
         startHidden,
         startWithTransition,
-        hiddenBefore,
-        hiddenAfter,
-        hiddenBeforeInstant,
-        hiddenAfterInstant,
-        duration,
-        delay,
-        easing,
-    } = resolveEffectiveSettings(settings);
+        ...transitionSettings
+    } = mergeWithDefaults(settings);
 
-    const showTransitionCssText = extractTransitionCssText({
-        duration,
-        delay,
-        easing,
-        ...hiddenBefore,
-    });
-    const hideTransitionCssText = extractTransitionCssText({
-        duration,
-        delay,
-        easing,
-        ...hiddenAfter,
-    });
-
-    const hiddenBeforeCss = extractCssValues(hiddenBefore);
-    const hiddenBeforeInstantCss = extractCssValues(hiddenBeforeInstant);
-
-    const hiddenAfterCss = extractCssValues(hiddenAfter);
-    const hiddenAfterInstantCss = extractCssValues(hiddenAfterInstant);
+    const { showTransition, hideTransition } = resolveShowHideTransitions(
+        transitionSettings
+    );
 
     return {
         startHidden,
         startWithTransition,
-        hiddenBeforeCss,
-        hiddenBeforeInstantCss,
-        hiddenAfterCss,
-        hiddenAfterInstantCss,
-        showTransitionCssText,
-        hideTransitionCssText,
+        showTransition,
+        hideTransition,
     };
 }
 

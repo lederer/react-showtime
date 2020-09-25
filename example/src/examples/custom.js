@@ -1,7 +1,7 @@
 export const name = "Custom transitions";
 
 export const desc =
-    "Define a custom transition's hidden state in <code>transition.hidden</code>.";
+    "Define a custom transition's <em>hidden</em> state via the <code>transition</code> property.";
 
 export const hook = `
 // import { useShowtime } from "react-showtime";
@@ -9,10 +9,8 @@ export const hook = `
 function Container() {
   const [ref, isMounted, show, hide] = useShowtime({
       transition: {
-        hidden: {
-          transform: "translateY(400px) rotate(180deg)",
-          opacity: 0,
-        }
+        transform: "translateY(400px) rotate(180deg)",
+        opacity: 0,
       },
   });
 
@@ -39,15 +37,13 @@ function Container() {
       <Showtime 
         show={show}
         transition={{
-          hidden: {
-            transform: "translateY(400px) rotate(180deg)",
-            opacity: 0,
-          }
+          transform: "translateY(400px) rotate(180deg)",
+          opacity: 0,
         }}
       >
-          {(ref) => (
-            <RandomEmoji ref={ref} />
-          )}
+        {(ref) => (
+          <RandomEmoji ref={ref} />
+        )}
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

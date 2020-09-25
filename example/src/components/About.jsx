@@ -59,13 +59,11 @@ function About(props) {
     const isFontLoaded = useFontFaceObserver("Pompiere");
     const [textRef, isTextMounted, showText] = useShowtime({
         startHidden: true,
+        easing: "cubic-bezier(0.34, 1.56, 0.92, 0.88)",
         transition: {
-            easing: "cubic-bezier(0.34, 1.56, 0.92, 0.88)",
-            hidden: {
-                transform: {
-                    value: "translateX(100vw)",
-                    delay: 250,
-                },
+            transform: {
+                value: "translateX(100vw)",
+                delay: 250,
             },
         },
     });
@@ -75,9 +73,7 @@ function About(props) {
         delay: 400,
         easing: "cubic-bezier(0.34, 1.56, 0.92, 0.88)",
         transition: {
-            hidden: {
-                transform: "translateX(100vw)",
-            },
+            transform: "translateX(100vw)",
         },
     });
     const [detailsRef] = useShowtime({

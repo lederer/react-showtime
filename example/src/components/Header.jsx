@@ -57,27 +57,27 @@ const BOUNCE = "cubic-bezier(0.34, 1.26, 1, 1.33)";
 const TICKET_TRANSITIONS = [
     // shuriken
     {
-        hidden: {
-            duration: 400,
+        duration: 400,
+        transition: {
             transform: "translateX(100vw) rotate(720deg)",
         },
     },
     // swing
     {
-        hidden: {
+        transition: {
             transform: "translateX(-160%) rotate(270deg)",
         },
     },
     // snake
     {
-        hidden: {
-            easing: "cubic-bezier(0.25, 1.66, 0.52, 2.04)",
+        easing: "cubic-bezier(0.25, 1.66, 0.52, 2.04)",
+        transition: {
             transform: "translateX(-160%)",
         },
     },
     // switchblade
     {
-        hidden: {
+        transition: {
             transform: "translate(-2.4rem, -1.6rem) rotate(-270deg)",
             transformOrigin: {
                 value: "top left",
@@ -96,7 +96,7 @@ function Header({ compact = false, ...props }) {
         startWithTransition: true,
         delay: 50,
         easing: BOUNCE,
-        transition: randomTransition,
+        ...randomTransition,
     });
 
     return (

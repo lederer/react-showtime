@@ -9,23 +9,21 @@ export const hook = `
 function Container() {
   const [ref, isMounted, show, hide] = useShowtime({
       startHidden: true,
-      transition: {
-        hiddenBefore: {
-          transform: "translateY(-100%)",
+      showTransition: {
+        transform: "translateY(-100%)",
+      },
+      showDuration: 200,
+      showEasing: "cubic-bezier(0.16, 2.04, 0.41, 1.67)",
+      hideTransition: {
+        transform: "translateX(300%)",
+        opacity: {
+          value: 0,
+          delay: 50,
           duration: 200,
-          easing: "cubic-bezier(0.16, 2.04, 0.41, 1.67)",
-        },
-        hiddenAfter: {
-          transform: "translateX(300%)",
-          opacity: {
-            value: 0,
-            delay: 50,
-            duration: 200,
-          },
-          duration: 400,
-          easing: "cubic-bezier(0.02, -0.31, 0.55, -0.34)",
         },
       },
+      hideDuration: 400,
+      hideEasing: "cubic-bezier(0.02, -0.31, 0.55, -0.34)",
   });
 
   return (
@@ -50,27 +48,25 @@ function Container() {
     <>
       <Showtime 
         show={show}
-        transition={{
-          hiddenBefore: {
-            transform: "translateY(-100%)",
+        showTransition={{
+          transform: "translateY(-100%)",
+        }}
+        showDuration={200}
+        showEasing="cubic-bezier(0.16, 2.04, 0.41, 1.67)"
+        hideTransition={{
+          transform: "translateX(300%)",
+          opacity: {
+            value: 0,
+            delay: 50,
             duration: 200,
-            easing: "cubic-bezier(0.16, 2.04, 0.41, 1.67)",
-          },
-          hiddenAfter: {
-            transform: "translateX(300%)",
-            opacity: {
-                value: 0,
-                delay: 50,
-                duration: 200,
-            },
-            duration: 400,
-            easing: "cubic-bezier(0.02, -0.31, 0.55, -0.34)",
           },
         }}
+        hideDuration={400}
+        hideEasing="cubic-bezier(0.02, -0.31, 0.55, -0.34)"
       >
-          {(ref) => (
-            <RandomEmoji ref={ref} />
-          )}
+        {(ref) => (
+          <RandomEmoji ref={ref} />
+        )}
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

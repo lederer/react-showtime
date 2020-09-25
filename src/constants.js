@@ -1,8 +1,8 @@
 export const STATUS = Object.freeze({
     showing: "showing",
     hidden: "hidden",
-    transitioningIn: "transitioningIn",
-    transitioningOut: "transitioningOut",
+    showTransition: "showTransition",
+    hideTransition: "hideTransition",
 });
 
 export const DEFAULTS = Object.freeze({

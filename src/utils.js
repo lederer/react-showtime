@@ -2,6 +2,15 @@ function trimPx(str) {
     return str.replace("px", "");
 }
 
+export function toKebabCase(str) {
+    return str
+        .match(
+            /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        )
+        .map((x) => x.toLowerCase())
+        .join("-");
+}
+
 export function getComputedDimensions(el) {
     // Can't transition from height/width: auto
     // so determine them and declare them in css explicitly.
@@ -44,7 +53,7 @@ export function getComputedDimensions(el) {
 
 export function addInlineStyles(element, styles) {
     for (const style in styles) {
-        element.style.setProperty(style, styles[style]);
+        element.style.setProperty(toKebabCase(style), styles[style]);
     }
 }
 

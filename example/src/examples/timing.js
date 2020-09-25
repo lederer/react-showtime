@@ -8,10 +8,10 @@ export const hook = `
 
 function Container() {
   const [ref, isMounted, show, hide] = useShowtime({
-      transition: "scale",
-      duration: 500,
-      delay: 250,
-      easing: "linear",
+    transition: "scale",
+    duration: 600,
+    delay: 250,
+    easing: "linear",
   });
 
   return (
@@ -37,13 +37,13 @@ function Container() {
       <Showtime 
         show={show}
         transition="scale"
-        duration={500}
+        duration={600}
         delay={250}
         easing="linear"
       >
-          {(ref) => (
-            <RandomEmoji ref={ref} />
-          )}
+        {(ref) => (
+          <RandomEmoji ref={ref} />
+        )}
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

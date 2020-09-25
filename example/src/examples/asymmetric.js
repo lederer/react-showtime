@@ -1,20 +1,18 @@
 export const name = "Asymmetric";
 
 export const desc =
-    "Use different transitions for showing and hiding with <code>transition.hiddenBefore</code> and <code>transition.hiddenAfter</code>.";
+    "Use different transitions for showing and hiding with <code>showTransition</code> and <code>hideTransition</code>.";
 
 export const hook = `
 // import { useShowtime } from "react-showtime";
 
 function Container() {
   const [ref, isMounted, show, hide] = useShowtime({
-      transition: {
-        hiddenBefore: {
-          transform: "translateY(400px) rotate(180deg)",
-          opacity: 0,
-        },
-        hiddenAfter: "fade",
-      },
+    showTransition: {
+      transform: "translateY(400px) rotate(180deg)",
+      opacity: 0,
+    },
+    hideTransition: "fade",
   });
 
   return (
@@ -39,17 +37,15 @@ function Container() {
     <>
       <Showtime 
         show={show}
-        transition={{
-          hiddenBefore: {
-            transform: "translateY(400px) rotate(180deg)",
-            opacity: 0,
-          },
-          hiddenAfter: "fade",
+        showTransition={{
+          transform: "translateY(400px) rotate(180deg)",
+          opacity: 0,
         }}
+        hideTransition="fade"
       >
-          {(ref) => (
-            <RandomEmoji ref={ref} />
-          )}
+        {(ref) => (
+          <RandomEmoji ref={ref} />
+        )}
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

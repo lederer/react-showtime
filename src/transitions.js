@@ -1,11 +1,11 @@
 export default Object.freeze({
     scale: {
-        hidden: {
+        transition: {
             transform: "scale(0)",
         },
     },
     slide: {
-        hidden: {
+        transition: {
             height: 0,
             minHeight: 0,
             paddingTop: 0,
@@ -20,12 +20,12 @@ export default Object.freeze({
         },
     },
     fade: {
-        hidden: {
+        transition: {
             opacity: 0,
         },
     },
     slideFade: {
-        hidden: {
+        showTransition: {
             height: 0,
             minHeight: 0,
             paddingTop: 0,
@@ -37,16 +37,25 @@ export default Object.freeze({
                 duration: 0,
                 delay: 0,
             },
-        },
-        hiddenBefore: {
             opacity: {
                 value: 0,
                 delay: 150,
             },
         },
-        hiddenAfter: {
-            delay: 100,
-            easing: "ease-in",
+        hideDelay: 100,
+        hideEasing: "ease-in",
+        hideTransition: {
+            height: 0,
+            minHeight: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            marginTop: 0,
+            marginBottom: 0,
+            overflow: {
+                value: "hidden",
+                duration: 0,
+                delay: 0,
+            },
             opacity: {
                 value: 0,
                 delay: 0,
@@ -54,23 +63,27 @@ export default Object.freeze({
         },
     },
     rise: {
-        hidden: {
+        showEasing: "ease-out",
+        showTransition: {
             transform: "translateY(50%)",
+            opacity: 0,
             zIndex: {
                 value: 1,
                 delay: 0,
                 duration: 0,
             },
         },
-        hiddenBefore: {
-            easing: "ease-out",
-            opacity: 0,
-        },
-        hiddenAfter: {
-            easing: "ease",
+        hideEasing: "ease",
+        hideTransition: {
+            transform: "translateY(50%)",
             opacity: {
                 value: 0,
                 delay: 50,
+            },
+            zIndex: {
+                value: 1,
+                delay: 0,
+                duration: 0,
             },
         },
     },
