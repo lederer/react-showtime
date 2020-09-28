@@ -1,4 +1,4 @@
-import { useRef, useState, useLayoutEffect, useEffect } from "react";
+import { useRef, useReducer, useLayoutEffect, useEffect } from "react";
 import useSettings from "./useSettings";
 import useEventListener from "./useEventListener";
 import { STATUS } from "./constants";
@@ -9,6 +9,23 @@ import {
     nullifyStyles,
 } from "./utils";
 
+function transitionReducer(state, action) {
+    switch (action.type) {
+        case "mount":
+            return { ...state, isMounted: true };
+        case "show":
+            return { ...state, status: STATUS.showTransition };
+        case "hide":
+            return { ...state, status: STATUS.hideTransition };
+        case "hidden":
+            return { ...state, isMounted: false, status: STATUS.hidden };
+        case "showing":
+            return { ...state, status: STATUS.showing };
+        default:
+            throw new Error("Invalid action type");
+    }
+}
+
 export default function useShowtime(settings) {
     const {
         startHidden,
@@ -17,17 +34,20 @@ export default function useShowtime(settings) {
         hideTransition,
     } = useSettings(settings);
 
+    const [state, dispatch] = useReducer(transitionReducer, {
+        isMounted: !startHidden,
+        status: startHidden
+            ? STATUS.hidden
+            : startWithTransition
+            ? STATUS.showTransition
+            : STATUS.showing,
+    });
+    const { isMounted, status } = state;
+
     const elementRef = useRef();
     const dimensionsRef = useRef();
     const inlineShowingCssRef = useRef();
-    const isInitialRenderRef = useRef(true);
     const eventSetRef = useRef();
-
-    const [status, setStatus] = useState(
-        startHidden ? STATUS.hidden : STATUS.showing
-    );
-
-    const [isMounted, setIsMounted] = useState(!startHidden);
 
     const animationFrameRequestRef = useRef();
     useEffect(() => {
@@ -35,17 +55,23 @@ export default function useShowtime(settings) {
     }, []);
 
     const handleTransitionRun = (e) => {
+        if (e.target !== elementRef.current) {
+            return;
+        }
         eventSetRef.current = eventSetRef.current || new Set();
         eventSetRef.current.add(e.propertyName);
     };
 
     const handleTransitionEnd = (e) => {
+        if (e.target !== elementRef.current) {
+            return;
+        }
+
         eventSetRef.current.delete(e.propertyName);
 
         if (!eventSetRef.current.size) {
             if (status === STATUS.hideTransition) {
-                setIsMounted(false);
-                setStatus(STATUS.hidden);
+                dispatch({ type: "hidden" });
             } else if (status === STATUS.showTransition) {
                 elementRef.current.style.transition = null;
                 animationFrameRequestRef.current = requestAnimationFrame(() => {
@@ -59,63 +85,37 @@ export default function useShowtime(settings) {
                         ...inlineShowingCssRef.current,
                     };
                     addInlineStyles(elementRef.current, showingCss);
-                    setStatus(STATUS.showing);
+                    dispatch({ type: "showing" });
                 });
             }
         }
     };
 
-    const handleTransitionCancel = (e) => {
-        eventSetRef.current.delete(e.propertyName);
-    };
-
     useEventListener("transitionrun", handleTransitionRun, elementRef.current);
     useEventListener("transitionend", handleTransitionEnd, elementRef.current);
-    useEventListener(
-        "transitioncancel",
-        handleTransitionCancel,
-        elementRef.current
-    );
 
     const show = () => {
-        if (status !== STATUS.hidden) {
-            return;
+        if (!isMounted && status === STATUS.hidden) {
+            dispatch({ type: "mount" });
         }
-        if (isMounted) {
-            return;
-        }
-        setIsMounted(true);
     };
 
     const hide = () => {
-        if (status !== STATUS.showing) {
-            return;
+        if (isMounted && status === STATUS.showing) {
+            dispatch({ type: "hide" });
         }
-        if (!isMounted) {
-            return;
-        }
-        setStatus(STATUS.hideTransition);
     };
 
     useLayoutEffect(() => {
-        if (!isMounted) {
-            return;
+        if (isMounted && status === STATUS.hidden) {
+            dispatch({ type: "show" });
         }
-
-        if (isInitialRenderRef.current) {
-            isInitialRenderRef.current = false;
-            if (!startHidden && !startWithTransition) {
-                return;
-            }
-        }
-
-        inlineShowingCssRef.current = getInlineStyles(elementRef.current);
-        addInlineStyles(elementRef.current, showTransition.instantStyles);
-        setStatus(STATUS.showTransition);
-    }, [isMounted, startHidden, startWithTransition, showTransition]);
+    }, [isMounted, status]);
 
     useLayoutEffect(() => {
         if (status === STATUS.showTransition) {
+            inlineShowingCssRef.current = getInlineStyles(elementRef.current);
+            addInlineStyles(elementRef.current, showTransition.instantStyles);
             dimensionsRef.current = getComputedDimensions(elementRef.current);
             addInlineStyles(elementRef.current, showTransition.styles);
         } else if (status === STATUS.hideTransition) {
