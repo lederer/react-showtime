@@ -1,90 +1,90 @@
 export default Object.freeze({
-    scale: {
-        transition: {
+    scale: Object.freeze({
+        transition: Object.freeze({
             transform: "scale(0)",
-        },
-    },
-    slide: {
-        transition: {
+        }),
+    }),
+    slide: Object.freeze({
+        transition: Object.freeze({
             height: 0,
             minHeight: 0,
             paddingTop: 0,
             paddingBottom: 0,
             marginTop: 0,
             marginBottom: 0,
-            overflow: {
+            overflow: Object.freeze({
                 value: "hidden",
                 duration: 0,
                 delay: 0,
-            },
-        },
-    },
-    fade: {
-        transition: {
+            }),
+        }),
+    }),
+    fade: Object.freeze({
+        transition: Object.freeze({
             opacity: 0,
-        },
-    },
-    slideFade: {
-        showTransition: {
+        }),
+    }),
+    slideFade: Object.freeze({
+        showTransition: Object.freeze({
             height: 0,
             minHeight: 0,
             paddingTop: 0,
             paddingBottom: 0,
             marginTop: 0,
             marginBottom: 0,
-            overflow: {
+            overflow: Object.freeze({
                 value: "hidden",
                 duration: 0,
                 delay: 0,
-            },
-            opacity: {
+            }),
+            opacity: Object.freeze({
                 value: 0,
                 delay: 150,
-            },
-        },
+            }),
+        }),
         hideDelay: 100,
         hideEasing: "ease-in",
-        hideTransition: {
+        hideTransition: Object.freeze({
             height: 0,
             minHeight: 0,
             paddingTop: 0,
             paddingBottom: 0,
             marginTop: 0,
             marginBottom: 0,
-            overflow: {
+            overflow: Object.freeze({
                 value: "hidden",
                 duration: 0,
                 delay: 0,
-            },
-            opacity: {
+            }),
+            opacity: Object.freeze({
                 value: 0,
                 delay: 0,
-            },
-        },
-    },
-    rise: {
+            }),
+        }),
+    }),
+    rise: Object.freeze({
         showEasing: "ease-out",
-        showTransition: {
+        showTransition: Object.freeze({
             transform: "translateY(50%)",
             opacity: 0,
-            zIndex: {
+            zIndex: Object.freeze({
                 value: 1,
                 delay: 0,
                 duration: 0,
-            },
-        },
+            }),
+        }),
         hideEasing: "ease",
-        hideTransition: {
+        hideTransition: Object.freeze({
             transform: "translateY(50%)",
-            opacity: {
+            opacity: Object.freeze({
                 value: 0,
                 delay: 50,
-            },
-            zIndex: {
+            }),
+            zIndex: Object.freeze({
                 value: 1,
                 delay: 0,
                 duration: 0,
-            },
-        },
-    },
+            }),
+        }),
+    }),
 });
