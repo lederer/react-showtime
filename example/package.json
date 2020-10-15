@@ -9,7 +9,6 @@
     "prop-types": "^15.6.2",
     "react": "link:../node_modules/react",
     "react-dom": "^16.9.0",
-    "react-intersection-observer": "^8.28.5",
     "react-live": "^2.2.2",
     "react-scripts": "^3.0.1",
     "react-showtime": "link:..",
