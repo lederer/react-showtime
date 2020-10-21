@@ -1,4 +1,4 @@
-# React Showtime <span style="white-space:nowrap;">🎟️ 🥁 🎭</span>
+# React Showtime 🎟️&nbsp;🥁&nbsp;🎭
 
 ### Mount & unmount with CSS transitions
 
