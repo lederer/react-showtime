@@ -1,11 +1,7 @@
 import { useRef } from "react";
 import { DEFAULTS } from "./constants";
-import { toKebabCase } from "./utils";
+import { isString, toKebabCase, stringifyCssTransitionNumber } from "./utils";
 import TRANSITIONS from "./transitions";
-
-function isString(s) {
-    return typeof s === "string" || s instanceof String;
-}
 
 function isObject(o) {
     return typeof o === "object" && o !== null;
@@ -27,22 +23,6 @@ function hasZeroDurationAndDelay(cssPropertyObject) {
     }
 
     return true;
-}
-
-function stringifyCssTransitionNumber(n) {
-    if (isString(n)) {
-        return n;
-    }
-    if (Number.isInteger(n)) {
-        return `${n}ms`;
-    }
-    if (Number.isNaN(n)) {
-        //  Expected string or number
-        return;
-    }
-
-    // Must be a float, then.
-    return `${n}s`;
 }
 
 function isZeroCssValue(v) {

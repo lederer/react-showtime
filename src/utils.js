@@ -2,6 +2,10 @@ function trimPx(str) {
     return str.replace("px", "");
 }
 
+export function isString(s) {
+    return typeof s === "string" || s instanceof String;
+}
+
 export function toKebabCase(str) {
     return str
         .match(
@@ -73,4 +77,20 @@ export function nullifyStyles(styles) {
         nullifiedStyles[style] = null;
     }
     return nullifiedStyles;
+}
+
+export function stringifyCssTransitionNumber(n) {
+    if (isString(n)) {
+        return n;
+    }
+    if (Number.isInteger(n)) {
+        return `${n}ms`;
+    }
+    if (Number.isNaN(n)) {
+        //  Expected string or number
+        return;
+    }
+
+    // Must be a float, then.
+    return `${n}s`;
 }
