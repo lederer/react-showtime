@@ -16,7 +16,7 @@
     "url": "https://github.com/azavea/react-showtime/issues"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --watchAll=false",
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
@@ -58,7 +58,6 @@
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.2",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-config-standard": "^14.1.1",
