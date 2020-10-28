@@ -1,4 +1,4 @@
-export default Object.freeze({
+const transitions = Object.freeze({
     scale: Object.freeze({
         transition: Object.freeze({
             transform: "scale(0)",
@@ -88,3 +88,5 @@ export default Object.freeze({
         }),
     }),
 });
+
+export default transitions;

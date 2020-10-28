@@ -1,4 +1,4 @@
-export default {
+const theme = {
     space: [
         0,
         "0.8rem",
@@ -100,3 +100,5 @@ export default {
         },
     },
 };
+
+export default theme;

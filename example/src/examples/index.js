@@ -6,7 +6,7 @@ import * as asymmetric from "./asymmetric";
 import * as complex from "./complex";
 import * as list from "./list";
 
-export default [
+const examples = [
     defaults,
     transitions,
     timing,
@@ -15,3 +15,5 @@ export default [
     complex,
     list,
 ];
+
+export default examples;
