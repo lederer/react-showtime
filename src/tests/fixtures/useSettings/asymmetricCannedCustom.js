@@ -3,9 +3,7 @@ import { stringifyCssTransitionNumber } from "../../../utils";
 
 const defaultDuration = stringifyCssTransitionNumber(DEFAULTS.duration);
 const defaultDelay = stringifyCssTransitionNumber(DEFAULTS.delay);
-const defaultEasing = "ease";
-
-const showEasing = "ease-out";
+const defaultEasing = DEFAULTS.easing;
 
 const name = "asymmetric canned/custom transitions (rise, shuriken)";
 
@@ -28,8 +26,8 @@ const expected = {
             zIndex: 1,
         },
         cssTransitionProperty: [
-            `transform ${defaultDuration} ${showEasing} ${defaultDelay}`,
-            `opacity ${defaultDuration} ${showEasing} ${defaultDelay}`,
+            `transform ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
+            `opacity ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
         ],
     },
     hideTransition: {

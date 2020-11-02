@@ -3,7 +3,7 @@ import { stringifyCssTransitionNumber } from "../../../utils";
 
 const defaultDuration = stringifyCssTransitionNumber(DEFAULTS.duration);
 const defaultDelay = stringifyCssTransitionNumber(DEFAULTS.delay);
-const defaultEasing = "ease";
+const defaultEasing = DEFAULTS.easing;
 
 const name = "symmetric custom transition (switchblade)";
 

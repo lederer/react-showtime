@@ -3,8 +3,8 @@ import { stringifyCssTransitionNumber } from "../../../utils";
 
 const defaultDuration = stringifyCssTransitionNumber(DEFAULTS.duration);
 const defaultDelay = stringifyCssTransitionNumber(DEFAULTS.delay);
+const defaultEasing = DEFAULTS.easing;
 
-const showEasing = "ease-out";
 const hideEasing = "ease-in";
 const hideDelay = stringifyCssTransitionNumber(100);
 
@@ -24,8 +24,8 @@ const expected = {
             zIndex: 1,
         },
         cssTransitionProperty: [
-            `transform ${defaultDuration} ${showEasing} ${defaultDelay}`,
-            `opacity ${defaultDuration} ${showEasing} ${defaultDelay}`,
+            `transform ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
+            `opacity ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
         ],
     },
     hideTransition: {

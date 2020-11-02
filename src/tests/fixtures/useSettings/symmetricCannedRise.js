@@ -3,9 +3,7 @@ import { stringifyCssTransitionNumber } from "../../../utils";
 
 const defaultDuration = stringifyCssTransitionNumber(DEFAULTS.duration);
 const defaultDelay = stringifyCssTransitionNumber(DEFAULTS.delay);
-
-const showEasing = "ease-out";
-const hideEasing = "ease";
+const defaultEasing = DEFAULTS.easing;
 
 const name = "symmetric canned rise transition";
 
@@ -23,8 +21,8 @@ const expected = {
             zIndex: 1,
         },
         cssTransitionProperty: [
-            `transform ${defaultDuration} ${showEasing} ${defaultDelay}`,
-            `opacity ${defaultDuration} ${showEasing} ${defaultDelay}`,
+            `transform ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
+            `opacity ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
         ],
     },
     hideTransition: {
@@ -36,8 +34,8 @@ const expected = {
             zIndex: 1,
         },
         cssTransitionProperty: [
-            `transform ${defaultDuration} ${hideEasing} ${defaultDelay}`,
-            `opacity ${defaultDuration} ${hideEasing} ${stringifyCssTransitionNumber(
+            `transform ${defaultDuration} ${defaultEasing} ${defaultDelay}`,
+            `opacity ${defaultDuration} ${defaultEasing} ${stringifyCssTransitionNumber(
                 50
             )}`,
         ],

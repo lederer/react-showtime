@@ -63,7 +63,6 @@ const transitions = Object.freeze({
         }),
     }),
     rise: Object.freeze({
-        showEasing: "ease-out",
         showTransition: Object.freeze({
             transform: "translateY(50%)",
             opacity: 0,
@@ -73,7 +72,6 @@ const transitions = Object.freeze({
                 duration: 0,
             }),
         }),
-        hideEasing: "ease",
         hideTransition: Object.freeze({
             transform: "translateY(50%)",
             opacity: Object.freeze({
