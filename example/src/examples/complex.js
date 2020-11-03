@@ -10,7 +10,7 @@ function Container() {
   const [ref, isMounted, show, hide] = useShowtime({
       startHidden: true,
       showTransition: {
-        transform: "translateY(-100%)",
+        transform: "translateY(-200%)",
       },
       showDuration: 200,
       showEasing: "cubic-bezier(0.16, 2.04, 0.41, 1.67)",
@@ -18,12 +18,12 @@ function Container() {
         transform: "translateX(300%)",
         opacity: {
           value: 0,
-          delay: 50,
+          delay: 100,
           duration: 200,
         },
       },
-      hideDuration: 400,
-      hideEasing: "cubic-bezier(0.02, -0.31, 0.55, -0.34)",
+      hideDuration: 300,
+      hideEasing: "cubic-bezier(0, -0.4, 0.54, -0.34)",
   });
 
   return (
@@ -49,7 +49,7 @@ function Container() {
       <Showtime 
         show={show}
         showTransition={{
-          transform: "translateY(-100%)",
+          transform: "translateY(-200%)",
         }}
         showDuration={200}
         showEasing="cubic-bezier(0.16, 2.04, 0.41, 1.67)"
@@ -57,12 +57,12 @@ function Container() {
           transform: "translateX(300%)",
           opacity: {
             value: 0,
-            delay: 50,
+            delay: 100,
             duration: 200,
           },
         }}
-        hideDuration={400}
-        hideEasing="cubic-bezier(0.02, -0.31, 0.55, -0.34)"
+        hideDuration={300}
+        hideEasing="cubic-bezier(0, -0.4, 0.54, -0.34)"
       >
         {(ref) => (
           <RandomEmoji ref={ref} />

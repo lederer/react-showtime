@@ -10,6 +10,6 @@ export const DEFAULTS = Object.freeze({
     startWithTransition: false,
     transition: "slideFade",
     duration: 250,
-    delay: 0,
+    delay: 16, // Without a nominal delay, Safari (mac/ios) easings may not execute correctly
     easing: "ease",
 });

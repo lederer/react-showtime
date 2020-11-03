@@ -5,9 +5,9 @@ const showDuration = "4s";
 const showDelay = stringifyCssTransitionNumber(50);
 const showEasing = "cubic-bezier(0.16, 2.04, 0.41, 1.67)";
 
-const hideDuration = "400ms";
+const hideDuration = "300ms";
 const hideDelay = stringifyCssTransitionNumber(DEFAULTS.delay);
-const hideEasing = "cubic-bezier(0.02, -0.31, 0.55, -0.34)";
+const hideEasing = "cubic-bezier(0, -0.4, 0.54, -0.34)";
 
 const name =
     "kitchen sink including initial state booleans and per-property timing";
@@ -16,7 +16,7 @@ const input = {
     startHidden: true,
     startWithTransition: true,
     showTransition: {
-        transform: "translateY(-100%)",
+        transform: "translateY(-200%)",
         background: {
             value: "red",
             duration: "1s",
@@ -24,7 +24,7 @@ const input = {
         opacity: {
             value: 0,
             delay: 0.1,
-            duration: 150,
+            duration: 200,
             easing: "ease-in",
         },
     },
@@ -35,7 +35,7 @@ const input = {
         transform: "translateX(300%)",
         opacity: {
             value: 0,
-            delay: "50ms",
+            delay: "100ms",
             duration: 0.2,
         },
         overflow: {
@@ -44,8 +44,8 @@ const input = {
             delay: 0,
         },
     },
-    hideDuration: "400ms",
-    hideEasing: "cubic-bezier(0.02, -0.31, 0.55, -0.34)",
+    hideDuration: "300ms",
+    hideEasing: "cubic-bezier(0, -0.4, 0.54, -0.34)",
 };
 
 const expected = {
@@ -53,7 +53,7 @@ const expected = {
     startWithTransition: true,
     showTransition: {
         styles: {
-            transform: "translateY(-100%)",
+            transform: "translateY(-200%)",
             background: "red",
             opacity: 0,
         },
@@ -64,7 +64,7 @@ const expected = {
                 "1s"
             )} ${showEasing} ${showDelay}`,
             `opacity ${stringifyCssTransitionNumber(
-                150
+                200
             )} ease-in ${stringifyCssTransitionNumber(0.1)}`,
         ],
     },
@@ -80,7 +80,7 @@ const expected = {
             `transform ${hideDuration} ${hideEasing} ${hideDelay}`,
             `opacity ${stringifyCssTransitionNumber(
                 0.2
-            )} ${hideEasing} ${stringifyCssTransitionNumber(50)}`,
+            )} ${hideEasing} ${stringifyCssTransitionNumber(100)}`,
         ],
     },
 };
