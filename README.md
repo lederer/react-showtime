@@ -104,7 +104,7 @@ Pass `startWithTransition={true}` to automatically execute the `show` transition
 
 ### Transitions
 
-If you accept all defaults, you'll get a `slideFade` transition with a `250ms` duration, `0ms` delay, and `"ease"` easing:
+If you accept all defaults, you'll get a `slideFade` transition with a `250ms` duration, `16ms` delay, and `"ease"` easing:
 
 ```jsx
 // Hook
