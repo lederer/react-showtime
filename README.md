@@ -318,14 +318,14 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
 | _Timing_              |
 | `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `delay`               | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `delay`               | `number` or `string`         | no     | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
 | `easing`              | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `showDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `showDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `showEasing`          | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `hideDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `hideDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `hideEasing`          | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `showDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `showDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `showEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `hideDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `hideDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `hideEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
 
 ### Showtime component
 
@@ -340,14 +340,14 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 | `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
 | _Timing_              |
 | `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `delay`               | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `delay`               | `number` or `string`         | no     | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
 | `easing`              | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `showDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `showDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `showEasing`          | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `hideDuration`        | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `hideDelay`           | `number` or `string`         | no     | `0`           | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `hideEasing`          | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `showDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `showDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `showEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `hideDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `hideDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `hideEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
 | _Events_              |
 | `onHidden`            | `function`                   | no     |               | Called when hide transition complete.                                                                     |
 | `onShowing`           | `function`                   | no     |               | Called when show transition complete.                                                                     |
