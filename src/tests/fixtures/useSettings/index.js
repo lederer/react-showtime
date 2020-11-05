@@ -17,7 +17,7 @@ import symmetricCustomSymmetricTiming from "./symmetricCustom.symmetricTiming";
 import symmetricCustomAsymmetricTiming from "./symmetricCustom.asymmetricTiming";
 import kitchenSink from "./kitchenSink";
 
-export default [
+const fixtures = [
     defaults,
     symmetricCannedSlideFade,
     symmetricCannedSlide,
@@ -37,3 +37,5 @@ export default [
     symmetricCustomAsymmetricTiming,
     kitchenSink,
 ];
+
+export default fixtures;

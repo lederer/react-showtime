@@ -42,4 +42,6 @@ const expected = {
     },
 };
 
-export default [name, input, expected];
+const fixture = [name, input, expected];
+
+export default fixture;
