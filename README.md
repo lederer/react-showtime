@@ -307,73 +307,66 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 -   a string referring to an [included transition](#included-transitions)
 -   an object with the following properties:
 
-| Name                  | Type                         | Req'd? | Default       | Description                                                                                               |
-| --------------------- | ---------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------- |
-| _Initial state_       |
-| `startHidden`         | `boolean`                    | no     | `false`       | Hide the element initially                                                                                |
-| `startWithTransition` | `boolean`                    | no     | `false`       | Execute `show` transition on initial mount. Ignored if `startHidden` is `true`.                           |
-| _Transitions_         |
-| `transition`          | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| `showTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| _Timing_              |
-| `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `delay`               | `number` or `string`         | no     | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `easing`              | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `showDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `showDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `showEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `hideDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `hideDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `hideEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| Name                  | Type                         | Req'd | Default       | Description                                                                                               |
+| --------------------- | ---------------------------- | ----- | ------------- | --------------------------------------------------------------------------------------------------------- |
+| `startHidden`         | `boolean`                    | no    | `false`       | Hide the element initially                                                                                |
+| `startWithTransition` | `boolean`                    | no    | `false`       | Execute `show` transition on initial mount. Ignored if `startHidden` is `true`.                           |
+| `transition`          | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `showTransition`      | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `hideTransition`      | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `duration`            | `number` or `string`         | no    | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `delay`               | `number` or `string`         | no    | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `easing`              | `string`                     | no    | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `showDuration`        | `number` or `string`         | no    |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `showDelay`           | `number` or `string`         | no    |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `showEasing`          | `string`                     | no    |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `hideDuration`        | `number` or `string`         | no    |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `hideDelay`           | `number` or `string`         | no    |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `hideEasing`          | `string`                     | no    |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
 
 ### Showtime component
 
-| Name                  | Type                         | Req'd? | Default       | Description                                                                                               |
-| --------------------- | ---------------------------- | ------ | ------------- | --------------------------------------------------------------------------------------------------------- |
-| `show`                | `boolean`                    | yes    |               | Toggle this to show/hide the element or component                                                         |
-| _Initial state_       |
-| `startWithTransition` | `boolean`                    | no     | `false`       | Execute `show` transition on initial mount. Ignored if `show` initially set to `false`.                   |
-| _Transitions_         |
-| `transition`          | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| `showTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| `hideTransition`      | `string` or `CSS Properties` | no     | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
-| _Timing_              |
-| `duration`            | `number` or `string`         | no     | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `delay`               | `number` or `string`         | no     | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `easing`              | `string`                     | no     | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `showDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `showDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `showEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| `hideDuration`        | `number` or `string`         | no     |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `hideDelay`           | `number` or `string`         | no     |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `hideEasing`          | `string`                     | no     |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
-| _Events_              |
-| `onHidden`            | `function`                   | no     |               | Called when hide transition complete.                                                                     |
-| `onShowing`           | `function`                   | no     |               | Called when show transition complete.                                                                     |
+| Name                  | Type                         | Req'd | Default       | Description                                                                                               |
+| --------------------- | ---------------------------- | ----- | ------------- | --------------------------------------------------------------------------------------------------------- |
+| `show`                | `boolean`                    | yes   |               | Toggle this to show/hide the element or component                                                         |
+| `startWithTransition` | `boolean`                    | no    | `false`       | Execute `show` transition on initial mount. Ignored if `show` initially set to `false`.                   |
+| `transition`          | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `showTransition`      | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `hideTransition`      | `string` or `CSS Properties` | no    | `"slideFade"` | [Included transition](#included-transitions) or object defining custom transition (see below)             |
+| `duration`            | `number` or `string`         | no    | `250`         | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `delay`               | `number` or `string`         | no    | `16`          | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `easing`              | `string`                     | no    | `"ease"`      | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `showDuration`        | `number` or `string`         | no    |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `showDelay`           | `number` or `string`         | no    |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `showEasing`          | `string`                     | no    |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `hideDuration`        | `number` or `string`         | no    |               | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `hideDelay`           | `number` or `string`         | no    |               | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `hideEasing`          | `string`                     | no    |               | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| `onHidden`            | `function`                   | no    |               | Called when hide transition complete.                                                                     |
+| `onShowing`           | `function`                   | no    |               | Called when show transition complete.                                                                     |
 
 ### Transition objects
 
 #### CSS Properties
 
-| Name                    | Type                                  | Req'd? | Default | Description                                                                 |
-| ----------------------- | ------------------------------------- | ------ | ------- | --------------------------------------------------------------------------- |
-| [Any CSS property name] | `string`, `number`, or `CSS Property` | yes    |         | Use camelCase for names. String and number values passed directly to style. |
+| Name                    | Type                                  | Req'd | Default | Description                                                                 |
+| ----------------------- | ------------------------------------- | ----- | ------- | --------------------------------------------------------------------------- |
+| [Any CSS property name] | `string`, `number`, or `CSS Property` | yes   |         | Use camelCase for names. String and number values passed directly to style. |
 
 #### CSS Property
 
-| Name       | Type                 | Req'd? | Default   | Description                                                                                               |
-| ---------- | -------------------- | ------ | --------- | --------------------------------------------------------------------------------------------------------- |
-| `value`    | `string` or `number` | yes    |           | Any CSS property name.                                                                                    |
-| `duration` | `number` or `string` | no     | inherited | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
-| `delay`    | `number` or `string` | no     | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
-| `easing`   | `string`             | no     | inherited | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
+| Name       | Type                 | Req'd | Default   | Description                                                                                               |
+| ---------- | -------------------- | ----- | --------- | --------------------------------------------------------------------------------------------------------- |
+| `value`    | `string` or `number` | yes   |           | Any CSS property name.                                                                                    |
+| `duration` | `number` or `string` | no    | inherited | [Transition duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)               |
+| `delay`    | `number` or `string` | no    | inherited | [Transition delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)                     |
+| `easing`   | `string`             | no    | inherited | [Transition timing function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) |
 
 ## Development
 
 React Showtime was built with [create-react-hook](https://github.com/Hermanya/create-react-hook) using [this blog post](https://www.twilio.com/blog/release-custom-react-component-hook-effect-npm-package) as a guiding reference.
 
-Be sure to reflect any API changes in this readme and in the demo app in `example/`.
+Be sure to reflect any API changes in test fixtures, the demo app in `example/`, and this readme.
 
 To get started:
 
