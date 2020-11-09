@@ -181,14 +181,14 @@ To define a custom transition, pass a CSS object literal describing the item's _
 
 Each value can be a string, number, or object. Strings and numbers will be passed through as CSS.
 
-As an example, here's how you might define a _revolve_ transition, where showing would mount the item then spin it around the y-axis, while hiding would spin then unmount.
+As an example, here's how you might define a _revolve_ transition, where showing would mount the item then fade it in while spinning it around the y-axis. Hiding would do the reverse.
 
 ```jsx
 // Hook
 const [ref, isMounted, show, hide] = useShowtime({
     transition: {
         transform: "rotate3d(0, 1, 0, 180deg)",
-        ...
+        opacity: 0,
     },
     ...
 });
@@ -199,7 +199,7 @@ const [ref, isMounted, show, hide] = useShowtime({
 <Showtime
     transition={{
         transform: "rotate3d(0, 1, 0, 180deg)",
-        ...
+        opacity: 0,
     }}
     ...
 >
@@ -209,7 +209,7 @@ const [ref, isMounted, show, hide] = useShowtime({
 
 You can pass an object instead of a string or number as a CSS property's value. It should contain `{ value, duration, delay, easing }` properties.
 
-`value` is required and will be passed through as CSS.
+`value` is required and will be passed through as the CSS property's value.
 
 The other properties are optional and will be applied to that property's transition timing, overriding any inherited timing values.
 
@@ -258,7 +258,7 @@ const HookExample = () => {
 
 ### Attaching the ref
 
-React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element and to listen for transition events.
+React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element, and to listen for transition events.
 
 If you are transitioning an _element_ directly, you can just pass the provided `ref` as a prop.
 
