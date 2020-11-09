@@ -10,7 +10,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 💨&emsp;Sensible API for defining _hidden_ styles and custom transitions.<br/>
 🎩&emsp;Included transitions: `slideFade`, `slide`, `fade`, `rise`, `scale`.<br/>
 🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
-🕴&emsp;Zero dependencies. 21k unpacked.
+🕴&emsp;Zero dependencies. 5.7k gzipped.
 
 The essential insight of React Showtime is that the one-two sequence of React's `useLayoutEffect` and `useEffect` hooks is nicely suited to the one-two sequence of mounting a component with _hidden_ CSS values and then applying _showing_ CSS values to trigger the transition. As for hiding, transition event handlers trigger unmounting once the "hide" transition is complete.
 
@@ -22,6 +22,8 @@ React Showtime is **not for sophisticated animations**, as it executes via CSS `
 
 ## Getting Started
 
+### Installation
+
 ```sh
 yarn add react-showtime
 ```
@@ -30,14 +32,16 @@ yarn add react-showtime
 npm install react-showtime
 ```
 
-Using React Showtime boils down to these key steps:
+### tl;dr
 
-1. Choose between the `useShowtime` hook or the `Showtime` component.
-1. Specify an included transition, or provide your own by defining the _hidden_ styles of your element or component.
-1. Attach the supplied `ref` to your containing element.
+1. Choose between the `useShowtime` hook or the `Showtime` component. The component is better for list items or if you need to listen for events (`onShowing`, `onHidden`).
+1. Define your `transition` by describing the item's _hidden_ styles with a CSS object literal. Or just pass the name of an included transition (`slideFade`, `slide`, `fade`, `rise`, `scale`).
+1. Attach the supplied `ref` to your containing element. If using the hook, conditionally render your item with the supplied `isMounted` boolean.
 1. Call the hook's `show()` and `hide()` functions – or toggle the component's `show` prop – as needed.
 
-You can get a bit fancier by fiddling with `duration`, `delay`, and `easing`, and by using different transitions for mounting (`showTransition`) and unmounting (`hideTransition`).
+Adjust transition timing via `duration`, `delay`, `easing`.
+
+You can also define asymmetric show/hide transitions (`showTransition`, `hideTransition`) and timing (`showDuration`, `showDelay`, `showEasing`, `hideDuration`, `hideDelay`, `hideEasing`).
 
 ## Usage
 

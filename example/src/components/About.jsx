@@ -197,7 +197,7 @@ function About(props) {
                             "::before": { content: "'🕴'", mr: 2 },
                         }}
                     >
-                        Zero dependencies. 21k unpacked.
+                        Zero dependencies. 5.7k gzipped.
                     </li>
                 </ul>
                 <Text sx={sx.more}>
