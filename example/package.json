@@ -6,11 +6,11 @@
   "dependencies": {
     "fontfaceobserver": "^2.1.0",
     "prop-types": "^15.7.2",
-    "react": "link:../node_modules/react",
+    "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-live": "^2.2.3",
     "react-scripts": "^4.0.0",
-    "react-showtime": "link:..",
+    "react-showtime": "https://github.com/azavea/react-showtime#feature/cek/netlify",
     "theme-ui": "^0.3.3"
   },
   "scripts": {
