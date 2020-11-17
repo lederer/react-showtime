@@ -19,6 +19,9 @@
   [headers.values]
     Content-Security-Policy = """
       default-src 'self';
+      font-src 'self' https://fonts.gstatic.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       """
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
