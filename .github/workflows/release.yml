@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - feature/cek/release-workflow
+    tags:
+      - "*"
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v2
+
+      - name: Install correct version of Node
+        shell: bash -l {0}
+        run: nvm install
+
+      - name: Set up registry authentication
+        uses: actions/setup-node@v1
+        with:
+          registry-url: https://registry.npmjs.org
+
+      - name: Install correct version of Yarn
+        run: yarn policies set-version $(cat .yvmrc)
+
+      - name: Install release dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build and publish package
+        run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
