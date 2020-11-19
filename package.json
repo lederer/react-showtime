@@ -21,8 +21,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build",
+    "deploy": "cd example && yarn install && yarn run build",
     "lint": "eslint --ext .js,.jsx src example/src"
   },
   "peerDependencies": {
