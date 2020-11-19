@@ -9236,9 +9236,9 @@ react-scripts@^4.0.0:
   optionalDependencies:
     fsevents "^2.1.3"
 
-"react-showtime@https://github.com/azavea/react-showtime#feature/cek/netlify":
+"react-showtime@https://github.com/azavea/react-showtime#develop":
   version "0.1.0"
-  resolved "https://github.com/azavea/react-showtime#f73d8ceceafa747e50018a6dd206ca1885189162"
+  resolved "https://github.com/azavea/react-showtime#9a066e98d75fd08450349c118db6fa4863ba0406"
 
 react-simple-code-editor@^0.10.0:
   version "0.10.0"
