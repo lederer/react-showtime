@@ -374,7 +374,5 @@ Be sure to reflect any API changes in test fixtures, the demo app in `example/`,
 
 To get started:
 
-1.  `yarn link` here to set up a local link for the `react-showtime` package.
-2.  `yarn link react-showtime` in `example` to install the locally linked `react-showtime` package.
-3.  `yarn start` here to watch for local changes to `react-showtime`,
-4.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
+1.  `yarn start` here to watch for local changes to `react-showtime`,
+2.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
