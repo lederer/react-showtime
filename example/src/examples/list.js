@@ -29,13 +29,13 @@ function Container() {
       {items.map(item => (
         <Item
           key={item}
-          onHidden={() => 
+          onHidden={() =>
             items.splice(items.indexOf(item), 1)
           }
         />
       ))}
-      <Button 
-        onClick={() => 
+      <Button
+        onClick={() =>
           setItems((current) => [Date.now(), ...current])
         }
         label="Add"

@@ -18,7 +18,7 @@ function Container() {
   return (
     <>
       {isMounted && <RandomEmoji ref={ref} />}
-      <Button 
+      <Button
         onClick={isMounted ? hide : show}
         label={isMounted ? "Hide" : "Show"}
       />
@@ -35,7 +35,7 @@ function Container() {
 
   return (
     <>
-      <Showtime 
+      <Showtime
         show={show}
         showTransition={{
           transform: "translateY(400px) rotate(180deg)",
@@ -45,7 +45,7 @@ function Container() {
       >
         <RandomEmoji />
       </Showtime>
-      <Button 
+      <Button
         onClick={() => setShow((current) => !current)}
         label={show ? "Hide" : "Show"}
       />
