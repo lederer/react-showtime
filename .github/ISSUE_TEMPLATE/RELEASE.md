@@ -26,7 +26,6 @@ $ git commit -m "X.Y.Z"
 ```bash
 $ git flow release publish X.Y.Z
 ```
-- [ ] Test the release branch on staging
 - [ ] Finish and publish the release branch:
     - When prompted, keep default commit messages
     - Use `X.Y.Z` as the tag message
