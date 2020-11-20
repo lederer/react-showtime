@@ -17,9 +17,7 @@ function Item({onHidden, ...props}) {
       onHidden={onHidden}
       {...props}
     >
-      {(ref) => (
-        <RandomEmoji ref={ref} onClose={() => setShow(false)} />
-      )}
+      <RandomEmoji onClose={() => setShow(false)} />
     </Showtime>
   );
 }

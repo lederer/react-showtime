@@ -41,9 +41,7 @@ function Container() {
           opacity: 0,
         }}
       >
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

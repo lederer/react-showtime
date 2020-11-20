@@ -64,9 +64,7 @@ function Container() {
         hideDuration={300}
         hideEasing="cubic-bezier(0, -0.4, 0.54, -0.34)"
       >
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}

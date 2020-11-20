@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { Children, cloneElement, useRef, useEffect, useState } from "react";
 import useShowtime from "./useShowtime";
 import { STATUS } from "./constants";
 
@@ -70,5 +70,5 @@ export default function Showtime({
         }
     }, [status, previousStatus, onHidden, onShowing]);
 
-    return isMounted ? children(ref) : null;
+    return isMounted ? cloneElement(Children.only(children), { ref }) : null;
 }

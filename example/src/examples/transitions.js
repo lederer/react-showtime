@@ -46,9 +46,7 @@ function Container() {
   return (
     <>
       <Showtime show={show} transition="${name}">
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       ${hasSecondItem ? "<RandomEmoji />" : ""}
       <Button 

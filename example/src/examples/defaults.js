@@ -31,9 +31,7 @@ function Container() {
   return (
     <>
       <Showtime show={show}>
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       <RandomEmoji />
       <Button 

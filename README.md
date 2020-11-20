@@ -80,7 +80,7 @@ Pass `{ startWithTransition: true }` to automatically execute the `show` transit
 
 #### Showtime component
 
-`Showtime` is a <a href="https://reactjs.org/docs/render-props.html">render prop component</a>. Its only child must be a function that accepts a `ref` parameter. Pass `ref` to your element or component.
+`Showtime` takes a single child component. It uses `useShowtime` under the hood, cloning the child and adding the `ref` to it.
 
 Toggle the `show` boolean prop to trigger show/hide.
 
@@ -97,7 +97,7 @@ const ComponentExample = () => {
         <div>
             <button onClick={toggle}>Toggle</button>
             <Showtime show={show}>
-                {(ref) => <div ref={ref}>Oh hi</div>}
+                <div>Oh hi</div>
             </Showtime>
         </div>
     );

@@ -41,9 +41,7 @@ function Container() {
         delay={250}
         easing="linear"
       >
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       <Button 
         onClick={() => setShow((current) => !current)}
