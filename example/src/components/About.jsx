@@ -122,8 +122,8 @@ function About(props) {
                 <Text sx={sx.desc}>
                     <strong>React Showtime</strong> makes it easy to apply CSS
                     transitions to the appearance and disappearance of React
-                    elements and components. It automatically handles mounting
-                    and unmounting to allow time for transitions to occur.
+                    elements. It automatically handles mounting and unmounting
+                    to allow time for transitions to occur.
                 </Text>
                 <ul sx={sx.features}>
                     <li

@@ -2,7 +2,7 @@
 
 ### Mount & unmount with CSS transitions
 
-React Showtime makes it easy to apply CSS transitions to the appearance and disappearance of React elements and components. It automatically handles mounting and unmounting to allow time for transitions to occur.
+React Showtime makes it easy to apply CSS transitions to the appearance and disappearance of React elements. It automatically handles mounting and unmounting to allow time for transitions to occur.
 
 👯&emsp;Choose between `useShowtime` hook and `<Showtime />` component.<br/>
 💃&emsp;Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.<br/>
