@@ -17,7 +17,7 @@ export default function Showtime({
     children,
     ...props
 }) {
-    const [ref, isMounted, show, hide, status] = useShowtime({
+    const [showtimeRef, isMounted, show, hide, status] = useShowtime({
         startHidden: !shouldShow,
         ...props,
     });
@@ -70,5 +70,27 @@ export default function Showtime({
         }
     }, [status, previousStatus, onHidden, onShowing]);
 
-    return isMounted ? cloneElement(Children.only(children), { ref }) : null;
+    // If child is a function like (ref) => <Child ref={ref} />
+    if (typeof children === "function") {
+        return isMounted ? children(showtimeRef) : null;
+    }
+
+    // Otherwise it is a component <Child />, to which ref must be attached
+    const child = Children.only(children);
+
+    return isMounted
+        ? cloneElement(child, {
+              ref(node) {
+                  showtimeRef.current = node;
+
+                  // Attach existing refs on child, if any
+                  const { ref } = child;
+                  if (ref?.hasOwnProperty("current")) {
+                      ref.current = node;
+                  } else if (typeof ref === "function") {
+                      ref(node);
+                  }
+              },
+          })
+        : null;
 }
