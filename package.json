@@ -7,6 +7,7 @@
   "repository": "azavea/react-showtime",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "files": [
     "dist/*.js",
@@ -62,6 +63,7 @@
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "babel-eslint": "^10.1.0",
+    "csstype": "^3.0.5",
     "eslint": "^7.13.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-config-standard": "^16.0.1",
@@ -79,6 +81,7 @@
     "react-test-renderer": "^17.0.1",
     "rollup": "^2.33.1",
     "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^4.1.2"
   }
 }
