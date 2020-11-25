@@ -1,15 +1,17 @@
 {
   "name": "react-showtime-example",
-  "homepage": "https://lederer.github.io/react-showtime",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.2",
+    "fontfaceobserver": "^2.1.0",
+    "prop-types": "^15.7.2",
     "react": "link:../node_modules/react",
-    "react-dom": "^16.9.0",
-    "react-scripts": "^3.0.1",
-    "react-showtime": "link:.."
+    "react-dom": "^16.14.0",
+    "react-live": "^2.2.3",
+    "react-scripts": "^4.0.0",
+    "react-showtime": "link:..",
+    "theme-ui": "^0.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,29 @@
+[Settings]
+  ID = "react-showtime"
+
+[build]
+  base = "."
+  publish = "example/build/"
+  command = "yarn run deploy"
+  environment = { NODE_VERSION = "12.19.0", YARN_VERSION = "1.22.10" }
+
+# Redirect all routes to index.html, so that React Router
+# can handle routing.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = """
+      default-src 'self';
+      font-src 'self' https://fonts.gstatic.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      """
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
