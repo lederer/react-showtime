@@ -15,17 +15,11 @@ jobs:
       - name: Checkout commit
         uses: actions/checkout@v2
 
-      - name: Install correct version of Node
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: Set up registry authentication
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
+          node-version: 12.x
           registry-url: https://registry.npmjs.org
-
-      - name: Install correct version of Yarn
-        run: yarn policies set-version $(cat .yvmrc)
 
       - name: Install release dependencies
         run: yarn install --frozen-lockfile
