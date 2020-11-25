@@ -2,8 +2,6 @@ name: Release
 
 on:
   push:
-    branches:
-      - feature/cek/release-workflow
     tags:
       - "*"
 
@@ -25,6 +23,6 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build and publish package
-        run: npm publish --dry-run
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AZAVEA_TOKEN }}
