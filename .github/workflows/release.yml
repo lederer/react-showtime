@@ -33,4 +33,4 @@ jobs:
       - name: Build and publish package
         run: npm publish --dry-run
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AZAVEA_TOKEN }}
