@@ -12,16 +12,18 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
     steps:
       - name: Checkout commit
         uses: actions/checkout@v2
 
-      - name: Install correct version of Node
-        shell: bash -l {0}
-        run: nvm install
-
-      - name: Install correct version of Yarn
-        run: yarn policies set-version $(cat .yvmrc)
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org
 
       - name: Get Yarn cache directory path
         id: yarn-cache-dir-path
