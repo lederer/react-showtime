@@ -82,9 +82,35 @@ Pass `{ startWithTransition: true }` to automatically execute the `show` transit
 
 #### Showtime component
 
-`Showtime` is a <a href="https://reactjs.org/docs/render-props.html">render prop component</a>. Its only child must be a function that accepts a `ref` parameter. Pass `ref` to your element or component.
+`Showtime` takes a single child component. It uses `useShowtime` under the hood, cloning the child and adding the `ref` to it.
 
 Toggle the `show` boolean prop to trigger show/hide.
+
+```jsx
+import React, { useState } from "react";
+import { Showtime } from "react-showtime";
+
+const ComponentExample = () => {
+    const [show, setShow] = useState(true);
+
+    const toggle = () => setShow((current) => !current);
+
+    return (
+        <div>
+            <button onClick={toggle}>Toggle</button>
+            <Showtime show={show}>
+                <div>Oh hi</div>
+            </Showtime>
+        </div>
+    );
+};
+```
+
+Pass `startWithTransition={true}` to automatically execute the `show` transition when the item initially mounts. It will be ignored if `show` is initially set to `false`.
+
+##### Additional performance consideration
+
+Since `Showtime` clones the child to attach its `ref`, it may be an expensive operation in some cases if the child component is substantially complicated. If so, provide a function that takes a `ref` and returns the child component instead, which may be more performant:
 
 ```jsx
 import React, { useState } from "react";
@@ -106,7 +132,7 @@ const ComponentExample = () => {
 };
 ```
 
-Pass `startWithTransition={true}` to automatically execute the `show` transition when the item initially mounts. It will be ignored if `show` is initially set to `false`.
+However, the direct child specification is recommended for most users.
 
 ### Transitions
 
@@ -291,6 +317,29 @@ const MultipleRefsExample = () => {
         <>
             <button onClick={toggle}>Toggle</button>
             {isMounted && <div ref={setRefs}>Hi there</div>}
+        </>
+    );
+};
+```
+
+Or if using the `Showtime` component:
+
+```jsx
+import React, { useRef } from "react";
+import { Showtime } from "react-showtime";
+
+const MultipleRefsExample = () => {
+    const myRef = useRef();
+    const [show, setShow] = useState(true);
+
+    const toggle = () => setShow((current) => !current);
+
+    return (
+        <>
+            <button onClick={toggle}>Toggle</button>
+            <Showtime show={show}>
+                <div ref={myRef}>Hi there</div>
+            </Showtime>
         </>
     );
 };

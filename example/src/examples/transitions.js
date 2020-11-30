@@ -25,7 +25,7 @@ function Container() {
     <>
       {isMounted && <RandomEmoji ref={ref} />}
       ${hasSecondItem ? "<RandomEmoji />" : ""}
-      <Button 
+      <Button
         onClick={isMounted ? hide : show}
         label={isMounted ? "Hide" : "Show"}
       />
@@ -46,12 +46,10 @@ function Container() {
   return (
     <>
       <Showtime show={show} transition="${name}">
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       ${hasSecondItem ? "<RandomEmoji />" : ""}
-      <Button 
+      <Button
         onClick={() => setShow((current) => !current)}
         label={show ? "Hide" : "Show"}
       />
