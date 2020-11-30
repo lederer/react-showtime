@@ -38,10 +38,10 @@ npm install react-showtime
 
 1. Choose between the `useShowtime` hook or the `Showtime` component. The component is better for list items or if you need to listen for events (`onShowing`, `onHidden`).
 1. Define your `transition` by describing the item's _hidden_ styles with a CSS object literal. Or just pass the name of an included transition (`slideFade`, `slide`, `fade`, `rise`, `scale`).
-1. Attach the supplied `ref` to your containing element. If using the hook, conditionally render your item with the supplied `isMounted` boolean.
+1. If using the hook, attach the supplied `ref` to your containing element and conditionally render your item with the supplied `isMounted` boolean.
 1. Call the hook's `show()` and `hide()` functions – or toggle the component's `show` prop – as needed.
 
-Adjust transition timing via `duration`, `delay`, `easing`.
+Optionally adjust transition timing via `duration`, `delay`, `easing`.
 
 You can also define asymmetric show/hide transitions (`showTransition`, `hideTransition`) and timing (`showDuration`, `showDelay`, `showEasing`, `hideDuration`, `hideDelay`, `hideEasing`).
 
@@ -286,17 +286,17 @@ const HookExample = () => {
 
 ### Attaching the ref
 
-React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element, and to listen for transition events.
+The `useShowtime` hook provides a `ref` that must end up attached to the element you're showing/hiding. It uses the `ref` to directly assign CSS transition properties and _hidden_ styles to the element, and to listen for transition events.
 
 If you are transitioning an _element_ directly, you can just pass the provided `ref` as a prop.
 
-If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the ref down to the component's outermost element.
+If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the `ref` down to the component's outermost element.
 
 If you are transitioning a _component you cannot edit_ and that does not forward refs to its outermost element, attach the `ref` to a wrapper div.
 
 #### Attaching multiple refs
 
-There may be times when you need to attach your own ref to the element or component, along with React Showtime's ref. You can do this using a [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs).
+There may be times when you need to attach your own `ref` to the element or component, along with React Showtime's `ref`. You can do this using a [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs).
 
 ```jsx
 import React, { useRef } from "react";
@@ -322,7 +322,11 @@ const MultipleRefsExample = () => {
 };
 ```
 
-Or if using the `Showtime` component:
+#### Attaching your own ref to the Showtime component's child
+
+If you pass a function child to the `Showtime` component (aka render prop), you can use a similar solution as the above to attach both your own `ref` and the `ref` Showtime supplies to the function child.
+
+If you pass a normal JSX child to the `Showtime` component, the implementation is robust to any normal or callback `ref` you might attach yourself. Eg, in the following code, `myRef` will be attached as expected, along with the `ref` that `Showtime` attaches internally.
 
 ```jsx
 import React, { useRef } from "react";
