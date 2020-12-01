@@ -17,9 +17,7 @@ function Item({onHidden, ...props}) {
       onHidden={onHidden}
       {...props}
     >
-      {(ref) => (
-        <RandomEmoji ref={ref} onClose={() => setShow(false)} />
-      )}
+      <RandomEmoji onClose={() => setShow(false)} />
     </Showtime>
   );
 }
@@ -31,13 +29,13 @@ function Container() {
       {items.map(item => (
         <Item
           key={item}
-          onHidden={() => 
+          onHidden={() =>
             items.splice(items.indexOf(item), 1)
           }
         />
       ))}
-      <Button 
-        onClick={() => 
+      <Button
+        onClick={() =>
           setItems((current) => [Date.now(), ...current])
         }
         label="Add"

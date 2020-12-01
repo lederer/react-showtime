@@ -1,6 +1,6 @@
 {
   "name": "react-showtime",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mount and unmount with CSS transitions",
   "author": "Scott Lederer",
   "license": "Apache-2.0",
@@ -29,8 +29,8 @@
     "lint": "eslint --ext .js,.jsx src example/src"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
