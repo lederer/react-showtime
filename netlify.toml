@@ -19,8 +19,10 @@
   [headers.values]
     Content-Security-Policy = """
       default-src 'self';
+      connect-src 'self' https://www.google-analytics.com;
       font-src 'self' https://fonts.gstatic.com;
-      script-src 'self' 'unsafe-eval' 'unsafe-inline';
+      img-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       """
     X-Frame-Options = "DENY"
