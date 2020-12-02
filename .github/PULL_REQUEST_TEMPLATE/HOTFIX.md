@@ -20,6 +20,7 @@ $ git flow hotfix publish YYYY-MM-DD
 - [ ] Finish and publish the hotfix branch:
     - When prompted, keep default commit messages
     - Use `-n` to skip tagging
+    - Use `-p` to push changes to the remote repository
 ```bash
-$ git flow hotfix finish -n
+$ git flow hotfix finish -n -p
 ```
