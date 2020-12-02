@@ -1,7 +1,7 @@
 export const name = "Defaults";
 
 export const desc =
-    "Default transition (slideFade), duration (250ms), delay (0ms), and easing (ease).";
+    "Default transition (slideFade), duration (250ms), delay (16ms), and easing (ease).";
 
 export const hook = `
 // import { useShowtime } from "react-showtime";
