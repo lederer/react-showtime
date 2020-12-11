@@ -23,7 +23,8 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn install && yarn run build",
-    "lint": "eslint --ext .js,.jsx src example/src"
+    "lint": "eslint --ext .js,.jsx src example/src",
+    "compile": "tsc"
   },
   "peerDependencies": {
     "react": "^16.14.0",
@@ -56,6 +57,8 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-url": "^5.0.1",
     "@testing-library/react-hooks": "^3.4.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "babel-eslint": "^10.1.0",
