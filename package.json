@@ -28,7 +28,8 @@
     "prepare": "yarn run build",
     "deploy": "cd example && yarn install && yarn run build",
     "lint": "eslint --ext .js,.jsx src example/src",
-    "compile": "tsc"
+    "compile": "tsc",
+    "watch": "tsc --watch"
   },
   "peerDependencies": {
     "react": "^17.0.1",
