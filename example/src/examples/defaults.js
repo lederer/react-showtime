@@ -1,7 +1,7 @@
 export const name = "Defaults";
 
 export const desc =
-    "Default transition (slideFade), duration (250ms), delay (0ms), and easing (ease).";
+    "Default transition (slideFade), duration (250ms), delay (16ms), and easing (ease).";
 
 export const hook = `
 // import { useShowtime } from "react-showtime";
@@ -13,7 +13,7 @@ function Container() {
     <>
       {isMounted && <RandomEmoji ref={ref} />}
       <RandomEmoji />
-      <Button 
+      <Button
         onClick={isMounted ? hide : show}
         label={isMounted ? "Hide" : "Show"}
       />
@@ -31,12 +31,10 @@ function Container() {
   return (
     <>
       <Showtime show={show}>
-        {(ref) => (
-          <RandomEmoji ref={ref} />
-        )}
+        <RandomEmoji />
       </Showtime>
       <RandomEmoji />
-      <Button 
+      <Button
         onClick={() => setShow((current) => !current)}
         label={show ? "Hide" : "Show"}
       />

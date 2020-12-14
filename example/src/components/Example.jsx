@@ -68,7 +68,7 @@ const sx = {
     },
     editor: {
         flex: "auto",
-        padding: "0 0.4rem",
+        padding: 0,
         background: "#322a37",
         fontFamily: "'IBM Plex Mono', monospace",
         fontSize: "1.2rem",

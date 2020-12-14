@@ -2,7 +2,9 @@
 
 ### Mount & unmount with CSS transitions
 
-React Showtime makes it easy to apply CSS transitions to the appearance and disappearance of React elements and components. It automatically handles mounting and unmounting to allow time for transitions to occur.
+React Showtime makes it easy to apply CSS transitions to the appearance and disappearance of React elements. It automatically handles mounting and unmounting to allow time for transitions to occur.
+
+**Demo: https://react-showtime.dev/**
 
 👯&emsp;Choose between `useShowtime` hook and `<Showtime />` component.<br/>
 💃&emsp;Feels familiar: `useShowtime` is a near-drop-in replacement for conditional rendering with a state boolean.<br/>
@@ -10,7 +12,7 @@ React Showtime makes it easy to apply CSS transitions to the appearance and disa
 💨&emsp;Sensible API for defining _hidden_ styles and custom transitions.<br/>
 🎩&emsp;Included transitions: `slideFade`, `slide`, `fade`, `rise`, `scale`.<br/>
 🎭&emsp;Symmetric or asymmetric show/hide transitions.<br/>
-🕴&emsp;Zero dependencies. 5.7k gzipped.
+🕴&emsp;Zero dependencies. 3.4k min+gzip.
 
 The essential insight of React Showtime is that the one-two sequence of React's `useLayoutEffect` and `useEffect` hooks is nicely suited to the one-two sequence of mounting a component with _hidden_ CSS values and then applying _showing_ CSS values to trigger the transition. As for hiding, transition event handlers trigger unmounting once the "hide" transition is complete.
 
@@ -36,10 +38,10 @@ npm install react-showtime
 
 1. Choose between the `useShowtime` hook or the `Showtime` component. The component is better for list items or if you need to listen for events (`onShowing`, `onHidden`).
 1. Define your `transition` by describing the item's _hidden_ styles with a CSS object literal. Or just pass the name of an included transition (`slideFade`, `slide`, `fade`, `rise`, `scale`).
-1. Attach the supplied `ref` to your containing element. If using the hook, conditionally render your item with the supplied `isMounted` boolean.
+1. If using the hook, attach the supplied `ref` to your containing element and conditionally render your item with the supplied `isMounted` boolean.
 1. Call the hook's `show()` and `hide()` functions – or toggle the component's `show` prop – as needed.
 
-Adjust transition timing via `duration`, `delay`, `easing`.
+Optionally adjust transition timing via `duration`, `delay`, `easing`.
 
 You can also define asymmetric show/hide transitions (`showTransition`, `hideTransition`) and timing (`showDuration`, `showDelay`, `showEasing`, `hideDuration`, `hideDelay`, `hideEasing`).
 
@@ -80,9 +82,35 @@ Pass `{ startWithTransition: true }` to automatically execute the `show` transit
 
 #### Showtime component
 
-`Showtime` is a <a href="https://reactjs.org/docs/render-props.html">render prop component</a>. Its only child must be a function that accepts a `ref` parameter. Pass `ref` to your element or component.
+`Showtime` takes a single child component. It uses `useShowtime` under the hood, cloning the child and adding the `ref` to it.
 
 Toggle the `show` boolean prop to trigger show/hide.
+
+```jsx
+import React, { useState } from "react";
+import { Showtime } from "react-showtime";
+
+const ComponentExample = () => {
+    const [show, setShow] = useState(true);
+
+    const toggle = () => setShow((current) => !current);
+
+    return (
+        <div>
+            <button onClick={toggle}>Toggle</button>
+            <Showtime show={show}>
+                <div>Oh hi</div>
+            </Showtime>
+        </div>
+    );
+};
+```
+
+Pass `startWithTransition={true}` to automatically execute the `show` transition when the item initially mounts. It will be ignored if `show` is initially set to `false`.
+
+##### Additional performance consideration
+
+Since `Showtime` clones the child to attach its `ref`, it may be an expensive operation in some cases if the child component is substantially complicated. If so, provide a function that takes a `ref` and returns the child component instead, which may be more performant:
 
 ```jsx
 import React, { useState } from "react";
@@ -104,7 +132,7 @@ const ComponentExample = () => {
 };
 ```
 
-Pass `startWithTransition={true}` to automatically execute the `show` transition when the item initially mounts. It will be ignored if `show` is initially set to `false`.
+However, the direct child specification is recommended for most users.
 
 ### Transitions
 
@@ -258,17 +286,17 @@ const HookExample = () => {
 
 ### Attaching the ref
 
-React Showtime provides a `ref` that must end up attached to the element you're showing/hiding. It uses the ref to directly assign CSS transition properties and _hidden_ styles to the element, and to listen for transition events.
+The `useShowtime` hook provides a `ref` that must end up attached to the element you're showing/hiding. It uses the `ref` to directly assign CSS transition properties and _hidden_ styles to the element, and to listen for transition events.
 
 If you are transitioning an _element_ directly, you can just pass the provided `ref` as a prop.
 
-If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the ref down to the component's outermost element.
+If you are transitioning a _custom component_, consider updating the component to use [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) to pass the `ref` down to the component's outermost element.
 
 If you are transitioning a _component you cannot edit_ and that does not forward refs to its outermost element, attach the `ref` to a wrapper div.
 
 #### Attaching multiple refs
 
-There may be times when you need to attach your own ref to the element or component, along with React Showtime's ref. You can do this using a [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs).
+There may be times when you need to attach your own `ref` to the element or component, along with React Showtime's `ref`. You can do this using a [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs).
 
 ```jsx
 import React, { useRef } from "react";
@@ -289,6 +317,33 @@ const MultipleRefsExample = () => {
         <>
             <button onClick={toggle}>Toggle</button>
             {isMounted && <div ref={setRefs}>Hi there</div>}
+        </>
+    );
+};
+```
+
+#### Attaching your own ref to the Showtime component's child
+
+If you pass a function child to the `Showtime` component (aka render prop), you can use a similar solution as the above to attach both your own `ref` and the `ref` Showtime supplies to the function child.
+
+If you pass a normal JSX child to the `Showtime` component, the implementation is robust to any normal or callback `ref` you might attach yourself. Eg, in the following code, `myRef` will be attached as expected, along with the `ref` that `Showtime` attaches internally.
+
+```jsx
+import React, { useRef } from "react";
+import { Showtime } from "react-showtime";
+
+const MultipleRefsExample = () => {
+    const myRef = useRef();
+    const [show, setShow] = useState(true);
+
+    const toggle = () => setShow((current) => !current);
+
+    return (
+        <>
+            <button onClick={toggle}>Toggle</button>
+            <Showtime show={show}>
+                <div ref={myRef}>Hi there</div>
+            </Showtime>
         </>
     );
 };
@@ -374,7 +429,5 @@ Be sure to reflect any API changes in test fixtures, the demo app in `example/`,
 
 To get started:
 
-1.  `yarn link` here to set up a local link for the `react-showtime` package.
-2.  `yarn link react-showtime` in `example` to install the locally linked `react-showtime` package.
-3.  `yarn start` here to watch for local changes to `react-showtime`,
-4.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
+1.  `yarn start` here to watch for local changes to `react-showtime`,
+2.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
