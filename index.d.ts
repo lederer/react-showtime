@@ -35,7 +35,7 @@ export interface ShowtimeSettings {
 }
 
 export interface ShowtimeProps<T> extends ShowtimeSettings {
-    children: (ref: Ref<T>) => JSX.Element;
+    children: JSX.Element | ((ref: Ref<T>) => JSX.Element);
     show: boolean;
     onHidden?: () => void;
     onShowing?: () => void;
