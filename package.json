@@ -27,7 +27,7 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn install && yarn run build",
-    "lint": "eslint --ext .js,.jsx src example/src",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src example/src",
     "compile": "tsc",
     "watch": "tsc --watch"
   },
