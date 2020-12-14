@@ -34,8 +34,8 @@ export interface ShowtimeSettings {
     hideEasing?: CSS.Property.TransitionTimingFunction;
 }
 
-export interface ShowtimeProps extends ShowtimeSettings {
-    children: (ref: any) => JSX.Element;
+export interface ShowtimeProps<T> extends ShowtimeSettings {
+    children: (ref: Ref<T>) => JSX.Element;
     show: boolean;
     onHidden?: () => void;
     onShowing?: () => void;
@@ -44,4 +44,4 @@ export interface ShowtimeProps extends ShowtimeSettings {
 export function useShowtime<T>(settings: PredefinedTransition | ShowtimeSettings):
     [MutableRefObject<T>, boolean, () => void, () => void];
 
-export function Showtime(props: ShowtimeProps): ReactElement<ShowtimeProps>;
+export function Showtime<T>(props: ShowtimeProps<T>): ReactElement<ShowtimeProps<T>>;
