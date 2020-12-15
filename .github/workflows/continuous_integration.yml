@@ -46,3 +46,6 @@ jobs:
 
       - name: Run tests
         run: yarn run test
+
+      - name: Run TypeScript compile
+        run: yarn run compile

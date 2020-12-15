@@ -16,6 +16,9 @@ dist
 .env.test.local
 .env.production.local
 
+# react-app ts files
+src/react-app-env.d.ts
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
