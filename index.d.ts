@@ -6,7 +6,7 @@ export as namespace Showtime;
 
 export type PredefinedTransition = "slideFade" | "slide" | "fade" | "rise" | "scale"
 
-export interface TransitionProperties {
+export interface TransitionProperty {
     value: string;
     duration?: CSS.Property.TransitionDuration;
     delay?: CSS.Property.TransitionDelay;
@@ -15,7 +15,7 @@ export interface TransitionProperties {
 
 export type Transition =
     PredefinedTransition |
-    { [key: string]: string | number | TransitionProperties };
+    { [key: string]: string | number | TransitionProperty };
 
 export interface ShowtimeSettings {
     startHidden?: boolean;
@@ -41,7 +41,7 @@ export interface ShowtimeProps<T> extends ShowtimeSettings {
     onShowing?: () => void;
 }
 
-export function useShowtime<T>(settings: PredefinedTransition | ShowtimeSettings):
+export function useShowtime<T>(settings?: PredefinedTransition | ShowtimeSettings):
     [MutableRefObject<T>, boolean, () => void, () => void];
 
 export function Showtime<T>(props: ShowtimeProps<T>): ReactElement<ShowtimeProps<T>>;
