@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   TypeScript support [#33](https://github.com/azavea/react-showtime/pull/33)
+
 ## [0.2.0] - 2020-12-01
 
 ### Added
