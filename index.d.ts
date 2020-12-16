@@ -2,8 +2,6 @@ import { MutableRefObject, ReactElement, Ref } from "react";
 
 import * as CSS from "csstype";
 
-export as namespace Showtime;
-
 export type PredefinedTransition = "slideFade" | "slide" | "fade" | "rise" | "scale"
 
 export interface TransitionProperty {
