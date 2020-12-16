@@ -7,6 +7,7 @@
   "repository": "azavea/react-showtime",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "files": [
     "dist/*.js",
@@ -26,7 +27,8 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn install && yarn run build",
-    "lint": "eslint --ext .js,.jsx src example/src"
+    "lint": "eslint --ext .js,.jsx src example/src",
+    "compile": "tsc"
   },
   "peerDependencies": {
     "react": "^17.0.1",
@@ -59,9 +61,12 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-url": "^5.0.1",
     "@testing-library/react-hooks": "^3.4.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "babel-eslint": "^10.1.0",
+    "csstype": "^3.0.5",
     "eslint": "^7.13.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-config-standard": "^16.0.1",
@@ -75,10 +80,11 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^4.0.2",
     "react": "^17.0.1",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "^4.0.1",
     "react-test-renderer": "^17.0.1",
     "rollup": "^2.33.1",
     "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^4.1.3"
   }
 }
