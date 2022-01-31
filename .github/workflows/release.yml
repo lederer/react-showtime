@@ -25,4 +25,4 @@ jobs:
       - name: Build and publish package
         run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AZAVEA_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_LEDERER_TOKEN }}
