@@ -4,7 +4,7 @@
   "description": "Mount and unmount with CSS transitions",
   "author": "Scott Lederer",
   "license": "Apache-2.0",
-  "repository": "azavea/react-showtime",
+  "repository": "lederer/react-showtime",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "index.d.ts",
@@ -18,7 +18,7 @@
     "npm": ">=5"
   },
   "bugs": {
-    "url": "https://github.com/azavea/react-showtime/issues"
+    "url": "https://github.com/lederer/react-showtime/issues"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom --watchAll=false",
