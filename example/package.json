@@ -7,22 +7,20 @@
     "fontfaceobserver": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "link:../node_modules/react",
-    "react-dom": "^17.0.1",
-    "react-live": "^2.2.3",
-    "react-scripts": "^4.0.1",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-live": "^4.1.5",
+    "react-scripts": "^5.0.1",
     "react-showtime": "link:..",
     "theme-ui": "^0.3.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom"
   },
   "browserslist": [
+    "last 2 versions",
     ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    "not dead"
   ]
 }

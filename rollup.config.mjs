@@ -1,11 +1,10 @@
 import babel from "@rollup/plugin-babel";
-import external from "rollup-plugin-peer-deps-external";
 import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import url from "@rollup/plugin-url";
-import { eslint } from "rollup-plugin-eslint";
+import eslint from "@rollup/plugin-eslint";
 
-import pkg from "./package.json";
+import pkg from "./package.json" assert { type: "json" };
 
 export default {
     input: "src/index.js",
@@ -21,15 +20,15 @@ export default {
             sourcemap: true,
         },
     ],
+    external: ["react", "react-dom"],
     plugins: [
-        external(),
         url({ exclude: ["**/*.svg"] }),
         eslint(),
         babel({
             exclude: "node_modules/**",
             babelHelpers: "bundled",
         }),
-        resolve({ browser: true }),
         commonjs(),
+        nodeResolve({ browser: true }),
     ],
 };
