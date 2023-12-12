@@ -31,6 +31,7 @@ const sx = {
         fontFamily: "Pompiere, cursive",
         fontSize: "3.2rem",
         textTransform: "uppercase",
+        color: "text",
         cursor: "pointer",
         "@media (max-width: 500px)": {
             fontSize: "2.4rem",
