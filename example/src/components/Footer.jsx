@@ -1,7 +1,5 @@
 /** @jsx jsx */
-import { jsx, Image, Link } from "theme-ui";
-
-import azavea from "../img/azavea.svg";
+import { jsx } from "theme-ui";
 
 const sx = {
     footer: {
@@ -13,13 +11,7 @@ const sx = {
 };
 
 function Footer(props) {
-    return (
-        <footer sx={sx.footer} {...props}>
-            <Link href="https://www.azavea.com/">
-                <Image src={azavea} width="120" alt="Azavea" />
-            </Link>
-        </footer>
-    );
+    return <footer sx={sx.footer} {...props} />;
 }
 
 export default Footer;

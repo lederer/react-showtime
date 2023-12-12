@@ -205,7 +205,7 @@ function About(props) {
                     <Link
                         sx={sx.link}
                         title="Go to repo"
-                        href="https://github.com/azavea/react-showtime"
+                        href="https://github.com/lederer/react-showtime"
                     >
                         see the README
                     </Link>

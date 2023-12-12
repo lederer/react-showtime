@@ -125,7 +125,7 @@ function Header({ compact = false, ...props }) {
             <Link
                 sx={sx.repo}
                 title="Go to repo"
-                href="https://github.com/azavea/react-showtime"
+                href="https://github.com/lederer/react-showtime"
             >
                 <Image
                     sx={sx.github}
