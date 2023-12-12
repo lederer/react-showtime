@@ -42,8 +42,9 @@ const sx = {
     features: {
         listStyle: "none",
         my: 3,
-        pl: "3.2rem",
-        textIndent: "-3.2rem",
+        ml: 1,
+        pl: "3.6rem",
+        textIndent: "-3.6rem",
     },
     feature: {
         mb: 1,
