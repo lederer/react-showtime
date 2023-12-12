@@ -6,7 +6,7 @@ const sx = {
     ticket: {
         "--opacity": 0,
         position: "relative",
-        py: "0.6rem",
+        py: 1,
         px: 2,
         color: "black",
         fontFamily: "'Arial Narrow', Arial, sans-serif",
@@ -32,8 +32,7 @@ const sx = {
             "@media (max-width: 500px)": {
                 "--stop-list": "transparent 0.6rem, #000 0",
             },
-            mask:
-                "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
+            mask: "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
             maskComposite: "intersect",
             WebkitMaskComposite: "source-in, source-in, source-in, xor",
             opacity: "var(--opacity)",
