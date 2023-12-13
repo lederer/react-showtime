@@ -5,7 +5,7 @@
   base = "."
   publish = "example/build/"
   command = "yarn run deploy"
-  environment = { NODE_VERSION = "12.19.0", YARN_VERSION = "1.22.10" }
+  environment = { NODE_VERSION = "20.10.0", YARN_VERSION = "4.0.2" }
 
 # Redirect all routes to index.html, so that React Router
 # can handle routing.

@@ -23,5 +23,6 @@
     "last 2 versions",
     ">0.2%",
     "not dead"
-  ]
+  ],
+  "packageManager": "yarn@4.0.2"
 }
