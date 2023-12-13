@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { jsx, NavLink, Image } from "theme-ui";
+import { NavLink, Image } from "theme-ui";
 import { forwardRef } from "react";
 
 const sx = {

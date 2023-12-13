@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { jsx, Link, Image } from "theme-ui";
+import { Link, Image } from "theme-ui";
 import { useShowtime } from "react-showtime";
 
 import Ticket from "./Ticket";

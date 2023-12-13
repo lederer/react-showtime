@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { jsx, Text, Link } from "theme-ui";
+import { Text, Link } from "theme-ui";
 import { useLayoutEffect } from "react";
 import useFontFaceObserver from "../hooks/useFontFaceObserver";
 import { useShowtime } from "react-showtime";

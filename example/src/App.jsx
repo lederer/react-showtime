@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { jsx, ThemeUIProvider, Global } from "theme-ui";
+import { ThemeUIProvider, Global } from "theme-ui";
 import { useState } from "react";
 
 import Header from "./components/Header";
