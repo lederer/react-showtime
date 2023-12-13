@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { jsx, Text, Close } from "theme-ui";
 import { forwardRef, useRef, useState } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";

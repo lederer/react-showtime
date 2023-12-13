@@ -1,9 +1,8 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
+/** @jsxImportSource theme-ui */
 
-import { ReactComponent as HookIcon } from "../img/hook.svg";
-import { ReactComponent as ComponentIcon } from "../img/component.svg";
-import { ReactComponent as ToggleIcon } from "../img/toggle.svg";
+import HookIcon from "../img/hook.svg?react";
+import ComponentIcon from "../img/component.svg?react";
+import ToggleIcon from "../img/toggle.svg?react";
 
 const sx = {
     container: {

@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
+/** @jsxImportSource theme-ui */
 
 import Example from "./Example";
 import EXAMPLES from "../examples";

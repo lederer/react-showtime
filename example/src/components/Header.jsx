@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { jsx, Link, Image } from "theme-ui";
 import { useShowtime } from "react-showtime";
 

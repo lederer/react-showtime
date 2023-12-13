@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { jsx, ThemeUIProvider, Global } from "theme-ui";
 import { useState } from "react";
 
