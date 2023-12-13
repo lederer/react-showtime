@@ -1,6 +1,8 @@
 /** @jsxImportSource theme-ui */
-import { NavLink, Image } from "theme-ui";
+import { NavLink } from "theme-ui";
 import { forwardRef } from "react";
+
+import ReactLogo from "../img/react.svg?react";
 
 const sx = {
     ticket: {
@@ -63,30 +65,22 @@ const sx = {
     },
 };
 
-const Ticket = forwardRef(
-    ({ active, iconSrc, fontSize, label, iconAlt = "", ...props }, ref) => {
-        return (
-            <NavLink
-                ref={ref}
-                sx={{
-                    ...sx.ticket,
-                    "--opacity": active ? 1 : 0,
-                }}
-                {...props}
-            >
-                <span sx={sx.content}>
-                    <Image
-                        src={iconSrc}
-                        sx={sx.icon}
-                        alt={iconAlt}
-                        width={28}
-                        height={28}
-                    />
-                    {label}
-                </span>
-            </NavLink>
-        );
-    }
-);
+const Ticket = forwardRef(({ active, fontSize, ...props }, ref) => {
+    return (
+        <NavLink
+            ref={ref}
+            sx={{
+                ...sx.ticket,
+                "--opacity": active ? 1 : 0,
+            }}
+            {...props}
+        >
+            <span sx={sx.content}>
+                <ReactLogo sx={sx.icon} alt="React" width={28} height={28} />
+                Showtime
+            </span>
+        </NavLink>
+    );
+});
 
 export default Ticket;

@@ -99,7 +99,7 @@ function About(props) {
             {isTextMounted && (
                 <Text sx={sx.heading} as="h2">
                     <span sx={sx.tldr} ref={textRef}>
-                        Mount &amp; unmount with{" "}
+                        Mount &amp; unmount React elements with{" "}
                         <span sx={{ whiteSpace: "nowrap" }}>
                             CSS transitions{" "}
                             {areEmojisMounted && (
