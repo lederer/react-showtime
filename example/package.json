@@ -4,6 +4,11 @@
   "license": "Apache-2.0",
   "private": true,
   "type": "module",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "fontfaceobserver": "^2.1.0",
@@ -14,6 +19,7 @@
     "react-showtime": "link:..",
     "theme-ui": "^0.16.1"
   },
+  "packageManager": "yarn@4.0.2",
   "scripts": {
     "start": "vite",
     "build": "vite build",
@@ -23,11 +29,5 @@
     "last 2 versions",
     ">0.2%",
     "not dead"
-  ],
-  "packageManager": "yarn@4.0.2",
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.8",
-    "vite-plugin-svgr": "^4.2.0"
-  }
+  ]
 }
