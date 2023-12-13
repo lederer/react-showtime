@@ -12,6 +12,7 @@ const sx = {
         },
     },
     heading: {
+        display: "block",
         mb: 3,
         fontFamily: "Pompiere, cursive",
         fontSize: "4.8rem",
@@ -38,7 +39,9 @@ const sx = {
         },
         pointerEvents: "none",
     },
-    desc: {},
+    desc: {
+        display: "block",
+    },
     features: {
         listStyle: "none",
         my: 3,
@@ -49,7 +52,9 @@ const sx = {
     feature: {
         mb: 1,
     },
-    more: {},
+    more: {
+        display: "block",
+    },
     link: {
         fontWeight: "bold",
         whiteSpace: "nowrap",
@@ -92,7 +97,7 @@ function About(props) {
     return (
         <div sx={sx.container} {...props}>
             {isTextMounted && (
-                <Text sx={sx.heading}>
+                <Text sx={sx.heading} as="h2">
                     <span sx={sx.tldr} ref={textRef}>
                         Mount &amp; unmount with{" "}
                         <span sx={{ whiteSpace: "nowrap" }}>
@@ -120,7 +125,7 @@ function About(props) {
                 </Text>
             )}
             <div ref={detailsRef}>
-                <Text sx={sx.desc}>
+                <Text sx={sx.desc} as="div">
                     <strong>React Showtime</strong> makes it easy to apply CSS
                     transitions to the appearance and disappearance of React
                     elements. It automatically handles mounting and unmounting
@@ -201,7 +206,7 @@ function About(props) {
                         Zero dependencies. 3.4k min+gzip.
                     </li>
                 </ul>
-                <Text sx={sx.more}>
+                <Text sx={sx.more} as="div">
                     Examples below. For API and further details,{" "}
                     <Link
                         sx={sx.link}
