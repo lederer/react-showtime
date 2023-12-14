@@ -14,7 +14,7 @@
     "dist/*.map"
   ],
   "engines": {
-    "node": ">=8",
+    "node": ">=16",
     "npm": ">=5"
   },
   "bugs": {
