@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { Text, Link } from "theme-ui";
 import { useLayoutEffect } from "react";
 import useFontFaceObserver from "../hooks/useFontFaceObserver";

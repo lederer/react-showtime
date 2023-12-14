@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { ThemeUIProvider, Global } from "theme-ui";
 import { useState } from "react";
 

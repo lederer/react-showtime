@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { NavLink } from "theme-ui";
 import { forwardRef } from "react";
 

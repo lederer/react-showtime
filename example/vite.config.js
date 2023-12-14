@@ -7,6 +7,6 @@ export default defineConfig(() => {
         build: {
             outDir: "build",
         },
-        plugins: [react(), svgr()],
+        plugins: [react({ jsxImportSource: "theme-ui" }), svgr()],
     };
 });

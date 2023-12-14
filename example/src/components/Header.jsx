@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { Link } from "theme-ui";
 import { useShowtime } from "react-showtime";
 

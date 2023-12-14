@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 import HookIcon from "../img/hook.svg?react";
 import ComponentIcon from "../img/component.svg?react";
 import ToggleIcon from "../img/toggle.svg?react";

@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 const sx = {
     footer: {
         display: "grid",
