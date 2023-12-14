@@ -5,6 +5,7 @@
   "author": "Scott Lederer",
   "license": "Apache-2.0",
   "repository": "lederer/react-showtime",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "index.d.ts",
@@ -21,8 +22,8 @@
     "url": "https://github.com/lederer/react-showtime/issues"
   },
   "scripts": {
-    "test": "react-scripts test --env=jsdom --watchAll=false",
-    "test:watch": "react-scripts test --env=jsdom",
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom",
+    "test:watch": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom --watchAll",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
@@ -82,9 +83,10 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^5.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
     "react-test-renderer": "^18.2.0",
     "rollup": "^4.7.0",
     "typescript": "^5.3.3"
