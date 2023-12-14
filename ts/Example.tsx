@@ -1,13 +1,12 @@
-import React, { useState, Ref } from "react";
+import { useState, Ref } from "react";
 
 import { Showtime, useShowtime } from "..";
 
 function App() {
-    const [pRef, isPMounted, showP, hideP] = useShowtime<HTMLParagraphElement>(
-        "slide"
-    );
+    const [pRef, isPMounted, showP, hideP] =
+        useShowtime<HTMLParagraphElement>("slide");
     const [show, setShow] = useState(true);
-    const toggle = () => setShow(current => !current);
+    const toggle = () => setShow((current) => !current);
     return (
         <div className="App">
             <header className="App-header">
