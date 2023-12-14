@@ -6,13 +6,17 @@
   "license": "Apache-2.0",
   "repository": "lederer/react-showtime",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": ".dist/react-showtime.umd.cjs",
+  "module": ".dist/react-showtime.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react-showtime.js",
+      "require": "./dist/react-showtime.umd.cjs"
+    }
+  },
   "types": "index.d.ts",
-  "jsnext:main": "dist/index.es.js",
   "files": [
-    "dist/*.js",
-    "dist/*.map"
+    "dist"
   ],
   "engines": {
     "node": ">=16",
@@ -24,9 +28,8 @@
   "scripts": {
     "test": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom",
     "test:watch": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom --watchAll",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
-    "prepare": "yarn run build",
+    "build": "vite build",
+    "watch": "vite build -w",
     "deploy": "yarn install && yarn run build && cd example && yarn install && yarn run build",
     "lint": "eslint --ext .js,.jsx src example/src",
     "compile": "tsc"
@@ -36,34 +39,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/eslint-parser": "^7.23.3",
-    "@babel/plugin-external-helpers": "^7.23.3",
-    "@babel/plugin-proposal-decorators": "^7.23.6",
-    "@babel/plugin-proposal-do-expressions": "^7.23.3",
-    "@babel/plugin-proposal-export-default-from": "^7.23.3",
-    "@babel/plugin-proposal-function-bind": "^7.23.3",
-    "@babel/plugin-proposal-function-sent": "^7.23.3",
-    "@babel/plugin-proposal-pipeline-operator": "^7.23.3",
-    "@babel/plugin-proposal-throw-expressions": "^7.23.3",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-syntax-flow": "^7.23.3",
-    "@babel/plugin-syntax-import-meta": "^7.10.4",
-    "@babel/plugin-transform-class-properties": "^7.23.3",
-    "@babel/plugin-transform-export-namespace-from": "^7.23.4",
-    "@babel/plugin-transform-json-strings": "^7.23.4",
-    "@babel/plugin-transform-logical-assignment-operators": "^7.23.4",
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.23.4",
-    "@babel/plugin-transform-numeric-separator": "^7.23.4",
-    "@babel/plugin-transform-optional-chaining": "^7.23.4",
-    "@babel/plugin-transform-react-jsx": "^7.23.4",
-    "@babel/preset-env": "^7.23.6",
-    "@babel/preset-react": "^7.23.3",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-eslint": "^9.0.5",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-url": "^8.0.2",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
@@ -88,8 +64,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "rollup": "^4.9.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.9"
   },
   "packageManager": "yarn@4.0.2"
 }
