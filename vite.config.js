@@ -13,4 +13,9 @@ export default defineConfig({
             plugins: [eslint()],
         },
     },
+    test: {
+        globals: true,
+        environment: "jsdom",
+        setupFiles: "./src/tests/setup.js",
+    },
 });

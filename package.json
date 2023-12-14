@@ -26,8 +26,8 @@
     "url": "https://github.com/lederer/react-showtime/issues"
   },
   "scripts": {
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom",
-    "test:watch": "yarn node --experimental-vm-modules $(yarn bin jest) --env=jsdom --watchAll",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "build": "vite build",
     "watch": "vite build -w",
     "deploy": "yarn install && yarn run build && cd example && yarn install && yarn run build",
@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-eslint": "^9.0.5",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
@@ -59,13 +60,13 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-standard": "^5.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^23.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.9"
+    "vite": "^5.0.9",
+    "vitest": "^1.0.4"
   },
   "packageManager": "yarn@4.0.2"
 }
