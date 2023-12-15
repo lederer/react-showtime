@@ -3,6 +3,12 @@ import { DEFAULTS } from "./constants";
 import { isString, toKebabCase, stringifyCssTransitionNumber } from "./utils";
 import TRANSITIONS from "./transitions";
 
+const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    (window?.matchMedia(`(prefers-reduced-motion: reduce)`) === true ||
+        window?.matchMedia(`(prefers-reduced-motion: reduce)`).matches ===
+            true);
+
 function isObject(o) {
     return typeof o === "object" && o !== null;
 }
@@ -41,7 +47,9 @@ function extractCssTransitionProperty({
     easing: commonEasing,
     ...rest
 }) {
-    const commonDuration = stringifyCssTransitionNumber(duration);
+    const commonDuration = prefersReducedMotion
+        ? "0ms"
+        : stringifyCssTransitionNumber(duration);
     const commonDelay = stringifyCssTransitionNumber(delay);
 
     const transitionStrings = [];
@@ -61,9 +69,9 @@ function extractCssTransitionProperty({
                 !isZeroCssValue(specificDuration) ||
                 !isZeroCssValue(specificDelay)
             ) {
-                specificDuration = stringifyCssTransitionNumber(
-                    specificDuration
-                );
+                specificDuration = prefersReducedMotion
+                    ? "0ms"
+                    : stringifyCssTransitionNumber(specificDuration);
                 specificDelay = stringifyCssTransitionNumber(specificDelay);
                 transitionStrings.push(
                     `${kebabName} ${specificDuration} ${specificEasing} ${specificDelay}`
@@ -215,15 +223,11 @@ function mergeWithDefaults(settings) {
 }
 
 function processSettings(settings = {}) {
-    const {
-        startHidden,
-        startWithTransition,
-        ...transitionSettings
-    } = mergeWithDefaults(settings);
+    const { startHidden, startWithTransition, ...transitionSettings } =
+        mergeWithDefaults(settings);
 
-    const { showTransition, hideTransition } = resolveShowHideTransitions(
-        transitionSettings
-    );
+    const { showTransition, hideTransition } =
+        resolveShowHideTransitions(transitionSettings);
 
     return {
         startHidden,

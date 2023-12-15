@@ -47,6 +47,7 @@ const theme = {
         ticket: "#fd7c83",
         tint: "#fff3f4",
         darktint: "#ffe0e3",
+        error: "#dc4553",
     },
     shadows: [
         "none",

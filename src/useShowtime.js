@@ -27,12 +27,8 @@ function transitionReducer(state, action) {
 }
 
 export default function useShowtime(settings) {
-    const {
-        startHidden,
-        startWithTransition,
-        showTransition,
-        hideTransition,
-    } = useSettings(settings);
+    const { startHidden, startWithTransition, showTransition, hideTransition } =
+        useSettings(settings);
 
     const [state, dispatch] = useReducer(transitionReducer, {
         isMounted: !startHidden,
@@ -67,9 +63,9 @@ export default function useShowtime(settings) {
             return;
         }
 
-        eventSetRef.current.delete(e.propertyName);
+        eventSetRef.current?.delete(e.propertyName);
 
-        if (!eventSetRef.current.size) {
+        if (!eventSetRef.current?.size) {
             if (status === STATUS.hideTransition) {
                 dispatch({ type: "hidden" });
             } else if (status === STATUS.showTransition) {
