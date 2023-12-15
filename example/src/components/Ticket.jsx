@@ -1,12 +1,13 @@
-/** @jsx jsx */
-import { jsx, NavLink, Image } from "theme-ui";
+import { NavLink } from "theme-ui";
 import { forwardRef } from "react";
+
+import ReactLogo from "../img/react.svg?react";
 
 const sx = {
     ticket: {
         "--opacity": 0,
         position: "relative",
-        py: "0.6rem",
+        py: 1,
         px: 2,
         color: "black",
         fontFamily: "'Arial Narrow', Arial, sans-serif",
@@ -32,8 +33,7 @@ const sx = {
             "@media (max-width: 500px)": {
                 "--stop-list": "transparent 0.6rem, #000 0",
             },
-            mask:
-                "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
+            mask: "radial-gradient(circle at top left, var(--stop-list)), radial-gradient(circle at bottom left, var(--stop-list)), radial-gradient(circle at top right, var(--stop-list)), radial-gradient(circle at bottom right, var(--stop-list))",
             maskComposite: "intersect",
             WebkitMaskComposite: "source-in, source-in, source-in, xor",
             opacity: "var(--opacity)",
@@ -64,30 +64,22 @@ const sx = {
     },
 };
 
-const Ticket = forwardRef(
-    ({ active, iconSrc, fontSize, label, iconAlt = "", ...props }, ref) => {
-        return (
-            <NavLink
-                ref={ref}
-                sx={{
-                    ...sx.ticket,
-                    "--opacity": active ? 1 : 0,
-                }}
-                {...props}
-            >
-                <span sx={sx.content}>
-                    <Image
-                        src={iconSrc}
-                        sx={sx.icon}
-                        alt={iconAlt}
-                        width={28}
-                        height={28}
-                    />
-                    {label}
-                </span>
-            </NavLink>
-        );
-    }
-);
+const Ticket = forwardRef(({ active, fontSize, ...props }, ref) => {
+    return (
+        <NavLink
+            ref={ref}
+            sx={{
+                ...sx.ticket,
+                "--opacity": active ? 1 : 0,
+            }}
+            {...props}
+        >
+            <span sx={sx.content}>
+                <ReactLogo sx={sx.icon} alt="React" width={28} height={28} />
+                Showtime
+            </span>
+        </NavLink>
+    );
+});
 
 export default Ticket;

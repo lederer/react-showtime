@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, Text, Link } from "theme-ui";
+import { Text, Link } from "theme-ui";
 import { useLayoutEffect } from "react";
 import useFontFaceObserver from "../hooks/useFontFaceObserver";
 import { useShowtime } from "react-showtime";
@@ -12,6 +11,7 @@ const sx = {
         },
     },
     heading: {
+        display: "block",
         mb: 3,
         fontFamily: "Pompiere, cursive",
         fontSize: "4.8rem",
@@ -38,17 +38,22 @@ const sx = {
         },
         pointerEvents: "none",
     },
-    desc: {},
+    desc: {
+        display: "block",
+    },
     features: {
         listStyle: "none",
         my: 3,
-        pl: "3.2rem",
-        textIndent: "-3.2rem",
+        ml: 1,
+        pl: "3.6rem",
+        textIndent: "-3.6rem",
     },
     feature: {
         mb: 1,
     },
-    more: {},
+    more: {
+        display: "block",
+    },
     link: {
         fontWeight: "bold",
         whiteSpace: "nowrap",
@@ -91,9 +96,9 @@ function About(props) {
     return (
         <div sx={sx.container} {...props}>
             {isTextMounted && (
-                <Text sx={sx.heading}>
+                <Text sx={sx.heading} as="h2">
                     <span sx={sx.tldr} ref={textRef}>
-                        Mount &amp; unmount with{" "}
+                        Mount &amp; unmount React elements with{" "}
                         <span sx={{ whiteSpace: "nowrap" }}>
                             CSS transitions{" "}
                             {areEmojisMounted && (
@@ -119,7 +124,7 @@ function About(props) {
                 </Text>
             )}
             <div ref={detailsRef}>
-                <Text sx={sx.desc}>
+                <Text sx={sx.desc} as="div">
                     <strong>React Showtime</strong> makes it easy to apply CSS
                     transitions to the appearance and disappearance of React
                     elements. It automatically handles mounting and unmounting
@@ -200,12 +205,12 @@ function About(props) {
                         Zero dependencies. 3.4k min+gzip.
                     </li>
                 </ul>
-                <Text sx={sx.more}>
+                <Text sx={sx.more} as="div">
                     Examples below. For API and further details,{" "}
                     <Link
                         sx={sx.link}
                         title="Go to repo"
-                        href="https://github.com/azavea/react-showtime"
+                        href="https://github.com/lederer/react-showtime"
                     >
                         see the README
                     </Link>

@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, Text, Close } from "theme-ui";
+import { Text, Close } from "theme-ui";
 import { forwardRef, useRef, useState } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import { useShowtime, Showtime } from "react-showtime";
@@ -13,6 +12,7 @@ const sx = {
         mx: "auto",
     },
     name: {
+        display: "block",
         mb: 2,
         fontFamily: "Pompiere, cursive",
         fontSize: "4.2rem",
@@ -20,6 +20,7 @@ const sx = {
         textAlign: "center",
     },
     desc: {
+        display: "block",
         mb: 4,
         textAlign: "center",
         "& code": {
@@ -179,9 +180,8 @@ const scope = { useShowtime, Showtime, useState, Button, RandomEmoji };
 function Example({ name, desc, code, noInline, ...props }) {
     const isComplex = typeof code === "object";
     const initialTransition = isComplex ? Object.keys(code)[0] : null;
-    const [selectedTransition, setSelectedTransition] = useState(
-        initialTransition
-    );
+    const [selectedTransition, setSelectedTransition] =
+        useState(initialTransition);
 
     if (!code) {
         return null;
@@ -189,8 +189,14 @@ function Example({ name, desc, code, noInline, ...props }) {
 
     return (
         <div sx={sx.container} {...props}>
-            <Text sx={sx.name}>{name}</Text>
-            <Text sx={sx.desc} dangerouslySetInnerHTML={{ __html: desc }} />
+            <Text sx={sx.name} as="h4">
+                {name}
+            </Text>
+            <Text
+                sx={sx.desc}
+                as="div"
+                dangerouslySetInnerHTML={{ __html: desc }}
+            />
             {isComplex && (
                 <div sx={sx.tabs}>
                     {Object.keys(code).map((name) => (

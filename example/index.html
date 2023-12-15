@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-970854-41"
-        ></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", "UA-970854-41");
-        </script>
         <meta charset="utf-8" />
         <meta
             name="viewport"
@@ -34,9 +22,9 @@
             content="Automatically incorporate CSS transitions into the mounting & unmounting of React elements."
         />
 
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
 
-        <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+        <link rel="icon" href="/favicon.png" />
 
         <link
             href="https://fonts.googleapis.com/css2?family=Pompiere"
@@ -54,5 +42,6 @@
         <noscript> You need to enable JavaScript to run this app. </noscript>
 
         <main id="root"></main>
+        <script type="module" src="/src/index.jsx"></script>
     </body>
 </html>

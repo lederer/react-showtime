@@ -1,10 +1,8 @@
-/** @jsx jsx */
-import { jsx, Link, Image } from "theme-ui";
+import { Link } from "theme-ui";
 import { useShowtime } from "react-showtime";
 
 import Ticket from "./Ticket";
-import react from "../img/react.svg";
-import github from "../img/github.svg";
+import GitHubLogo from "../img/github.svg?react";
 
 const sx = {
     header: {
@@ -112,9 +110,6 @@ function Header({ compact = false, ...props }) {
                     href="#"
                     active={!compact}
                     sx={sx.showtime}
-                    iconSrc={react}
-                    iconAlt="React"
-                    label="Showtime"
                     onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
@@ -125,11 +120,10 @@ function Header({ compact = false, ...props }) {
             <Link
                 sx={sx.repo}
                 title="Go to repo"
-                href="https://github.com/azavea/react-showtime"
+                href="https://github.com/lederer/react-showtime"
             >
-                <Image
+                <GitHubLogo
                     sx={sx.github}
-                    src={github}
                     alt="Github"
                     width="40"
                     height="40"

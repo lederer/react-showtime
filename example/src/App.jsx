@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, ThemeProvider } from "theme-ui";
+import { ThemeUIProvider, Global } from "theme-ui";
 import { useState } from "react";
 
 import Header from "./components/Header";
@@ -34,7 +33,21 @@ function App() {
     const [isHookMode, setIsHookMode] = useState(true);
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeUIProvider theme={theme}>
+            <Global
+                styles={{
+                    body: {
+                        fontSize: 4,
+                        "@media (max-width: 400px)": {
+                            fontSize: 3,
+                        },
+                    },
+                    a: {
+                        textDecoration: "none",
+                        color: "accent",
+                    },
+                }}
+            />
             <Header sx={sx.header} />
             <About sx={sx.about} />
             <Toggle
@@ -44,7 +57,7 @@ function App() {
             />
             <Examples sx={sx.examples} isHookMode={isHookMode} />
             <Footer />
-        </ThemeProvider>
+        </ThemeUIProvider>
     );
 }
 
