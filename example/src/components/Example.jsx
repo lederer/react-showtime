@@ -56,15 +56,42 @@ const sx = {
     },
     example: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "stretch",
+        flexDirection: "column",
         alignItems: "stretch",
         minHeight: "28rem",
         "@media (min-width: 900px)": {
             boxShadow: 2,
         },
+    },
+    playground: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "stretch",
+        alignItems: "stretch",
         "@media (max-width: 600px)": {
             flexDirection: "column",
+        },
+    },
+    error: {
+        display: "none",
+        ":not(:empty)": {
+            display: "block",
+            position: "relative",
+            py: 1,
+            pr: 3,
+            pl: 8,
+            background: "error",
+            color: "tint",
+            "::before": {
+                content: "'⚠'",
+                position: "absolute",
+                left: 2,
+                top: 1,
+                fontSize: 8,
+            },
+            "> pre": {
+                whiteSpace: "pre-wrap",
+            },
         },
     },
     editor: {
@@ -128,12 +155,14 @@ const sx = {
         flexBasis: "40%",
         width: "40%",
         maxWidth: "40%",
-        minHeight: "36rem",
         overflow: "hidden",
         "@media (max-width: 600px)": {
             flexBasis: "100%",
             width: "100%",
             maxWidth: "100%",
+        },
+        ":empty": {
+            p: 0,
         },
     },
 };
@@ -221,9 +250,13 @@ function Example({ name, desc, code, noInline, ...props }) {
                     code={isComplex ? code[selectedTransition] : code}
                     noInline={noInline}
                 >
-                    <LiveEditor style={sx.editor} />
-                    <LiveError />
-                    <LivePreview Component={Canvas} />
+                    <div sx={sx.playground}>
+                        <LiveEditor style={sx.editor} />
+                        <LivePreview Component={Canvas} />
+                    </div>
+                    <div sx={sx.error}>
+                        <LiveError />
+                    </div>
                 </LiveProvider>
             </div>
         </div>
