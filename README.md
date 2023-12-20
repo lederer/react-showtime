@@ -432,4 +432,4 @@ To get started:
 1.  `yarn start` to watch for local changes to `react-showtime`,
 2.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
 
-This project uses the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching workflow. Usage of the [`gitflow-avh`](https://github.com/petervanderdoes/gitflow-avh) CLI tool is recommended for releases and hotfixes.
+This project uses the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching workflow. Usage of the [`gitflow-cjs`](https://github.com/CJ-Systems/gitflow-cjs) CLI tool is recommended for releases and hotfixes.
