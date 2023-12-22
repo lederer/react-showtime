@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-12-22
+
+### Changed
+
+-   Retry release
+
 ## [0.3.1] - 2023-12-22
 
 ### Changed
@@ -43,8 +49,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Deploy example site to Netlify [#6](https://github.com/lederer/react-showtime/pull/6)
 -   Create workflow to publish to npm [#7](https://github.com/lederer/react-showtime/pull/7)
 
-[unreleased]: https://github.com/lederer/react-showtime/compare/0.3.1...HEAD
-[0.3.1]: https://github.com/lederer/react-showtime/compare/0.3.1...0.3.1
+[unreleased]: https://github.com/lederer/react-showtime/compare/0.3.2...HEAD
+[0.3.2]: https://github.com/lederer/react-showtime/compare/0.3.1...0.3.2
+[0.3.1]: https://github.com/lederer/react-showtime/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/lederer/react-showtime/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/lederer/react-showtime/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/lederer/react-showtime/releases/tag/0.1.0
