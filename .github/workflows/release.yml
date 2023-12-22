@@ -26,6 +26,6 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build and publish package
-        run: yarn publish
+        run: yarn npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_LEDERER_TOKEN }}
