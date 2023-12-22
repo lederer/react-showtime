@@ -25,7 +25,9 @@ jobs:
       - name: Install release dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build and publish package
-        run: yarn npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_LEDERER_TOKEN }}
+      - name: Publish package
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_LEDERER_TOKEN }}
+          access: public
+          dry-run: true
