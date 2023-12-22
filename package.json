@@ -4,7 +4,10 @@
   "description": "Mount and unmount with CSS transitions",
   "author": "Scott Lederer",
   "license": "Apache-2.0",
-  "repository": "lederer/react-showtime",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lederer/react-showtime.git"
+  },
   "type": "module",
   "main": ".dist/react-showtime.umd.cjs",
   "module": ".dist/react-showtime.js",
