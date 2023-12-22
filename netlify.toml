@@ -5,7 +5,7 @@
   base = "."
   publish = "example/build/"
   command = "yarn run deploy"
-  environment = { NODE_VERSION = "12.19.0", YARN_VERSION = "1.22.10" }
+  environment = { NODE_VERSION = "20.10.0", YARN_VERSION = "4.0.2" }
 
 # Redirect all routes to index.html, so that React Router
 # can handle routing.
@@ -19,10 +19,10 @@
   [headers.values]
     Content-Security-Policy = """
       default-src 'self';
-      connect-src 'self' https://www.google-analytics.com;
+      connect-src 'self';
       font-src 'self' https://fonts.gstatic.com;
-      img-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com;
+      img-src 'self';
+      script-src 'self' 'unsafe-eval' 'unsafe-inline';
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       """
     X-Frame-Options = "DENY"

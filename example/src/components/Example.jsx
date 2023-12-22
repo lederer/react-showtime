@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, Text, Close } from "theme-ui";
+import { Text, Close } from "theme-ui";
 import { forwardRef, useRef, useState } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import { useShowtime, Showtime } from "react-showtime";
@@ -13,6 +12,7 @@ const sx = {
         mx: "auto",
     },
     name: {
+        display: "block",
         mb: 2,
         fontFamily: "Pompiere, cursive",
         fontSize: "4.2rem",
@@ -20,6 +20,7 @@ const sx = {
         textAlign: "center",
     },
     desc: {
+        display: "block",
         mb: 4,
         textAlign: "center",
         "& code": {
@@ -55,20 +56,47 @@ const sx = {
     },
     example: {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "stretch",
+        flexDirection: "column",
         alignItems: "stretch",
         minHeight: "28rem",
         "@media (min-width: 900px)": {
             boxShadow: 2,
         },
+    },
+    playground: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "stretch",
+        alignItems: "stretch",
         "@media (max-width: 600px)": {
             flexDirection: "column",
         },
     },
+    error: {
+        display: "none",
+        ":not(:empty)": {
+            display: "block",
+            position: "relative",
+            py: 1,
+            pr: 3,
+            pl: 8,
+            background: "error",
+            color: "tint",
+            "::before": {
+                content: "'⚠'",
+                position: "absolute",
+                left: 2,
+                top: 1,
+                fontSize: 8,
+            },
+            "> pre": {
+                whiteSpace: "pre-wrap",
+            },
+        },
+    },
     editor: {
         flex: "auto",
-        padding: "0 0.4rem",
+        padding: 0,
         background: "#322a37",
         fontFamily: "'IBM Plex Mono', monospace",
         fontSize: "1.2rem",
@@ -127,12 +155,14 @@ const sx = {
         flexBasis: "40%",
         width: "40%",
         maxWidth: "40%",
-        minHeight: "36rem",
         overflow: "hidden",
         "@media (max-width: 600px)": {
             flexBasis: "100%",
             width: "100%",
             maxWidth: "100%",
+        },
+        ":empty": {
+            p: 0,
         },
     },
 };
@@ -179,9 +209,8 @@ const scope = { useShowtime, Showtime, useState, Button, RandomEmoji };
 function Example({ name, desc, code, noInline, ...props }) {
     const isComplex = typeof code === "object";
     const initialTransition = isComplex ? Object.keys(code)[0] : null;
-    const [selectedTransition, setSelectedTransition] = useState(
-        initialTransition
-    );
+    const [selectedTransition, setSelectedTransition] =
+        useState(initialTransition);
 
     if (!code) {
         return null;
@@ -189,8 +218,14 @@ function Example({ name, desc, code, noInline, ...props }) {
 
     return (
         <div sx={sx.container} {...props}>
-            <Text sx={sx.name}>{name}</Text>
-            <Text sx={sx.desc} dangerouslySetInnerHTML={{ __html: desc }} />
+            <Text sx={sx.name} as="h4">
+                {name}
+            </Text>
+            <Text
+                sx={sx.desc}
+                as="div"
+                dangerouslySetInnerHTML={{ __html: desc }}
+            />
             {isComplex && (
                 <div sx={sx.tabs}>
                     {Object.keys(code).map((name) => (
@@ -215,9 +250,13 @@ function Example({ name, desc, code, noInline, ...props }) {
                     code={isComplex ? code[selectedTransition] : code}
                     noInline={noInline}
                 >
-                    <LiveEditor style={sx.editor} />
-                    <LiveError />
-                    <LivePreview Component={Canvas} />
+                    <div sx={sx.playground}>
+                        <LiveEditor style={sx.editor} />
+                        <LivePreview Component={Canvas} />
+                    </div>
+                    <div sx={sx.error}>
+                        <LiveError />
+                    </div>
                 </LiveProvider>
             </div>
         </div>

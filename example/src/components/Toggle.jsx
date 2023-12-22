@@ -1,9 +1,6 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
-
-import { ReactComponent as HookIcon } from "../img/hook.svg";
-import { ReactComponent as ComponentIcon } from "../img/component.svg";
-import { ReactComponent as ToggleIcon } from "../img/toggle.svg";
+import HookIcon from "../img/hook.svg?react";
+import ComponentIcon from "../img/component.svg?react";
+import ToggleIcon from "../img/toggle.svg?react";
 
 const sx = {
     container: {
@@ -31,6 +28,7 @@ const sx = {
         fontFamily: "Pompiere, cursive",
         fontSize: "3.2rem",
         textTransform: "uppercase",
+        color: "text",
         cursor: "pointer",
         "@media (max-width: 500px)": {
             fontSize: "2.4rem",

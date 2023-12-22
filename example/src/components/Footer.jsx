@@ -1,8 +1,3 @@
-/** @jsx jsx */
-import { jsx, Image, Link } from "theme-ui";
-
-import azavea from "../img/azavea.svg";
-
 const sx = {
     footer: {
         display: "grid",
@@ -13,13 +8,7 @@ const sx = {
 };
 
 function Footer(props) {
-    return (
-        <footer sx={sx.footer} {...props}>
-            <Link href="https://www.azavea.com/">
-                <Image src={azavea} width="120" alt="Azavea" />
-            </Link>
-        </footer>
-    );
+    return <footer sx={sx.footer} {...props} />;
 }
 
 export default Footer;

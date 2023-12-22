@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 // via https://usehooks.com/useEventListener/
-export default function useEventListener(eventName, handler, element = window) {
+export default function useEventListener(eventName, handler, element) {
     // This allows the effect below to always get latest handler ...
     // ... without needing to pass it in effect deps array ...
     // ... and potentially cause effect to re-run every render.

@@ -11,8 +11,7 @@ const theme = {
         "6.4rem",
     ],
     fonts: {
-        body:
-            '"Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+        body: '"Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
         heading: "inherit",
         monospace: "'IBM Plex Mono', monospace",
     },
@@ -48,6 +47,7 @@ const theme = {
         ticket: "#fd7c83",
         tint: "#fff3f4",
         darktint: "#ffe0e3",
+        error: "#dc4553",
     },
     shadows: [
         "none",
@@ -85,18 +85,9 @@ const theme = {
             fontFamily: "body",
             lineHeight: "body",
             fontWeight: "body",
-            fontSize: 4,
             position: "relative",
-            width: "100%",
             m: 0,
             p: 0,
-            "@media (max-width: 400px)": {
-                fontSize: 3,
-            },
-        },
-        a: {
-            textDecoration: "none",
-            color: "accent",
         },
     },
 };

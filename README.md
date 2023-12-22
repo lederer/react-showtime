@@ -423,11 +423,13 @@ The `useShowtime` hook accepts a single parameter, which can be either of:
 
 ## Development
 
-React Showtime was built with [create-react-hook](https://github.com/Hermanya/create-react-hook) using [this blog post](https://www.twilio.com/blog/release-custom-react-component-hook-effect-npm-package) as a guiding reference.
+React Showtime was originally bootstrapped with [create-react-hook](https://github.com/Hermanya/create-react-hook) using [this blog post](https://www.twilio.com/blog/release-custom-react-component-hook-effect-npm-package) as a guiding reference.
 
-Be sure to reflect any API changes in test fixtures, the demo app in `example/`, and this readme.
+Be sure to reflect any API changes in test fixtures, the demo app in `example/`, the TypeScript types in `index.d.ts`, and this readme.
 
 To get started:
 
-1.  `yarn start` here to watch for local changes to `react-showtime`,
+1.  `yarn start` to watch for local changes to `react-showtime`,
 2.  `yarn start` in `example/` to watch for changes to the demo site and run a dev server.
+
+This project uses the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) branching workflow. Usage of the [`gitflow-cjs`](https://github.com/CJ-Systems/gitflow-cjs) CLI tool is recommended for releases and hotfixes.

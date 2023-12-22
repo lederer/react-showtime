@@ -3,26 +3,31 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "private": true,
-  "dependencies": {
-    "fontfaceobserver": "^2.1.0",
-    "prop-types": "^15.7.2",
-    "react": "link:../node_modules/react",
-    "react-dom": "^17.0.1",
-    "react-live": "^2.2.3",
-    "react-scripts": "^4.0.1",
-    "react-showtime": "link:..",
-    "theme-ui": "^0.3.4"
+  "type": "module",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.10",
+    "vite-plugin-svgr": "^4.2.0"
   },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "fontfaceobserver": "^2.3.0",
+    "prop-types": "^15.8.1",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-live": "^4.1.5",
+    "react-showtime": "link:..",
+    "theme-ui": "^0.16.1"
+  },
+  "packageManager": "yarn@4.0.2",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "browserslist": [
+    "last 2 versions",
     ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    "not dead"
   ]
 }

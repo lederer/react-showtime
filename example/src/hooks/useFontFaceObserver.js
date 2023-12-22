@@ -1,5 +1,5 @@
 import { useRef, useState, useLayoutEffect } from "react";
-const FontFaceObserver = require("fontfaceobserver");
+import FontFaceObserver from "fontfaceobserver";
 
 function useFontFaceObserver(name, options) {
     const [isLoaded, setIsLoaded] = useState(false);

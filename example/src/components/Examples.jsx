@@ -1,6 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui";
-
 import Example from "./Example";
 import EXAMPLES from "../examples";
 
@@ -42,7 +39,7 @@ function Examples({ isHookMode, ...props }) {
 
     return (
         <div sx={sx.examples} {...props}>
-            <h2 sx={sx.heading}>{title}</h2>
+            <h3 sx={sx.heading}>{title}</h3>
             {EXAMPLES.map(({ name, desc, hook, component, noInline }, i) => {
                 const code = isHookMode ? hook : component;
                 return code ? (
