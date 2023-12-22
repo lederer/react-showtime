@@ -1,6 +1,6 @@
 {
   "name": "react-showtime",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Mount and unmount with CSS transitions",
   "author": "Scott Lederer",
   "license": "Apache-2.0",
