@@ -29,6 +29,7 @@
     "url": "https://github.com/lederer/react-showtime/issues"
   },
   "scripts": {
+    "start": "vite",
     "build": "vite build",
     "watch": "vite build -w",
     "test": "vitest run",
