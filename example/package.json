@@ -5,19 +5,19 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.12",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8",
     "vite-plugin-svgr": "^4.2.0"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
+    "@emotion/react": "^11.13.3",
     "fontfaceobserver": "^2.3.0",
     "prop-types": "^15.8.1",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-live": "^4.1.5",
+    "react-live": "^4.1.7",
     "react-showtime": "link:..",
-    "theme-ui": "^0.16.1"
+    "theme-ui": "^0.16.2"
   },
   "packageManager": "yarn@4.0.2",
   "scripts": {
