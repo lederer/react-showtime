@@ -64,7 +64,7 @@ const sx = {
     },
 };
 
-const Ticket = forwardRef(({ active, fontSize, ...props }, ref) => {
+const Ticket = forwardRef(({ active, ...props }, ref) => {
     return (
         <NavLink
             ref={ref}

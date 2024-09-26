@@ -85,7 +85,7 @@ export default function Showtime({
 
                   // Attach existing refs on child, if any
                   const { ref } = child;
-                  if (ref?.hasOwnProperty("current")) {
+                  if (ref && Object.prototype.hasOwnProperty.call(ref, "current")) {
                       ref.current = node;
                   } else if (typeof ref === "function") {
                       ref(node);

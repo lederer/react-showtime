@@ -64,7 +64,7 @@ export function addInlineStyles(element, styles) {
 export function getInlineStyles(element) {
     const styles = {};
     for (const prop in element.style) {
-        if (element.style.hasOwnProperty(prop) && element.style[prop]) {
+        if (Object.prototype.hasOwnProperty.call(element.style, prop) && element.style[prop]) {
             styles[prop] = element.style[prop];
         }
     }
