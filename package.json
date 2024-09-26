@@ -1,6 +1,6 @@
 {
   "name": "react-showtime",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Animate the entry/exit of React elements during mount/unmount with CSS transitions.",
   "author": "Scott Lederer",
   "license": "Apache-2.0",
