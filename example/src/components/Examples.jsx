@@ -40,7 +40,7 @@ function Examples({ isHookMode, ...props }) {
     return (
         <div sx={sx.examples} {...props}>
             <h3 sx={sx.heading}>{title}</h3>
-            {EXAMPLES.map(({ name, desc, hook, component, noInline }, i) => {
+            {EXAMPLES.map(({ name, desc, hook, component, noInline }) => {
                 const code = isHookMode ? hook : component;
                 return code ? (
                     <Example
